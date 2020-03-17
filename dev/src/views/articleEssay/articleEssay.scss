@@ -1,0 +1,25 @@
+main#articleEssay{
+  position: relative;
+  &::before{
+    display: block;content: '';
+    position: fixed;top: 0;
+    width: 100vw;height: 100vh;
+    background: url("../../assets/gradient.png");
+    background-size: cover;
+  }
+}
+
+div.row{
+  position: relative;
+  width: 65rem;
+  margin: 0 auto;
+  background-color: hsl(0,0,95%);
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 1px 10px #646464;
+  div.essay{
+    border-right: 1px solid black;
+  }
+  div.aside{
+    min-height: 100vh;
+  }
+}
