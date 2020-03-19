@@ -1,7 +1,31 @@
 <template>
-    <header id="headbar" class="z-index-100" :class="{shrink:scrolled}">
-        <h1>JavaScript 数组的排序方法</h1>
-    </header>
+    <v-app-bar app flat shrink-on-scroll>
+        <div id="headbar" class="wrapper d-flex align-center">
+
+            <transition name="headbarSlide">
+                <h4  v-if="title"  v-text="headbar.value.title"/>
+                <div v-if="search" class="search d-flex" :class="{mobile:display.isMobile}">
+                    <div class="prefix d-none d-sm-flex" v-text="prefix"/>
+                    <input ref="search" type="search" v-model="value"
+                           :placeholder="placeholder"
+                           @blur="closeSearch"
+                    />
+                </div>
+            </transition>
+
+
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon dark @click="resetSearch">
+                <v-icon>{{ title ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
+            </v-btn>
+            <v-btn icon dark @click="showCategory">
+                <v-icon>mdi-apps</v-icon>
+            </v-btn>
+
+        </div>
+    </v-app-bar>
 </template>
 
 <script>
@@ -10,37 +34,69 @@
         name: "headbar",
         data(){
             return {
-                scrolled:false,
-                timer:null
+                timer:null,
+                search:false,
+                value:'',
+                title:true
             }
         },
         computed:{
-            ...mapState(['headbar']),
+            ...mapState(['headbar','display','visible']),
+            placeholder(){
+                return this.display.isMobile ? '文章搜索':''
+            },
+            prefix(){
+                return '文章搜索'
+            },
+        },
+        watch:{
+
         },
         methods:{
-            shrink(){
-                // this.scrolled = true
-                console.log(1)
+            resetSearch(){
+                this.search = false
+                this.title = false
+                this.value = ''
+                setTimeout(() => {
+                    this.search = true
+                },50)
             },
-            debounce() {
+            closeSearch(){
+                this.search = false
                 if(!this.timer){
                     this.timer = setTimeout(()=>{
-                        this.timer = null
-                        console.log(1)
-                    },500)
-                }
+                        if(!this.search)
+                            this.title = true
 
+                        this.timer = null
+                    },300)
+                }
             },
+            showCategory(){
+                this.visible.category = !this.visible.category
+            }
+
         },
-        mounted(){
-            window.addEventListener('scroll',this.debounce,true)
+        updated() {
+            if(this.$refs.search)
+                this.$refs.search.focus()
+
         },
-        destroyed () {
-            window.removeEventListener('scroll', this.debounce)
-        }
+
     }
 </script>
 
 <style scoped lang="scss">
+    .headbarSlide-enter-active {
+        transition: opacity .3s,transform .3s;
+    }
+    .headbarSlide-leave-active {
+        display: none;
+        transition: opacity 0,transform 0;
+    }
+    .headbarSlide-enter, .headbarSlide-leave-to {
+        opacity: 0;
+        transform: translateY(8px);
+    }
 @import 'headbar';
 </style>

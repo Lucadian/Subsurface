@@ -7,3 +7,25 @@
 .z-index-80{
   z-index: 80;
 }
+
+//category.vue 组件的特殊样式
+html{
+  overflow: hidden;
+  margin-right: 17px;
+  &.scroller{
+    overflow: auto;
+    margin-right: 0;
+  }
+}
+
+div#headbar{
+  transform: translateX(-8.5px);
+  &.scroller{
+    transform: translateX(0);
+  }
+}
+header.v-app-bar{
+  .v-toolbar__content{
+    padding: 0;
+  }
+}

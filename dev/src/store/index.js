@@ -1,18 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { headbar } from './modules/headbar'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    headbar:{
-      shrink:false,
+    headbar,
+    display:{
+      isMobile:false
+    },
+    visible:{
+      category:false,
     }
   },
   mutations: {
+
   },
   actions: {
   },
+  getters:{
+
+  },
   modules: {
+
   }
 })

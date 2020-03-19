@@ -1,19 +1,23 @@
 <template>
-    <main id="articleEssay" class="z-index-80">
-        <v-row>
+    <v-content>
+        <v-row :class="{mobile:$vuetify.breakpoint.xs}">
             <v-col class="essay" cols=12 sm=8>
-                内容
+                <p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p>
             </v-col>
             <v-col class="aside" cols=12 sm=4>
-                侧栏
+                <p>侧栏</p>
             </v-col>
         </v-row>
-    </main>
+    </v-content>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
-        name: "articleEssay"
+        name: "articleEssay",
+        computed:{
+
+        },
     }
 </script>
 
