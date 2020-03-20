@@ -1,0 +1,78 @@
+title:你的图片肿了么？删除元数据三种的办法
+published:2020-02-20
+lastEdited:2020-02-20
+source:次表面
+cover:images/covers/cover_tool.png
+<!--divider-->
+<section class="prologue">
+    <p>随着 PS CC系列到来而产生的元数据问题，官方在大量的迭代中，完全没有要解决这个问题意向呵。
+    </p>
+    <p>
+        先向你解释一下，什么是图片的元数据(AncestorsMetedata)，比如你做了个图标，只有1kb。后经多次上传、下载、修改、再上传，终有一天，你发现这个<strong>10×10 像素的小玩意竟然肿了起来，有 500kb 这么大！这就是元数据导致的图片体积增大，严重者 PSD 甚至可以膨胀到 1TB</strong>。
+    </p>
+    <img class="fullWidth" style="margin: 2.6rem auto 1rem auto"
+         src="__imageHost/images/articles/%E7%BE%8E%E6%9C%AF%2C%E5%B7%A5%E5%85%B7/od1.png">
+    <small class="imgDescription">在 PS 的菜单 “文件” -> “文件简介”，可看到图片的元数据</small>
+    <p>网络搜集了三种亲测有效的方法：</p>
+    <ol>
+        <li><b class="fixedWidth _12rem">使用脚本删除元数据</b></li>
+        <li><b class="fixedWidth _12rem">使用导出删除元数据</b></li>
+        <li><b class="fixedWidth _12rem">转移图层删除元数据</b></li>
+    </ol>
+</section>
+
+<section>
+    <h2>使用脚本删除元数据</h2>
+    <p>
+        将下面代码另存为 .jsx 文件，放在任意位置，先用 PS 打开目标图片，再到菜单中依次找到 "文件"->"脚本"->"浏览" 即可执行刚才的代码文件。
+    </p>
+    <pre class="prettyprint">
+function deleteAncestorsData(){
+    whatApp = String(app.name)
+    if(whatApp.search("Photoshop") > 0) {
+        if(!documents.length) {
+            alert("未检测到文件：请先打开一个文件，再执行脚本。")
+            return
+        }
+        if (!ExternalObject.AdobeXMPScript)
+            ExternalObject.AdobeXMPScript = new ExternalObject("lib:AdobeXMPScript")
+        var xmp = new XMPMeta( activeDocument.xmpMetadata.rawData)
+        xmp.deleteProperty(XMPConst.NS_PHOTOSHOP, "DocumentAncestors")
+        app.activeDocument.xmpMetadata.rawData = xmp.serialize()
+    }
+}
+deleteAncestorsData()
+</pre>
+    <p>
+        网络上大量的素材图片被反复使用，慢慢地积累了巨量的原始数据，真的是历经千难万险，才出现在你的面前 (；´д｀)ゞ
+    </p>
+</section>
+<section>
+    <h2>使用导出删除元数据</h2>
+    <img class="fullWidth" style="margin: 1.6rem auto 1rem auto"
+         src="__imageHost/images/articles/%E7%BE%8E%E6%9C%AF%2C%E5%B7%A5%E5%85%B7/%E5%AF%BC%E5%87%BA%E9%A6%96%E9%80%89%E9%A1%B9.png">
+    <small class="imgDescription">必须在设置中关闭元数据，导出时才会删除元数据</small>
+    <p>
+        这种方法的<strong>重点在于导出的设置，导出前必须先设定“导出首选项”：</strong> 在 “文件”->“导出”->“导出首选项”
+        中，<strong>在元数据的下拉列表下选择“无”</strong>，然后才可以快乐地使用 “导出为... 将图层导出到文件” 等方式保存图片了。
+    </p>
+</section>
+<section>
+    <h2>转移图层删除元数据</h2>
+    <p>
+        该方法是整体转移图层到新的文档中，可以刷新原始数据。这里只说“转移”图层，不是框选复制或拖拽复制图层，<strong>框选复制或拖拽复制是无效的</strong>！
+        正确的转移图层法，按照如下流程操作即可。
+    </p>
+    <img class="fullWidth" style="margin: 1.6rem auto 1rem auto"
+         src="__imageHost/images/articles/%E7%BE%8E%E6%9C%AF%2C%E5%B7%A5%E5%85%B7/%E5%A4%8D%E5%88%B6%E5%9B%BE%E5%B1%82.jpg">
+    <small class="imgDescription">选择所有图层，然后再任意图层上右键，选择复制图层</small>
+    <img class="fullWidth" style="margin: 2.6rem auto 1rem auto"
+         src="__imageHost/images/articles/%E7%BE%8E%E6%9C%AF%2C%E5%B7%A5%E5%85%B7/%E6%96%B0%E5%BB%BA%E6%96%87%E6%A1%A3.jpg">
+    <small class="imgDescription">在弹出的窗口中，选择“新建文档”，即可将所有图层转移到新的文件里</small>
+</section>
+<section>
+    <p>
+        以上三种方法，任选其一即可。图片元数据的处理过程，让我想起了 CAD 的“教育版”水印问题，只要复制黏贴过有水印的文件，整个项目就像闹流感一样，
+        完全处理不过来。所以使用外部素材前都要先看一下大小，<strong>莫等整个项目都是大文件后，才回头处理，那真是非常非常辛苦</strong>！
+    </p>
+</section>

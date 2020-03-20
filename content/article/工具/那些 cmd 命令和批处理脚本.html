@@ -1,0 +1,96 @@
+title:那些 cmd 命令和批处理脚本
+published:2018-10-27
+lastEdited:2018-10-27
+source:次表面
+cover:images/covers/cover_cmd.png
+<!--divider-->
+
+<section class="prologue">
+    <p>
+        在某些不得已的情况下，绕不开 cmd 的使用，而且微软也不会取消 cmd。好在 cmd 比其他命令行工具更轻更快，同时 Node
+        工具也都支持 cmd，其常用命令又与 shell 基本一致，而且居家旅行什么的直接掏出 cmd 用起来，也很有逼格不是？
+    </p>
+    <p>注：<strong>以下都是 cmd 命令和相关的批处理脚本，不是 shell，不是 shell</strong></p>
+</section>
+<style>
+    table{
+        border-collapse: collapse;
+        border:1px solid black;
+        width:100%;
+    }
+    th{
+        text-align: center;
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;letter-spacing: 0.2rem;
+        border: 1px solid black;
+    }   th:first-child{width: 36%}
+    td{
+        border: 1px solid black;
+        padding: 0.3rem 1rem;
+    }
+    section{
+        border-bottom: 0!important;
+    }
+
+</style>
+<section>
+    <h2>文件操作</h2>
+    <table>
+        <thead>
+        <tr><th>命令</th><th>作用</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>mkdir 目录名</td><td>不支持 -p 路径创建，特殊字符用双引号</td></tr>
+        <tr><td>md 路径</td><td>创建多级目录，注意用反斜线！可连续创建</td></tr>
+        <tr><td>touch 路径</td><td>依路径创建文件，可连续创建</td></tr>
+        <tr><td>rm -r 路径 / 文件名</td><td>删除目录或文件，特殊字符用双引号</td></tr>
+        <tr><td>echo 内容 > 文件名</td><td>向文件写入内容，自动覆盖，无需双引号</td></tr>
+        <tr><td>echo 内容 >> 文件名</td><td>向文件追加内容，无需双引号</td></tr>
+        <tr><td>cp -r 文件名 路径</td><td>将文件复制黏贴到指定路径下</td></tr>
+        <tr><td>mv 源路径 目标路径</td><td>重命名或移动文件，特殊字符用双引号</td></tr>
+        <tr><td>cat 目标路径</td><td>查看目标文件内容，特殊字符用双引号</td></tr>
+        <tr><td>du -sh</td><td>返回当前目录大小</td></tr>
+        <tr><td>ls</td><td>列出所有文件</td></tr>
+        <tr><td>tree</td><td>以树形结构展现当前目录内容</td></tr>
+        </tbody>
+    </table>
+</section>
+<section>
+    <h2>批处理脚本</h2>
+    <table>
+        <thead>
+        <tr><th>关键字</th><th>作用</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>%1</td><td>传入脚本的参数，用法同 shell 中的 $ 标识符</td></tr>
+        <tr><td>@</td><td>禁用当前行的屏显</td></tr>
+        <tr><td>echo 内容</td><td>屏显后面的内容</td></tr>
+        <tr><td>rem 和 ::</td><td>当前行为注释</td></tr>
+        <tr><td>set 变量名=值</td><td>声明变量并赋值</td></tr>
+        <tr><td>%变量名%</td><td>使用变量</td></tr>
+        <tr><td>%cd%</td><td>当前目录的绝对路径</td></tr>
+        <tr><td>call 参数</td><td>调用另一个脚本，调用结束后返回当前位置</td></tr>
+        <tr><td>pause</td><td>暂停脚本，一般用于执行结束时做提示用</td></tr>
+        <tr><td>type 文件名</td><td>屏显当前目录内指定文件的内容</td></tr>
+        </tbody>
+    </table>
+</section>
+<section>
+    <h2>系统调用</h2>
+    <table>
+        <thead>
+        <tr><th>命令</th><th>作用</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>netstat -a</td><td>查看当前电脑的端口占用情况</td></tr>
+        <tr><td>ipconfig</td><td>查看本机 ip 信息</td></tr>
+        <tr><td>explorer</td><td>打开我的电脑</td></tr>
+        <tr><td>notepad</td><td>打开记事本</td></tr>
+        <tr><td>calc</td><td>打开系统自带的计算器</td></tr>
+        <tr><td>regedit</td><td>打开注册表</td></tr>
+        <tr><td>taskmgr</td><td>打开任务管理器</td></tr>
+        <tr><td>compmgmt</td><td>计算机管理器，开启或关闭系统服务用的</td></tr>
+        <tr><td>shutdown -s -t 3600</td><td>定时关机</td></tr>
+        </tbody>
+    </table>
+</section>

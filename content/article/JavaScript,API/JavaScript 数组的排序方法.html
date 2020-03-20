@@ -1,0 +1,43 @@
+title:JavaScript 数组的排序方法,
+published:2019-08-06,
+lastEdited:2019-08-06,
+source:次表面,
+cover:images/covers/cover_api_remake.png
+<!--divider-->
+<section class="prologue">
+    <p>▲ 嘿嘿~ 标题说的是排序“方法”，不是排序“算法”。</p>
+    <p>Array.prototype 中有 sort 和 reverse 两个方法对数组进行排序，逆向排序可直接使用 reverse 方法，sort 内部使用的是快排算法。</p>
+</section>
+<section>
+    <h2>sort 的用法和规则函数</h2>
+    <p>
+        sort() 通过传入一个函数来控制排序规则，<strong>包括但不限于对 number 和 对象 的排序控制</strong>。为方便使用，只<strong>记住参数 a，b 的传入和使用位置即可</strong>。
+    </p>
+<pre class="prettyprint">
+arr.sort((a,b) => a - b) //升序
+arr.sort((a,b) => b - a) //降序
+items.sort((a, b) => a.key - b.key ) //依对象属性升序
+items.sort((a, b) => b.key - a.key ) //依对象属性降序
+</pre>
+</section>
+<section>
+    <h2>sort 和 reverse 都会修改原数组</h2>
+    <p>
+        在数组所有的方法中，只有 <strong>sort() 和 reverse() 是修改原数组的</strong>，其返回值也是原数组。
+        因为从性能上考虑，“原地排序”最省空间。
+    </p>
+<pre class="prettyprint">
+let arr = [1,2,3,4,5]
+arr = arr.reverse()
+console.log(arr) //[5, 4, 3, 2, 1]
+</pre>
+</section>
+<section>
+    <h2>sort 会调用元素的 toString 方法</h2>
+    <p>
+        sort() 方法会调用每个元素的 toString() 方法，然后再据其 UTF-16 的大小进行排序，且 <strong>sort() 默认只能按升序排列</strong>。
+    </p>
+<pre class="prettyprint">
+[5,10,30,20,40].sort() //[10, 20, 30,40,5] 默认是按字符串顺序排列的
+</pre>
+</section>

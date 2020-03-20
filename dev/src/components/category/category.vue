@@ -86,9 +86,9 @@ aside{
 }
 div.overlay{
     position: fixed;
-    background-color: rgba(48,53,58,.6);
+    background-color: rgba(48,53,58,.75);
     width: 100vw;
     height: 100vh;
-    z-index: 10;
+    z-index: 5;
 }
 </style>

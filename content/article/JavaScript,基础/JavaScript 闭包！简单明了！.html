@@ -1,0 +1,41 @@
+title:JavaScript 闭包！简单明了
+published:2019-09-10
+lastEdited:2019-09-21
+source:Arman
+cover:images/articles/JavaScript,基础/closure.jpg
+<!--divider-->
+<section class="prologue">
+    <p>
+        这篇文章是转载，这是我见过的，最一目了然的闭包了。
+    </p>
+    <p>
+        原文：<a href="https://zhuanlan.zhihu.com/p/56942865" target="_blank">Arman 的前端学习笔记：闭包！简单明了</a>
+    <p>
+        闭包可以简单理解成“定义在一个函数内部的子函数“，这个子函数可以访问父函数内的局部变量。闭包主要用处有两个：
+    </p>
+    <ol class="font-medium">
+        <li><b>用来读取 函数作用域内的 局部变量</b></li>
+        <li><b>让这些局部变量 始终保持在 内存中</b></li>
+    </ol>
+</section>
+<section>
+    <h2>闭包的最简示例</h2>
+    <img class="halfWidth" style="margin: 1.6rem auto 1rem auto;"
+         src="__imageHost/images/articles/JavaScript,基础/closure.jpg">
+    <pre class="prettyprint">
+    function foo(){
+        let fish = 3
+        return function() {
+            fish -= 1
+            return fish
+        }
+    }
+
+    let eat = foo()
+    eat() //2
+    eat() //1
+</pre>
+    <p>
+        foo 执行后，eat 保持着对局部变量 fish 的引用，所以 fish 所占内存不会被回收，这里的函数 eat 和局部变量 fish 就形成了闭包。
+    </p>
+</section>

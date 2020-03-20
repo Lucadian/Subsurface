@@ -1,0 +1,35 @@
+title:Win10 中使用自定义脚本
+published:2018-10-27
+lastEdited:2018-10-27
+source:次表面
+cover:images/covers/cover_cmd.png
+<!--divider-->
+<section class="prologue">
+    <p>
+        某个 IDE 很奇怪，除了 cmd 外，不能在软件窗口内嵌入其他命令行工具，这就导致任务栏中挤着很多命令行的标签，看起来不优雅啊，这么难看怎能受得了？
+        这就不得不使用 cmd，于是借此记录下 Win10 中，通过 cmd 使用自定义脚本的方法。
+    </p>
+    <img class="fullWidth" style="margin: 1.2rem auto 0.6rem auto"
+         src="__imageHost/images/articles/%E5%85%B6%E4%BB%96%2C%E5%B7%A5%E5%85%B7/%E5%91%BD%E4%BB%A4%E8%A1%8C.png">
+    <small class="imgDescription">任务栏中挤满了命令行标签，这很不”优雅“</small>
+</section>
+<section>
+    <h2>设置脚本目录的系统路径</h2>
+    <p><strong>右键“我的电脑” — 属性 — 高级系统设置</strong>，或调出 Cortana 直接搜索“环境变量”，打开系统属性窗口，点击右下方的“环境变量”按钮。</p>
+    <img class="mediumWidth" style="margin: 1.2rem auto 0.6rem auto"
+         src="__imageHost/images/articles/%E5%85%B6%E4%BB%96%2C%E5%B7%A5%E5%85%B7/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8C%89%E9%92%AE.png">
+    <small class="imgDescription">点击右下角“环境变量”按钮</small>
+    <img class="mediumWidth" style="margin: 1.2rem auto 0.6rem auto"
+         src="__imageHost/images/articles/%E5%85%B6%E4%BB%96%2C%E5%B7%A5%E5%85%B7/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BF%AE%E6%94%B9_1.png">
+    <small class="imgDescription">①选择名为“Path”的那行 ②点击“编辑”按钮</small>
+    <img class="mediumWidth" style="margin: 1.2rem auto 0.6rem auto"
+         src="__imageHost/images/articles/%E5%85%B6%E4%BB%96%2C%E5%B7%A5%E5%85%B7/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BF%AE%E6%94%B9_2.png">
+    <small class="imgDescription">①点击“新建” ②粘贴入存放脚本的目录 ③点击“确定”</small>
+</section>
+<section>
+    <h2>脚本必须是 .bat 后缀</h2>
+    <p><strong>cmd 只能执行 cmd 命令，而且 cmd 脚本文件必须是 .bat 后缀（即批处理脚本）</strong>。次表面将那些常用的、有趣的命令整理成篇，放在了这里：
+        <a href="./那些 cmd 命令和批处理脚本" target="_blank">那些 cmd 命令和批处理脚本</a>
+    </p>
+
+</section>

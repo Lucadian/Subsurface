@@ -1,0 +1,173 @@
+title:JavaScript 中的数据类型（Data Types and Values）
+published:2019-07-04
+lastEdited:2019-07-20
+source:次表面
+cover:images/articles/JavaScript,基础/George%20Boole.png
+<!--divider-->
+<section class="prologue">
+    <p>
+        JavaScript 是一种弱类型脚本语言 bla bla bla ... 所以，我以 ECMA-262 文档和《JavaScript 高级程序设计》
+        为参考，对 JS 中数据类型相关的内容，来一次高度的概括，的概括，的概括 ~
+    </p>
+</section>
+<section>
+    <h2>JS 中只有七种数据类型</h2>
+    <p>
+        在 ECMA 官方文档中，对数据类型有着非常简洁的描述：
+    </p>
+    <q>
+        The ECMAScript language types are Undefined, Null, Boolean, String, Symbol, Number, and Object.
+    </q>
+    <p>
+        而在 JS 高程中除了类似的表述外，还将数据类型分为简单类型（基本类型）和 复杂类型（Object），并且不支持任何创建自定义类型的机制。
+        因此，JS 中一共只有七种数据类型，它们分别是：
+    </p>
+    <ol>
+        <li>number</li>
+        <li>string</li>
+        <li>boolean</li>
+        <li>undefined</li>
+        <li>null</li>
+        <li>object</li>
+        <li>symbol</li>
+    </ol>
+    <p>此外，<strong>array、function、NaN 都不是 JS 的数据类型；null 虽然是对象，但它是一种独立的类型</strong>。
+        英语里的特殊名词，都是首字母大写的，而 typeof 的返回值都是小写的，因此在实践中，应该注意：<strong>JS 里的数据类型都是小写的</strong>。
+        使用 typeof 类型运算符时，结果如下：
+    </p>
+<pre class="prettyprint" contenteditable="true">
+typeof console.log //function 但它却不是 JS 的基本类型
+typeof []     //object 数组也不是 JS 的基本类型，而是一种特殊的对象
+typeof null   //object 是小写的
+typeof 次表面  //undefined 是小写的
+</pre>
+</section>
+<section>
+    <h2>Number 类型</h2>
+    <p>JavaScript 中槽点最多的就是 number，高程中开篇第一句话就是：
+        “Number 类型应该是 ECMAScript 中最令人关注的数据类型了”。
+        大家第一次接触 number 类型时，会疑问 —— 没有整型与浮点型的区分吗？ES 文档中对 number 的描述为：
+    </p>
+    <q>representing the double-precision 64-bit format IEEE 754-2008 values as specified in the IEEE Standard for Binary Floating-Point Arithmetic</q>
+    <p>即 number 类型的一切值都是 双精度64位格式 IEEE 754-2008 值，简言之“所有 number 类型值都是浮点数”，
+        但高程中的描述是“ECMAScript 会不失时机地将浮点数值转换为整数值”。由此可知，
+        <strong>设计上 number 所有的值都是浮点型，但出于性能的原因，在实现上，是有整型和浮点型区分的</strong>。
+        然后再从 精度、进制、长度 和 NaN 四个问题方向去分解 number 的细节。</p>
+    <p>Number 的精度：</p>
+    <ol>
+        <li>整数的精度 — 普通整数计算都精确，超大整数计算不一定，有可能出现 infinity 值。</li>
+        <li>小数的精度 — 由于二进制无法精确计算1/10，因此小数计算会出现不精确结果。</li>
+        <li>最小精度值 — Number.EPSILON === Math.pow(2, -52)，即 2 的 -52 次方。
+            <br>Math.abs(0.1 + 0.2 - 0.3) &lt;= Number.EPSILON，由于二进制计算浮点数存在生理性误差，因此要使用最小精度差的方式检测浮点数。</li>
+    </ol>
+    <p>Number 的进制：</p>
+    <ol>
+        <li>二 进 制&nbsp; — 0b 开头，据说 IE 不支持。</li>
+        <li>八 进 制&nbsp; — 0 &nbsp;开头，出现超过 7 的数字时，会自动解析为十进制。</li>
+        <li>十六进制 — 0x 开头，不区分大小写。</li>
+        <li>进制转换 — 算术运算时，二进制、八进制和十六进制都将被转为十进制，因此 JS中任何进制数字输出时，都会被转为十进制。</li>
+    </ol>
+    <p>Number 的长度：</p>
+    <ol>
+        <li>正负零 — ES 中存在 +0 和 -0，因此除法运算中要特别检测 -0 以避免出现 -infinity。</li>
+        <li>最大值 — Number.MAX_VALUE，若超出则自动转为 infinity。</li>
+        <li>最小值 — Number.MIN_VALUE，若超出则自动转为 -infinity。</li>
+        <li>无穷值 — infinity，因为 infinity 是一个值，因此 typeof Infinity === "number" 。</li>
+    </ol>
+    <p>Number 的 NaN：</p>
+    <ol>
+        <li>NaN 是一个值，NaN 占用了 9007199254740990 这个数字。</li>
+        <li>NaN 参与任何运算结果都为 NaN，例如 NaN + 1 //结果为 NaN</li>
+        <li>NaN 的检查只能用 isNaN() 方法，isNaN 会对传入的参数进行隐式转换，所有不能被转为 number 的值，都会被认为是 NaN。</li>
+        <li>NaN 的设计初衷是为了体现弱类型语言的优势，高程（第三版）29页对此有描述，其他语言 0/0 会报错，而 JS 返回 NaN，并不影响程序进行。</li>
+    </ol>
+</section>
+<section>
+    <h2>String 类型</h2>
+    <p>ES 文档和高程中，对字符串类型的描述基本一致：字符串类型是 0 或多个 16 位 unicode 字符(元素)组成的有序集合。
+        由此可知：<strong>String 类型底层是以数组的形式实现的</strong>。</p>
+    <p>ES 文档还写明字符串类型的最大长度：“up to a maximum length of 2<sup>53</sup> - 1 elements”，
+        由此可知：<strong>String 类型受编码格式影响，有最大长度限制</strong>。</p>
+    <p>高程中还特别指出：“<strong>字符串一旦创建，它的值就不能改变</strong>。要改变某个变量保存的字符串，先要销毁原来的字符串，
+        然后再用另一个新字符串填充该变量”。
+        与 PHP 中的单双引号不同，ES 中单双引号在功能和性能上是完全一样的。
+        为弥补设计上不足，ES <strong>使用反引号（`）来实现模板字符串，使用 ${ } 作为插值定界符</strong>。定界符内可以使用表达式、三元运算、函数等。
+    </p>
+</section>
+<section>
+    <h2>Boolean 类型</h2>
+    <img class="halfWidth" style="margin: 2rem auto 0.5rem auto"
+         src="__imageHost/images/articles/JavaScript,基础/George%20Boole.png" alt="乔治·布尔">
+    <small class="imgDescription">乔治·布尔是英格兰数学家和哲学家、数理逻辑学先驱。</small>
+    <p>1864年，布尔冒着大雨步行两英里走到讲台，身着打湿的衣服为学生们授课。不久后，他就病倒了，最后不幸死于错误的治疗方式。（方方老师讲得确实“鲜活又生动”）</p>
+    <p>为什么布尔值是 Boolean 而不是 Boole？ </p>
+    <p>
+        具体原因已经无从考证，可以推测的是，由于布尔代数（Boolean Algebra）更出名的原因，Pascal 最先使用了 boolean 指代布尔类型，
+        虽然 C++ 中使用了 Boole，但 Java 还是选择了 Boolean，于是 <strong>JS 跟随 Java 使用了 Boolean 这个词代表布尔类型</strong>。
+    </p>
+</section>
+<section>
+    <h2>Null 类型</h2>
+    <p>Null 类型是只有一个值的数据类型，其设计初衷是，<strong>表示一切引用类型的空值</strong>（师从 Java 的 null ，BrendanEich 自己在 twiter 上说的）。
+        如果一个变量准备用来存放对象，那么应该显式地将 null 值赋予该变量。
+        在脚本结束后，一切值为 null 的变量或属性，都会被 V8 的垃圾回收器处理掉。</p>
+</section>
+<section>
+    <h2>Undefined 类型</h2>
+    <img class="largeWidth" style="margin: 1.5rem auto 0.5rem auto"
+         src="__imageHost/images/articles/JavaScript,基础/undefinedInJS.jpg" alt="">
+    <p>Undefined 类型是只有一个值的数据类型，其设计初衷是，<strong>表示一切值类型的空值</strong>,因此，直接使用已声明但未赋值的变量（属性）都会返回 "undefined"。
+        使用未申明的变量会直接报错（XX is not defined），其中有一个特例：typeof 一个未声明的变量时，也会返回 "undefined",但不报错，原因如上图。
+    </p>
+</section>
+<section>
+    <h2>Symbol 类型</h2>
+    <p>文档中只用了三句话，明确地定义了 Symbol 的特征和用途：</p>
+    <ol>
+        <li>The Symbol type is the set of all non-String values that may be used as the key of an Object property.</li>
+        <li>Each possible Symbol value is unique and immutable.</li>
+        <li>Each Symbol value immutably holds an associated value called [[Description]] that is either undefined or a String value.</li>
+    </ol>
+    <p>由此可知：</p>
+    <p><strong>Symbol 类型的值是一种非字符串，可用作对象属性的键名</strong>。（非直译）</p>
+    <p>Symbol 类型的值都是唯一且无法被修改的。</p>
+    <p>Symbol 类型的值可以绑定一个“描述参数”，用以描述该 Symbol 值，“描述参数”的类型可以是字符串，也可以是 undefined（即使用时不传参）。</p>
+    <p>Symbol 的实用案例 — <a href="https://zhuanlan.zhihu.com/p/22652486" target="_blank">方应杭：JS 中的 Symbol 是什么？</a></p>
+</section>
+<section>
+    <h2>Object 类型</h2>
+    <p>关于对象类型，高程和 ES 文档分别介绍了不同的内容，高程用了半页的篇幅只介绍了 7 个有趣的方法 ，
+        而文档则着重强调 “对象是属性的集合，属性分为值属性和访问器属性”（类似于 PHP 中的魔术方法）。</p>
+    <img class="mediumWidth" style="margin: 0.7rem auto;"
+         src="__imageHost/images/articles/JavaScript,基础/elephant.jpg" alt="">
+    <small class="imgDescription">JS 是面向对象还是基于对象？那要看如何定义“面向对象”</small>
+    <p>关于对象类型的八条基本概念：</p>
+    <ol>
+        <li>对象是属性的集合（An Object is logically a collection of properties）。</li>
+        <li>对象的属性是无序排列的，属性名是字符串或 Symbol 值，空字符串（''）也是有效键名。</li>
+        <li>对象的逻辑比较，本质是栈空间上值（地址）的比较，只要不是把同一个对象直接传值给两个变量，则任何对象都是不相等的。</li>
+        <li>给对象使用算数运算符（即进行隐式转换），会调用其 valueOf() 方法。</li>
+        <li>forEach 是浅层遍历，并且无法被 break 。
+            <br>for in 是深层遍历，遇到无法被遍历的 key 时，会自动跳过。</li>
+        <li>因为数组和函数也是对象，所以也可以拥有属性（方法）。</li>
+        <li>浅拷贝：只拷贝对象的地址，两个地址还是指向同一个对象。
+            <br>深拷贝：克隆出另一个独立的对象。例如使用 Object.assign() 或 JSON 等方式 。</li>
+        <li>一旦设置了访问器属性，便不可使用该属性的 writable 和 value 了。</li>
+    </ol>
+</section>
+<section>
+    <h2>数据类型的隐式转换</h2>
+    <img class="fullWidth" style="margin: 1.5rem auto 0.5rem auto;"
+         src="__imageHost/images/articles/JavaScript,基础/damnJS3.jpg" alt="">
+    <a style="display: block;text-align: center;width: 120px;margin: 0 auto"
+       href="https://subsurface.obs.cn-north-4.myhuaweicloud.com/images/articles/JavaScript,基础/JSDataTransHighRes.jpg" target="_blank">点击查看大图</a>
+    <p>隐式转换，是 JavaScript 中的数据，
+        <strong>在参与一元运算、二元运算、关系运算时，通过调用 Number()、String() 或 toString() 方法而产生的一种类型转换</strong>。
+        概括起来，隐式转换的规律有：</p>
+    <ol>
+        <li>有字符串参与的加法运算，都是隐式地调用 String()。其他所有运算，都是隐式地调用 Number()。</li>
+        <li>空数组是 0；单元素数组，将其元素转 number；多元素数组是 NaN。</li>
+        <li>null 被转为 0，undefined 和任何对象都是 NaN。</li>
+    </ol>
+    <p>JavaScript 的戊戌六君子（六假）：false 0 "" NaN null undefined</p>
+</section>

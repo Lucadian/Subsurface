@@ -13,7 +13,7 @@ html{
   overflow: hidden;
   margin-right: 17px;
   &.scroller{
-    overflow: auto;
+    overflow-y: auto;
     margin-right: 0;
   }
 }
