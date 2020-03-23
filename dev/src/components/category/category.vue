@@ -6,7 +6,7 @@
             </aside>
         </transition>
         <transition name="fade">
-            <div v-show="visible.category" class="overlay" @click="visible.category = false"/>
+            <div v-show="visible.category" class="overlay" @click="visible.category = false" @contextmenu.prevent="wasted"/>
         </transition>
     </div>
 </template>
@@ -30,7 +30,10 @@
             }
         },
         methods:{
-
+            wasted(){
+                this.visible.category = false
+                return false
+            }
         },
         updated(){
                 if(this.visible.category){

@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app flat shrink-on-scroll>
+    <v-app-bar app flat shrink-on-scroll >
         <div id="headbar" class="wrapper d-flex align-center">
 
             <transition name="headbarSlide">
@@ -17,10 +17,10 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon dark @click="resetSearch">
+            <v-btn icon dark @click="resetSearch" @contextmenu.prevent="wasted">
                 <v-icon>{{ title ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
             </v-btn>
-            <v-btn icon dark @click="showCategory">
+            <v-btn icon dark @click="showCategory" @contextmenu.prevent="wasted">
                 <v-icon>mdi-apps</v-icon>
             </v-btn>
 
@@ -48,6 +48,7 @@
             prefix(){
                 return '文章搜索'
             },
+
         },
         watch:{
 
@@ -74,6 +75,9 @@
             },
             showCategory(){
                 this.visible.category = !this.visible.category
+            },
+            wasted(){
+                return false
             }
 
         },

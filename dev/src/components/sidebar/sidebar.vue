@@ -1,19 +1,22 @@
 <template>
     <div class="sidebar">
-        <side-list/>
-        <side-chart/>
-        <side-pics/>
+        <update-list/>
+        <v-divider/>
+        <recommends/>
+        <block-button/>
+        <blog-chart/>
     </div>
 </template>
 
 <script>
-    import sideList from './sideList/sideList'
-    import sideChart from './sideChart/sideChart'
-    import sidePics from './sidePics/sidePics'
+    import updateList from './updateList/updateList'
+    import recommends from './recommends/recommends'
+    import blockButton from './blockButton/blockButton'
+    import blogChart  from './blogChart/blogChart'
     export default {
         name: "sidebar",
         components:{
-            sideList,sideChart,sidePics
+            updateList,recommends,blockButton,blogChart
         }
     }
 </script>
@@ -21,7 +24,7 @@
 <style scoped lang="scss">
 div.sidebar{
     position: sticky;
-    top: 1.5rem;
+    top: 1.2rem;
     padding: 1.7rem;
     @media(max-width: 600px){
         padding: .6rem;

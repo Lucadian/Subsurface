@@ -1,6 +1,7 @@
 <template>
     <div class="sideList">
-        <div class="item d-flex" v-for="n in 6">
+        <div class="updateList">
+            <div class="item d-flex" v-for="n in 6">
             <div class="cover">
                 <img :src=src alt="">
             </div>
@@ -14,8 +15,13 @@
                 </div>
             </div>
         </div>
+        </div>
+        <v-divider/>
+        <div class="recommend">
+
+        </div>
         <div class="button">
-            最近更新<v-icon dark small color="#dbdbdb" style="transform: translateX(2px) translateY(-2px)">mdi-arrow-up-bold-hexagon-outline</v-icon>
+            查看全部<v-icon dark small color="#dbdbdb" style="transform: translateX(2px) translateY(-2px)">mdi-arrow-up-bold-hexagon-outline</v-icon>
         </div>
     </div>
 </template>
@@ -32,70 +38,11 @@
 </script>
 
 <style scoped lang="scss">
-    div.sideList{
-        margin-top: 1.2rem;
-    }
-    div.item{
-        padding: 0.6rem 0;
-        div.cover{
-            width: 34%;
-            height: 3.75rem;
-            overflow: hidden;
-            border: 1px solid #c5c5c5;
-            border-radius: 1px;
-            @media(max-width: 720px){
-                width: 27%;
-            }
-            &:hover{
-                border: 1px solid #42474C;
-            }
-            img{
-                object-fit: cover;
-                cursor: pointer;
-                width: 100%;
-                height: 100%;
-            }
-        }
-        div.preview{
-            position: relative;
-            width: 66%;
-            height: 3.75rem;
-            padding: 0 9px 0 11px;
-            @media(max-width: 720px){
-                width: 72%;
-            }
-            div.title{
-                width: 100%;
-                letter-spacing: .5px;
-                overflow: hidden;
-                height: 35px;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 2;
-                h4{
-                    color:rgba(0,0,0,.7);
-                    text-align: justify;
-                    word-break: break-all;
-                    cursor: pointer;
-                    font-size: 15px;
-                    line-height: 18px;
-                    &:hover{
-                        color:#b30000;
-                    }
-                }
-            }
 
-            div.date{
-                position: absolute;bottom: 0;
-                width: 94%;
-                font-size: 12px;
-            }
-        }
-    }
     div.button{
         margin: 20px 0 0 0;
         font-size: 14px;
-        color:rgba(255,255,255,.8);
+        color:hsl(0,0,95%);
         border-radius: 3px;
         background-color: rgba(0,0,0,.35);
         height: 30px;

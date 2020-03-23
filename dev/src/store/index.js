@@ -12,6 +12,7 @@ export default new Vuex.Store({
     },
     visible:{
       category:false,
+      contacts:false
     }
   },
   mutations: {
