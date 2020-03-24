@@ -16,7 +16,7 @@
 
 <style scoped lang="scss">
     div.recommends{
-
+        /*background-color: rgba(0,0,0,.01);*/
     }
     a.item{
         display: block;
@@ -26,7 +26,7 @@
         height: 2.8rem;
         overflow: hidden;
         word-break: break-all;
-        border-bottom: 1px dotted hsl(0,0,85%);
+        border-bottom: 1px dotted hsl(0,0,88%);
         &:last-child{
             border-bottom: none;
         }

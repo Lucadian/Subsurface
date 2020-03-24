@@ -1,6 +1,6 @@
 div.sideChart{
   margin-top: 40px;
-  padding-bottom: 14px;
+  padding-bottom: 12px;
   border-radius: 3px;
   border: 1px solid #d1d1d1;
   div.header{
@@ -14,6 +14,12 @@ div.sideChart{
       }
       div.date{
         transform: translateX(10px);
+        @media(max-width: 800px){
+          display: none;
+        }
+        @media(max-width: 600px){
+          display: block;
+        }
       }
     }
   }
@@ -51,6 +57,15 @@ div.sideChart{
     padding: 0 6px;
     overflow: hidden;
     user-select: none;
+    @media(max-width:600px){
+      height: 105px;
+    }
+    @media(max-width:500px){
+      height: 126px;
+    }
+    @media(max-width:440px){
+      height: 147px;
+    }
     div.grid{
       font-size: 12px;
       box-sizing: border-box;
@@ -65,7 +80,7 @@ div.sideChart{
         top: 1px;left: 1px;
       }
       &:hover{
-        border: 1px solid black;
+        border: .5px solid black;
         border-radius: 2px;
         background-color: white;
         //&:before{

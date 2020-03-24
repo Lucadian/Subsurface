@@ -11,7 +11,7 @@ export default new Vuex.Store({
       isMobile:false
     },
     visible:{
-      category:false,
+      category:true,
       contacts:false
     }
   },

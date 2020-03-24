@@ -1,8 +1,34 @@
 <template>
     <div id="category">
         <transition name="slide">
-            <aside v-show="visible.category" :class="{mobile:display.isMobile}">
-                123
+            <aside v-show="visible.category" :class="{mobile:display.isMobile}"
+            >
+                <div class="tabs d-flex justify-space-between">
+                        <v-tabs v-model="tab" background-color="transparent"  active-class="activeTab">
+                            <v-tab v-for="item in items" :key="item.tab">
+                                {{ item.tab }}
+                            </v-tab>
+                        </v-tabs>
+
+<!--                    <v-spacer/>-->
+                    <v-btn icon large @click="visible.category = false">
+                        <v-icon color="#6a6a6a" style="transform: scaleX(-1)">mdi-close</v-icon>
+                    </v-btn>
+                </div>
+                <v-divider/>
+                <v-tabs-items v-model="tab">
+                    <v-tab-item
+                            v-for="item in items"
+                            :key="item.tab"
+                    >
+                        {{ item.content }}
+                    </v-tab-item>
+                </v-tabs-items>
+                <div class="list">
+                    <p>213131</p><p>213131</p><p>213131</p><p>213131</p><p>213131</p><p>213131</p><p>213131</p><p>213131</p><p>213131</p>
+                </div>
+                <v-divider/>
+                <div class="info"></div>
             </aside>
         </transition>
         <transition name="fade">
@@ -12,12 +38,21 @@
 </template>
 
 <script>
+    import { category } from '@/assets/category'
     import { mapState } from 'vuex'
     export default {
         name: "category",
         data(){
             return {
+                category,
+                tabs:['文章','日志','相册'],
+                tab: null,
+                items: [
+                    { tab: '文章', content: '文章分类' },
+                    { tab: '日志', content: '日志分类' },
+                    { tab: '相册', content: '相册分类' },
 
+                ],
             }
         },
         computed:{
@@ -32,6 +67,9 @@
         methods:{
             wasted(){
                 this.visible.category = false
+                return false
+            },
+            aaa(){
                 return false
             }
         },
@@ -66,17 +104,7 @@
     .slide-enter, .slide-leave-to {
         transform: translateX(26rem);
     }
-    .fade-enter-active {
-        transition: opacity .3s;
-    }
-    .fade-leave-active {
-        transition: opacity .3s;
-    }
-    .fade-enter, .fade-leave-to {
-        opacity:0;
-    }
 aside{
-    pointer-events: none;
     position: fixed;right: 0;top: 0;
     z-index: 20;
     width: 27rem;
@@ -86,6 +114,12 @@ aside{
         width: 78vw;
     }
 
+}
+.activeTab {
+
+}
+.theme--light.v-tabs-items{
+    background-color: transparent;
 }
 div.overlay{
     position: fixed;

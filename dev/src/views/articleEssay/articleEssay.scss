@@ -19,6 +19,8 @@ main.v-content{
       background-color: hsl(0,0%,95%);
       @media(max-width: 600px){
         background-color: white;
+        border-radius: 0;
+        box-shadow: none;
       }
     }
   }
@@ -28,7 +30,7 @@ main.v-content{
 div.row{
 
   div.essay{
-    border-right: 1px solid black;
+    border-right: .5px solid black;
     padding: 0;
     @media(max-width: 600px){
       border-right: 0;
