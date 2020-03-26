@@ -1,9 +1,11 @@
 <template>
     <v-app-bar app flat shrink-on-scroll >
-        <div id="headbar" class="wrapper d-flex align-center">
-
+        <div id="headbar" class="wrapper scroller d-flex align-center">
             <transition name="headbarSlide">
-                <h4  v-if="title"  v-text="headbar.value.title"/>
+                <h4  v-if="title"
+                     :class="{fix:visible.contacts}"
+                     v-text="visible.contacts ? '微信二维码' : headbar.title.value"
+                />
                 <div v-if="search" class="search d-flex" :class="{mobile:display.isMobile}">
                     <div class="prefix d-none d-sm-flex" v-text="prefix"/>
                     <input ref="search" type="search" v-model="value"
@@ -12,16 +14,12 @@
                     />
                 </div>
             </transition>
-
-
-
             <v-spacer></v-spacer>
-
             <v-btn icon dark @click="resetSearch" @contextmenu.prevent="wasted">
                 <v-icon>{{ title ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
             </v-btn>
             <v-btn icon dark @click="showCategory" @contextmenu.prevent="wasted">
-                <v-icon>mdi-apps</v-icon>
+                <v-icon style="transform: translateY(-1px)">mdi-apps</v-icon>
             </v-btn>
 
         </div>
@@ -29,7 +27,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState,mapMutations } from 'vuex'
     export default {
         name: "headbar",
         data(){
@@ -48,12 +46,16 @@
             prefix(){
                 return '文章搜索'
             },
-
         },
         watch:{
 
         },
         methods:{
+            ...mapMutations(['hideScrollbar']),
+            showCategory(){
+                this.visible.category = true
+                this.hideScrollbar()
+            },
             resetSearch(){
                 this.search = false
                 this.title = false
@@ -72,9 +74,6 @@
                         this.timer = null
                     },300)
                 }
-            },
-            showCategory(){
-                this.visible.category = !this.visible.category
             },
             wasted(){
                 return false

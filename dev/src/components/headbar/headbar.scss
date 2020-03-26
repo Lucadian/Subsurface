@@ -1,5 +1,5 @@
 header.v-app-bar{
-  background-color: rgba(57,63,69,.82)!important;
+  background-color: rgba(55,61,68,.8)!important;
   color: white;
   overflow: hidden;
   &::before{
@@ -20,6 +20,11 @@ header.v-app-bar{
     h4{
       font-size: 90%;
       letter-spacing: 2px;
+      &.fix{
+        @media(max-width: 67rem) {
+          transform: translateX(1rem);
+        }
+      }
     }
     @media(max-width: 67rem){
       width: 100vw;

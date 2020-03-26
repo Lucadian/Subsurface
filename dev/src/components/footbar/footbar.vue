@@ -9,7 +9,7 @@
                     </a>
                 </div>
                 <div class="weixin">WeChat:
-                    <a @click="visible.contacts = true">Arcadia_liu</a>
+                    <a @click="showContacts">Arcadia_liu</a>
                     <v-icon x-small class="mb-3">mdi-chat-processing</v-icon>
                 </div>
 
@@ -23,7 +23,7 @@
             </div>
         </div>
         <transition name="fade">
-            <div class="mask" v-if="visible.contacts" @click.self="visible.contacts = false">
+            <div class="mask" v-if="visible.contacts" @click.self="hideContacts">
                 <div class="cage">
                     <transition name="fade">
                         <img v-show=isLoaded :src=QRCodeImg alt="微信二维码" @load="isLoaded = true">
@@ -48,7 +48,7 @@
 
 <script>
     import { domain } from '@/assets/domain.js'
-    import { mapState } from 'vuex'
+    import { mapState,mapMutations } from 'vuex'
     export default {
         name: "footBar",
         data(){
@@ -59,15 +59,19 @@
             }
         },
         computed:{
-            ...mapState(['display','visible']),
-            root(){
-                return document.getElementById('html')
-            },
-            head(){
-                return document.getElementById('headbar')
-            }
+            ...mapState(['display','visible','headbar']),
+
         },
         methods:{
+            ...mapMutations(['hideScrollbar','showScrollbar']),
+            showContacts(){
+                this.visible.contacts = true
+                this.hideScrollbar()
+            },
+            hideContacts(){
+                this.visible.contacts = false
+                this.showScrollbar()
+            },
             copy(str){
                 // 创建input标签存放需要复制的文字
                 let input = document.createElement('input');
@@ -82,20 +86,9 @@
                 document.body.removeChild(input)
                 this.copied = true
             },
-        },
-        updated(){
-            if(this.visible.contacts){
-                this.root.classList.remove('scroller')
-                if(!this.display.isMobile)
-                    this.head.classList.remove('scroller')
-            }
-            else{
-                this.root.classList.add('scroller')
-                if(!this.display.isMobile)
-                    this.head.classList.add('scroller')
-            }
 
         },
+
     }
 </script>
 
@@ -133,17 +126,23 @@ footer{
             font-weight: bold;
             font-size: 14px;
             letter-spacing: 1px;
+            @media(max-width: 800px){
+                display: none;
+            }
         }
         .git{
             margin-left: 40px;
+            @media(max-width: 800px){
+                margin-left: 0;
+            }
             @media(max-width: 600px) {
                 display: none;
             }
         }
         .weixin{
             margin-left: 25px;
-            @media(max-width: 800px){
-                display: none;
+            @media(max-width: 600px) {
+                margin-left: 0;
             }
 
         }
@@ -190,7 +189,7 @@ footer{
             }
             .weixinName{
                 text-shadow: 0 0 4px black;
-                transform: translateX(12px) translateY(20px);
+                transform: translateX(12px) translateY(25px);
                 font-size: 20px;
                 text-align: center;
             }
