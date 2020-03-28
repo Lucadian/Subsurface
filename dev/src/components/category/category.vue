@@ -33,8 +33,7 @@
             </aside>
         </transition>
         <transition name="fade">
-            <div class="overlay" v-show="visible.category" @click="hideCategory" @contextmenu.prevent="wasted">
-            </div>
+            <div class="overlay" v-show="visible.category" @click="hideCategory" @contextmenu.prevent="wasted" />
         </transition>
         <transition name="fade">
             <qrcode v-if="valid.qrcode" :valid="valid"/>
@@ -102,11 +101,10 @@
             },
             showQRCode(){
                 this.visible.category = false
+                if(this.visible.contacts)
+                    this.visible.contacts = false
                 this.valid.qrcode = true
             }
-
-        },
-        updated(){
 
         },
 

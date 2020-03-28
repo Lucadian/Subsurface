@@ -1,0 +1,22 @@
+main.v-content{
+  &::before{
+    display: block;content: '';
+    position: fixed;top: 0;left: 0;
+    width: 100vw;height: 100vh;
+    background-color: hsl(0,0%,95%);
+  }
+  width: 60rem;
+  margin: 0 auto;
+
+  div.aRow{
+    position: relative;
+    margin: 0;
+  }
+}
+
+a.cover{
+  img{
+    width: 200px;
+    height: 120px;
+  }
+}

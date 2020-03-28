@@ -2,15 +2,15 @@
     <div class="showcase d-flex justify-space-between align-center">
 
         <!--当前页面二维码-->
-        <v-tooltip bottom open-delay="600">
+        <v-tooltip right open-delay="300" nudge-top="6" nudge-right="4">
             <template v-slot:activator="{ on }">
                 <v-btn icon x-large v-on="on" @click="$emit('showQRCode')">
                     <v-icon large color="#424242">mdi-qrcode</v-icon>
                 </v-btn>
             </template>
-            <span>
-                页面转码
-            </span>
+            <div>
+                移动端浏览
+            </div>
         </v-tooltip>
 
         <v-spacer></v-spacer>
@@ -42,6 +42,20 @@
 </script>
 
 <style scoped lang="scss">
+    div.v-tooltip__content{
+        color:black;
+        background-color: #EBEBEB;
+        padding: 4px 12px;
+        border: 1px solid #c4c4c4!important;
+        &::before{
+            position: absolute;left: -10px;bottom: 5px;
+            display:inline-block;content: '';
+            width:0;height:0;
+            border-top: 4px solid transparent;
+            border-right: 10px solid #c4c4c4;
+            border-bottom: 4px solid transparent;
+        }
+    }
     div.showcase{
         padding: 0 31px 0 22px;
         height: 100px;

@@ -2,8 +2,12 @@
     <div class="mask" @click.self="close">
         <div class="cage">
             <vue-qrcode :value=url tag="img" :options="options"/>
-            <div class="url">
+            <div class="btn_return">
+                <v-btn icon x-large @click="close">
+                    <v-icon large color="white">mdi-redo-variant</v-icon>
+                </v-btn>
             </div>
+
         </div>
     </div>
 </template>
@@ -50,7 +54,8 @@
         justify-content: center;
         .cage{
             margin-top: 29vh;
-            height: 180px;
+            height: 300px;
+            width: 300px;
             @media(max-width:1930px){
                 transform: scale(.8);
             }
@@ -60,14 +65,18 @@
                 background-color: white;
                 box-shadow: 0 0 8px white,0 0 12px white,0 0 16px white,0 0 32px white,0 0 80px white;
             }
-            div.url{
-                margin-top: 1.5rem;
-                letter-spacing: 2px;
-                /*color: #ededed;*/
-                font-size: 17px;
-                text-align: center;
-                text-shadow: 0 0 6px black,0 0 3px black,;
+            div.btn_return{
+                width: 52px;
+                margin: 40px auto 0 auto;
             }
+            /*div.url{*/
+            /*    margin-top: 1.5rem;*/
+            /*    letter-spacing: 2px;*/
+            /*    !*color: #ededed;*!*/
+            /*    font-size: 17px;*/
+            /*    text-align: center;*/
+            /*    text-shadow: 0 0 6px black,0 0 3px black,;*/
+            /*}*/
         }
 
     }

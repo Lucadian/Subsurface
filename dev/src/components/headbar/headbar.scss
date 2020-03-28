@@ -17,6 +17,9 @@ header.v-app-bar{
     width: 67rem;
     height: 100%;
     margin: 0 auto;
+    &.shorten{
+      width: 60rem;
+    }
     h4{
       font-size: 90%;
       letter-spacing: 2px;
