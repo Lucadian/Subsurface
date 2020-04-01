@@ -16,7 +16,6 @@ export default new Vuex.Store({
     overlay:{
         visible : false,
         message :'',
-
     }
   },
   mutations: {

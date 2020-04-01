@@ -17,8 +17,8 @@ header.v-app-bar{
     width: 67rem;
     height: 100%;
     margin: 0 auto;
-    &.shorten{
-      width: 60rem;
+    &.narrow{
+      width: 57rem;
     }
     h4{
       font-size: 90%;
@@ -44,7 +44,6 @@ header.v-app-bar{
     }
 
   }
-
 }
 div.search{
   padding: 4px 0;
@@ -85,6 +84,7 @@ div.search{
 
   }
 }
+
 div.search.mobile{
   width: calc(100vw - 8.5rem);
   input{
@@ -97,6 +97,7 @@ div.search.mobile{
     }
   }
 }
+
 button.v-btn{
   width: 3rem;
   height: 3rem;

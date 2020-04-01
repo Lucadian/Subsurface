@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import articleList from '../views/articleList/articleList.vue'
+import articleList from '@/views/articleList/articleList'
+import blog from '@/views/blog/blog'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'articleList',
-    component: articleList,
+    name: 'blog',
+    component: blog,
   },
   {
     path: '/article/:dirname/:filename',

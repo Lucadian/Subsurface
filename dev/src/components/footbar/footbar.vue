@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div class="wrapper d-flex justify-space-between">
+        <div class="wrapper d-flex justify-space-between" :class="{ shorten : !headbar.style.shrink }">
             <div class="leftBox d-flex justify-space-between">
                 <div class="site">次表面网络空间</div>
                 <div class="git">GitHub:
@@ -54,7 +54,7 @@
         data(){
             return {
                 isLoaded :false,
-                QRCodeImg:domain.image + '/images/wechat.png',
+                QRCodeImg:domain.image + '/wechat.png',
                 copied:false
             }
         },
@@ -104,6 +104,9 @@ footer{
         height: 4.5rem;
         line-height: 4.2rem;
         margin: 0 auto;
+        &.shorten{
+            max-width: 57rem;
+        }
         @media(max-width: 67rem) {
             width: 100vw;
         }

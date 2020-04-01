@@ -43,7 +43,7 @@ let article = [
         num:statistics['规范'] ? statistics['规范']:0
     },
     {
-        title: '美术',
+        title: '美工',
         subtitle:'设计 & 素材',icon: 'mdi-adobe',
         num:statistics['美术'] ? statistics['美术']:0
     },

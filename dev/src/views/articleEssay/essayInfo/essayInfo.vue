@@ -24,7 +24,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../../assets/style.theme.scss";
+    @import "../../../assets/style.theme.scss";
     div.essayInfo{
         color: white;
         user-select: none;

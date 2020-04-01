@@ -19,7 +19,7 @@
         name: "qrcode",
         data(){
             return {
-                url:'http://www.subsurface.cn/article/JavaScript,%E5%9F%BA%E7%A1%80/JavaScript%20%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B',
+                url:'https://www.baidu.com/',
                 options:{
                     errorCorrectionLevel:'L',//Possible values are low, medium, quartile, high or L, M, Q, H
                     margin:0,

@@ -1,61 +1,66 @@
 <template>
     <v-content>
-        <div class="aRow d-flex" v-for="item in archive">
-            <div>
-                <a class="cover" :href="href(item.dir,item.file)" @touchend="location(item.dir,item.file)" target="_blank">
-                    <img :src=src(item.cover)>
-                </a>
-            </div>
-            <div>
-                <a class="title" :href="href(item.dir,item.file)" @touchend="location(item.dir,item.file)" target="_blank">
-                    <h5 v-text="item.title" />
-                </a>
-                <div class="notes d-flex justify-start">
-                    <div>修改 {{item.lastEdited}}</div>
-                    <div>目录 {{item.dir}}</div>
-                </div>
-                <div class="brief" v-text="item.brief"/>
-            </div>
-        </div>
+        <list/>
+        <pagination/>
     </v-content>
 </template>
 
 <script>
-    import { domain } from '@/assets/domain'
     import { mapState,mapMutations } from 'vuex'
-    import { archive } from './archive'
 
+    import pagination from './pagination/pagination'
+    import list from './list/list'
     export default {
         name: "articleList",
-        data(){
-            return {
-                archive,
-                domain
-            }
-        },
+
         computed:{
             ...mapState(['headbar']),
-            path(){
-                return 'http://' + window.location.host + '/article/'
-            },
         },
-        methods:{
-            location(dir,file){
-                window.location.href = 'http://' + window.location.host + '/article/' + dir + '/' + file
-            },
-            href(dir,file){
-                return 'http://' + window.location.host + '/article/' + dir + '/' + file
-            },
-            src(path){
-                return this.domain.image + '/' + path
-            }
+        components:{
+            list,pagination
         },
         created() {
             this.headbar.style.shrink = false
+            this.headbar.style.narrow = true
+            this.headbar.title = `
+<style lang="scss">
+    .title{
+        letter-spacing: 1px;
+    }
+    .目录{
+        position: relative;
+        width: 3.3rem;
+    }
+    .目录::after{
+        display: inline-block;content: '';
+        position: absolute;right: 0;bottom: 5px;
+        height: 20px;
+        width: 1px;
+        background-color: white;
+    }
+    .排序说明{
+        font-size: 80%;
+        transform: translateX(12px) translateY(2px);
+    }
+</style>
+<div class="title d-flex ml-2" >
+    <div class="目录">目录</div><div class="排序说明">按更新时间排序</div>
+</div>`
         }
     }
 </script>
 
 <style scoped lang="scss">
-@import 'articleList.scss';
+
+    main.v-content{
+        &::before{
+            display: block;content: '';
+            position: fixed;top: 0;left: 0;
+            width: 100vw;height: 100vh;
+            background-color: hsl(0,0%,94%);
+            @media(max-width: 600px){
+                background-color: white;
+            }
+        }
+    }
 </style>

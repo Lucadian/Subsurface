@@ -17,8 +17,8 @@
     import { mapState } from 'vuex'
     import sidebar from '@/components/sidebar/sidebar.vue'
     import sideInfo from '@/components/sideInfo/sideInfo.vue'
-    import essayInfo from '@/components/essayInfo/essayInfo.vue'
-    import essayText from '@/components/essayText/essayText.vue'
+    import essayInfo from './essayInfo/essayInfo.vue'
+    import essayText from './essayText/essayText.vue'
     export default {
         name: "articleEssay",
         computed:{
