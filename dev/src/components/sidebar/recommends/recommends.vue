@@ -1,10 +1,10 @@
 <template>
     <div class="recommends">
-        <a class="item" href=""><h4>JavaScript 原型链的简易图解（Prototype chain）</h4></a>
-        <a class="item" href=""><h4>测试 dadwa 阿瓦达题阿瓦达题</h4></a>
-        <a class="item" href=""><h4>JavaScript 的数据类型</h4></a>
-        <a class="item" href=""><h4>DOM 狂悖无道的尺寸(一) Scroll/Client/Offset</h4></a>
-        <a class="item" href=""><h4>你的图片肿了么？删除元数据三种的办法</h4></a>
+        <h4 class="item"><a href="">JavaScript 原型链的简易图解（Prototype chain）</a></h4>
+        <h4 class="item"><a href="">测试 dadwa 阿瓦达题阿瓦达题</a></h4>
+        <h4 class="item"><a href="">JavaScript 的数据类型</a></h4>
+        <h4 class="item"><a href="">DOM 狂悖无道的尺寸(一) Scroll/Client/Offset</a></h4>
+        <h4 class="item"><a href="">你的图片肿了么？删除元数据三种的办法</a></h4>
     </div>
 </template>
 
@@ -18,7 +18,7 @@
     div.recommends{
         /*background-color: rgba(0,0,0,.01);*/
     }
-    a.item{
+    h4.item{
         display: block;
         color: #606060;
         box-sizing: border-box;
@@ -30,10 +30,11 @@
         &:last-child{
             border-bottom: none;
         }
-        &:hover{
+        &:hover a{
             color: black;
         }
-        h4{
+        a{
+            color:#606060;
             font-size: 15px;
             line-height: 2.8rem;
         }

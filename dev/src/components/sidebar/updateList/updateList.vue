@@ -30,6 +30,9 @@
 
     div.item{
         padding: 0.6rem 0;
+        &:hover h4{
+            color: black!important;
+        }
         a.cover{
             display: block;
             width: 34%;
@@ -74,10 +77,6 @@
                     cursor: pointer;
                     font-size: 15px;
                     line-height: 18px;
-                    &:hover{
-                        /*color:#007aff;*/
-                        color: black;
-                    }
                 }
             }
 

@@ -73,6 +73,10 @@
         div.day{
             padding: 0.7rem 0;
             position: relative;
+            &:hover .label-day{
+                background-color: #007fe0;
+                text-shadow: 0 0 2px black;
+            }
             &.anchored::before{
                 position: absolute;top: 0;
                 left: -2%;
@@ -102,7 +106,7 @@
                 line-height: 1.1rem;
                 text-align: center;
                 height: 1.1rem;
-                width: 5rem;
+                width: 5.4rem;
                 border-radius: 3px;
                 margin: .7rem 0;
             }

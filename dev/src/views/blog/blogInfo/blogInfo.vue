@@ -24,7 +24,6 @@
     @import "../../../assets/style.theme.scss";
     div.blogInfo{
         position: relative;
-        z-index: 1;
         color: white;
         user-select: none;
         font-style: normal;
