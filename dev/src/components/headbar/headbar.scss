@@ -17,9 +17,7 @@ header.v-app-bar{
     width: 67rem;
     height: 100%;
     margin: 0 auto;
-    &.narrow{
-      width: 57rem;
-    }
+
     h4{
       font-size: 90%;
       letter-spacing: 2px;
@@ -30,7 +28,7 @@ header.v-app-bar{
       }
     }
     @media(max-width: 67rem){
-      width: 100vw;
+      width: 100vw!important;
       padding: 0 .5rem;
       h4{
         max-height: 64px;

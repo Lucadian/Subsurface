@@ -41,7 +41,7 @@
             blogInfo,sideInfo,sidebar,blogText,blogTabs,selector
         },
         created(){
-            this.headbar.style.shrink = false
+            this.headbar.valid.shrink = false
             this.headbar.title =  title
         }
     }

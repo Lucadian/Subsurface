@@ -24,7 +24,7 @@ let title =
         transform: translateX(12px) translateY(2px);
     }
 </style>
-<div class="blogName title d-none d-md-flex ml-2" >
+<div class="blogName title d-flex ml-2" >
     <div class="标题">相册</div>
     <div class="排序说明">默认相册</div>
 </div>

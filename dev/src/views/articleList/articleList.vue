@@ -14,14 +14,15 @@
         name: "articleList",
 
         computed:{
-            ...mapState(['headbar']),
+            ...mapState(['headbar','footbar']),
         },
         components:{
             list,pagination
         },
         created() {
-            this.headbar.style.shrink = false
-            this.headbar.style.narrow = true
+            this.headbar.valid.shrink = false
+            this.headbar.style = 'width: 57rem'
+            this.footbar.style = 'width: 57rem'
             this.headbar.title = `
 <style lang="scss">
     .title{

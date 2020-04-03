@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div class="wrapper d-flex justify-space-between" :class="{ shorten : !headbar.style.shrink }">
+        <div class="wrapper d-flex justify-space-between" :style="footbar.style">
             <div class="leftBox d-flex justify-space-between">
                 <div class="site">次表面网络空间</div>
                 <div class="git">GitHub:
@@ -12,7 +12,6 @@
                     <a @click="showContacts">Arcadia_liu</a>
                     <v-icon x-small class="mb-3">mdi-chat-processing</v-icon>
                 </div>
-
             </div>
             <div class="rightBox d-flex justify-space-between">
                 <div class="vuetify">
@@ -59,7 +58,7 @@
             }
         },
         computed:{
-            ...mapState(['display','visible','headbar']),
+            ...mapState(['display','visible','footbar']),
 
         },
         methods:{
@@ -108,7 +107,7 @@ footer{
             max-width: 57rem;
         }
         @media(max-width: 67rem) {
-            width: 100vw;
+            width: 100vw!important;
         }
         @media(max-width: 600px) {
             padding: 0 0.6rem;

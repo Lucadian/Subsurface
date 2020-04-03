@@ -1,6 +1,6 @@
 <template>
-    <v-app-bar app flat :shrink-on-scroll="headbar.style.shrink" >
-        <div id="headbar" class="wrapper scroller d-flex align-center" :class="{ narrow : headbar.style.narrow }">
+    <v-app-bar app flat :shrink-on-scroll="headbar.valid.shrink" >
+        <div id="headbar" class="wrapper scroller d-flex align-center" :style="headbar.style">
             <transition name="headbarSlide">
                 <h4  v-if="headbar.valid.title"
                      :class="{fix:visible.contacts}"

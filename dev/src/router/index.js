@@ -13,8 +13,14 @@ const routes = [
     component: album
   },
   {
+    path: '/query',
+    name: 'articleList',
+    component: () => import('@/views/articleList/articleList')
+  },
+  {
     path: '/blog/:year',
     name: 'blog',
+    props:true,
     component: () => import('@/views/blog/blog')
   },
   {
