@@ -1,10 +1,10 @@
 module.exports = {
   //输出路径
-  outputDir:'./dist',
+  outputDir:'../dist',
 
   //输出的文件，其文件名是否添加哈希值
   filenameHashing:true,
-
+  publicPath: '/dist/',
   pages:{
     index:{
       entry: './src/main.js',
@@ -13,7 +13,7 @@ module.exports = {
       template: './public/index.html',
 
       // 在 dist/index.html 的输出
-      filename: 'index.html',
+      filename: '../index.html',
 
       // 当使用 title 选项时，
       // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>

@@ -5,7 +5,7 @@
   "scripts": {
     "parc": "vue-cli-service build",
     "serv": "vue-cli-service serve --open",
-    "update": ""
+    "up": ""
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",

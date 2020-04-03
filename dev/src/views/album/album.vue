@@ -3,16 +3,16 @@
         <v-content>
             <v-container fluid>
                 <v-row>
-                    <v-col cols="6" sm="4" md="3" v-for="n in 20">
-                        <div class="box" @click="showViewer" path="content/album/ttt.jpg">
-                            <img src="content/album/ttt.jpg">
+                    <v-col cols="6" sm="4" md="3" v-for="n in 2">
+                        <div class="box" @click="showViewer" path="content/album/动效参考/bread.gif">
+                            <img src="content/album/动效参考/bread.gif">
                             <div class="ribbon" v-text="'测试图片测试图片测试'" />
                         </div>
                     </v-col>
                 </v-row>
             </v-container>
         </v-content>
-        <viewer :path="path"/>
+        <viewer :path="path" />
     </div>
 
 </template>
@@ -21,13 +21,14 @@
     import { mapState,mapMutations } from 'vuex'
     import { title } from './title.js'
     import viewer from '@/components/viewer/viewer'
+
     export default {
         name: "album",
         data(){
             return {
                 imgs:[
                     {
-                        src:'content/album/ttt.jpg',msg:'测试图片测试图片测试图片'
+                        src:'content/album/动效参考/bread.gif',msg:'测试图片测试图片测试图片'
                     }
                 ],
                 path:{
@@ -72,10 +73,12 @@ div.album{
 }
 main.v-content{
     width: 1120px;
+    min-height: calc(100vh - 136px);
     margin: 64px auto 0 auto;
     padding-top: 0!important;
     @media(max-width: 960px){
         margin-top: 56px;
+        min-height: calc(100vh - 128px);
     }
 }
 div.row{
