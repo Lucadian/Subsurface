@@ -53,8 +53,7 @@
             display: block;content: '';
             position: fixed;top: 0;left: 0;
             width: 100vw;height: 100vh;
-            background: url("../../assets/gradient.png");
-            background-size: cover;
+            background: linear-gradient(0deg,#d0d0d0 4%,#a8a8a8 30%,#6c6c6c 95%);
         }
         width: calc(67rem - 0.5px);
         margin: 64px auto 0 auto;

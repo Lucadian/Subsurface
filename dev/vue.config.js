@@ -4,7 +4,9 @@ module.exports = {
 
   //输出的文件，其文件名是否添加哈希值
   filenameHashing:true,
-  publicPath: '/dist/',
+  publicPath: process.env.NODE_ENV === 'production'
+      ? '/dist/'
+      : '/',
   pages:{
     index:{
       entry: './src/main.js',
@@ -13,7 +15,7 @@ module.exports = {
       template: './public/index.html',
 
       // 在 dist/index.html 的输出
-      filename: '../index.html',
+      filename: './index.html',
 
       // 当使用 title 选项时，
       // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
@@ -24,7 +26,6 @@ module.exports = {
   devServer:{
     port:8080,
     // host:'192.168.2.2',
-    // contentBase:'./dist',
     contentBase:'../',
     progress:true,
     compress:true

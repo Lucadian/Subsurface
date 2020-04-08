@@ -16,7 +16,9 @@ html{
 //category.vue 组件的特殊样式
 html{
   overflow: hidden;
-  margin-right: 17px;
+  &.mr-17{
+    margin-right: 17px;
+  }
   &.scroller{
     overflow-y: scroll;
     margin-right: 0;

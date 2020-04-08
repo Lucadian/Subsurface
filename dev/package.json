@@ -5,7 +5,8 @@
   "scripts": {
     "parc": "vue-cli-service build",
     "serv": "vue-cli-service serve --open",
-    "up": ""
+    "album": "node ./src/libs/archive_album.js",
+    "aa": "node ./src/libs/archive_album.js"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",

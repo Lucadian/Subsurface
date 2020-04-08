@@ -2,16 +2,15 @@
     <div class="mask" @click.self="close">
         <div class="cage">
             <vue-qrcode :value=url tag="img" :options="options"/>
-            <div class="btn_return">
-                <v-btn icon x-large @click="close">
-                    <v-icon large color="white">mdi-redo-variant</v-icon>
-                </v-btn>
-            </div>
-
+        </div>
+        <div class="url">{{ url }}</div>
+        <div class="btn_return">
+            <v-btn icon x-large @click="close">
+                <v-icon large color="white">mdi-redo-variant</v-icon>
+            </v-btn>
         </div>
     </div>
 </template>
-
 <script>
     import vueQrcode from '@chenfengyuan/vue-qrcode'
     import { mapMutations } from 'vuex'
@@ -19,7 +18,7 @@
         name: "qrcode",
         data(){
             return {
-                url:'https://www.baidu.com/',
+                url:'',
                 options:{
                     errorCorrectionLevel:'L',//Possible values are low, medium, quartile, high or L, M, Q, H
                     margin:0,
@@ -38,10 +37,15 @@
         components:{
             vueQrcode
         },
+        created(){
+            let href =  decodeURI(window.location.href)
+            if(window.location.hostname === 'localhost')
+                href = href.replace(/localhost/g,'192.168.2.2')
 
+            this.url = href
+        }
     }
 </script>
-
 <style scoped lang="scss">
 .mask{
         position: fixed;
@@ -50,12 +54,8 @@
         background-color: #373D44;
         width: 100vw;
         height: 100vh;
-        display: flex;
-        justify-content: center;
         .cage{
-            margin-top: 29vh;
-            height: 300px;
-            width: 300px;
+            margin: 29vh auto 0 auto;
             @media(max-width:1930px){
                 transform: scale(.8);
             }
@@ -65,19 +65,21 @@
                 background-color: white;
                 box-shadow: 0 0 8px white,0 0 12px white,0 0 16px white,0 0 32px white,0 0 80px white;
             }
-            div.btn_return{
-                width: 52px;
-                margin: 40px auto 0 auto;
-            }
-            /*div.url{*/
-            /*    margin-top: 1.5rem;*/
-            /*    letter-spacing: 2px;*/
-            /*    !*color: #ededed;*!*/
-            /*    font-size: 17px;*/
-            /*    text-align: center;*/
-            /*    text-shadow: 0 0 6px black,0 0 3px black,;*/
-            /*}*/
-        }
 
+        }
+        .url{
+            text-align: center;
+            width: 90vw;
+            margin: 5vh auto;
+            height: 24px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+        div.btn_return{
+            width: 52px;
+            margin: 40px auto 0 auto;
+        }
     }
 </style>

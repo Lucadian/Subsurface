@@ -1,0 +1,184 @@
+article{
+  position: relative;
+  div.mark{
+    position: absolute;top: 0;left: -12px;
+    width: 12px;
+    height: 56px;
+    border-radius: 5px 0 0 5px;
+    box-shadow: -2px 0 4px #646464;
+    &::after{
+      display: block;content: '';
+      width: 20px;
+      height: 56px;
+      background-color: hsl(0,0,95%);
+      border-radius: 5px 0 0 5px;
+    }
+  }
+  div.essayText{
+    padding: .9rem 1.7rem 0.7rem 1.7rem;
+    min-height: calc(100vh - 128px);
+    font-size: 17px;
+    word-break: break-all;
+    text-align: justify;
+    @media(max-width: 600px){
+      padding: 0.6rem;
+    }
+
+  }
+  div.Fin{
+    letter-spacing: 2px;
+    user-select: none;
+    color: rgba(84,89,93,.9);
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 2rem 1.7rem;
+    border-radius: 2px;
+    margin: 0 1.7;
+
+    @media(max-width: 600px){
+      color: hsl(0,0%,92%);
+      text-align: center;
+      background-color: rgba(84,89,93,.8);
+      margin: 0 ;
+      border-radius: 0;
+    }
+  }
+}
+section{
+  padding: 12px 0;
+  border-bottom: 1px solid rgb(170,170,170);
+  &:last-child{
+    border-bottom: none;
+  }
+  h2{ //章节标题
+    &::before{
+      vertical-align: middle;
+      display: inline-block;content: '';
+      width: 1.1rem;
+      height: 0.5rem;
+      margin-right: 1rem;
+      background-color:#bb1c1c;
+      transform: translateY(-0.15rem);
+    }
+    font-size: 1.25rem;
+    line-height: 1.4rem;
+    margin: 1.8rem 0;
+  }
+  p{
+    line-height: 1.85rem;
+    text-indent:2em;
+    margin: 1.5rem 0!important;
+  }
+  q{
+    display: block;
+    font-size: 1rem;
+    background-color: hsl(0,0%,88%);
+    border-radius: 4px;
+    padding: 0.45rem 0.6rem;
+    margin: -0.35rem 0 0 0;
+  }
+  a{
+    text-decoration: none;
+    color: #0366d6;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  strong{ //重点内容下划线
+    font-weight: bold;
+    padding: 0 0 2px 0;
+  }
+  img{
+    display: block;
+  }
+  img.fullWidth{
+    width: 98%;
+    @media(max-width: 600px){
+      width: 100%;
+    }
+  }
+  img.largeWidth{
+    width: 82%;
+    @media(max-width: 600px){
+      width: 100%;
+    }
+  }
+  img.mediumWidth{
+    width: 64%;
+    @media(max-width: 600px){
+      width: 89%;
+    }
+  }
+  img.halfWidth{
+    width: 52%;
+    @media(max-width: 600px){
+      width: 62%;
+    }
+  }
+  sup{
+    font-size: 0.6rem;padding: 1px;
+  }
+  .imgDescription{
+    display: block;text-align: center;
+  }
+
+}
+ol{
+  padding: 0 0 0 3.2rem!important;
+  margin: 0;
+  text-indent: 0;
+  line-height: 1.4rem;
+  @media(max-width: 600px){
+    padding-left:18px;
+  }
+
+  li{
+    margin: .7rem 0;
+  }
+}
+div.keyCode{
+  padding: 12px;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: lighter;
+  color: white;
+  background-color: #1c2125;
+  &::selection{
+    color: white;
+    background-color: #0563D4;
+  }
+}
+pre.prettyprint{ //演示代码
+
+  color: #0000dd;
+  font-size: 0.82rem;
+  line-height: 1.5rem;
+  font-family: "Lucida Console", Consolas, Monaco;
+  background-color: hsl(0,0%,90%);
+  padding: 0.7rem 2rem !important;
+  border: 1px dashed rgb(119, 136, 85)!important;
+  border-radius: 4px;
+
+  margin: 0.6rem 0 1.2rem 0;
+  overflow-x: auto;
+  &:hover{
+    background-color: hsl(0,0%,92%);
+  }
+  span.kwd{
+    color: #0000dd;
+    font-weight: bold;
+  }
+  span,typ,span.pln,span.pun{
+    color: #0000dd;
+  }
+  span.lit{
+    //color: #9e0000;
+  }
+  span.com{
+    color: #005a78;
+  }
+  em{
+    font-style:normal;
+    color:#005a78;
+  }
+}

@@ -1,21 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import articleList from '@/views/articleList/articleList'
-import album from '@/views/album/album'
+// import articleList from '@/views/articleList/articleList'
+// import album from '@/views/album/album'
+// import blog from '@/views/blog/blog'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/album/:gallery',
     name: 'album',
-    component: album
+    props:true,
+    component: () => import('@/views/album/album')
   },
   {
     path: '/query',
-    name: 'articleList',
-    component: () => import('@/views/articleList/articleList')
+    name: 'query',
+    component: () => import('@/views/query/query')
   },
   {
     path: '/blog/:year',
@@ -24,15 +26,15 @@ const routes = [
     component: () => import('@/views/blog/blog')
   },
   {
-    path: '/article/:dirname/:filename',
-    name: 'articleEssay',
+    path: '/essay/:dirname/:filename',
+    name: 'essay',
     props:true,
-    component: () => import('@/views/articleEssay/articleEssay.vue')
+    component: () => import('@/views/essay/essay')
   },
   {
     path: '/*',
     name: 'error',
-    component: () => import('@/views/error.vue')
+    component: () => import('@/views/error')
   }
 ]
 

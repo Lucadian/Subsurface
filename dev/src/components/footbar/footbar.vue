@@ -24,9 +24,20 @@
         <transition name="fade">
             <div class="mask" v-if="visible.contacts" @click.self="hideContacts">
                 <div class="cage">
-                    <transition name="fade">
-                        <img v-show=isLoaded :src=QRCodeImg alt="微信二维码" @load="isLoaded = true">
-                    </transition>
+                    <v-img :class="{glow:isLoaded}" @load="isLoaded = true"
+                           :src="QRCodeImg"
+                           aspect-ratio="1"
+                    >
+                        <template v-slot:placeholder>
+                            <v-row
+                                    class="fill-height ma-0"
+                                    align="center"
+                                    justify="center"
+                            >
+                                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                            </v-row>
+                        </template>
+                    </v-img>
                     <div class="weixinName">
                         Arcadia_liu
                         <v-btn icon @click="copy('Arcadia_liu')" class="ml-n1 mb-1">
@@ -46,14 +57,14 @@
 </template>
 
 <script>
-    import { domain } from '@/assets/domain.js'
+    import domain from '@/assets/domain.js'
     import { mapState,mapMutations } from 'vuex'
     export default {
         name: "footBar",
         data(){
             return {
                 isLoaded :false,
-                QRCodeImg:domain.image + '/wechat.png',
+                QRCodeImg:domain.image + '/images/wechat.png',
                 copied:false
             }
         },
@@ -85,6 +96,9 @@
                 document.body.removeChild(input)
                 this.copied = true
             },
+            aaa(){
+                console.log(123)
+            }
 
         },
 
@@ -181,13 +195,15 @@ footer{
             @media(max-width:1930px){
                 transform: scale(.8);
             }
-            img{
+            .v-image{
                 display: block;
                 margin: 0 auto;
                 width: 160px;
                 height: 160px;
-                background-color: white;
-                box-shadow: 0 0 8px white,0 0 12px white,0 0 16px white,0 0 32px white,0 0 80px white;
+                &.glow{
+                    background-color: white;
+                    box-shadow: 0 0 8px white,0 0 12px white,0 0 16px white,0 0 32px white,0 0 80px white;
+                }
             }
             .weixinName{
                 text-shadow: 0 0 4px black;

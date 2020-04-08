@@ -21,17 +21,20 @@ export default new Vuex.Store({
   },
   mutations: {
     hideScrollbar(state){
-      if(!state.display.isMobile){
-        document.getElementById('html').classList.remove('scroller')
+      let root = document.getElementById('html')
+          root.classList.remove('scroller')
+      if (state.display.isMobile)
+        root.classList.remove('mr-17')
+      else
         document.getElementById('headbar').classList.remove('scroller')
-      }
     },
     showScrollbar(state){
-      if(!state.display.isMobile){
-        document.getElementById('html').classList.add('scroller')
+      let root = document.getElementById('html')
+      root.classList.add('scroller')
+      if (state.display.isMobile)
+        root.classList.add('mr-17')
+      else
         document.getElementById('headbar').classList.add('scroller')
-      }
-
     }
   },
   actions: {

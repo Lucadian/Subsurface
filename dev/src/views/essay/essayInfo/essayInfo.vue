@@ -19,7 +19,8 @@
 
 <script>
     export default {
-        name: "essayInfo"
+        name: "essayInfo",
+        props:['value']
     }
 </script>
 
