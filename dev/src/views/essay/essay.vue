@@ -2,7 +2,7 @@
     <v-content>
         <v-row>
             <v-col class="essay" cols=12 sm=8>
-                <essay-info :value="info"/>
+                <essay-info :value="info" :dirname="dirname"/>
                 <essay-text :value="text"/>
             </v-col>
             <v-col class="aside" cols=12 sm=4>
@@ -20,7 +20,6 @@
     import essayText from './essayText/essayText.vue'
     import axios from 'axios'
     import domain from '@/assets/domain'
-
     export default {
         name: "essay",
         data(){
@@ -29,9 +28,6 @@
                 text:'',
                 domain
             }
-        },
-        computed:{
-
         },
         props:[
             'dirname','filename'

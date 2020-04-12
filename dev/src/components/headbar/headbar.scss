@@ -17,30 +17,10 @@ header.v-app-bar{
     width: 67rem;
     height: 100%;
     margin: 0 auto;
-
-    h4{
-      font-size: 90%;
-      letter-spacing: 2px;
-      &.fix{
-        @media(max-width: 67rem) {
-          transform: translateX(1rem);
-        }
-      }
-    }
     @media(max-width: 67rem){
       width: 100vw!important;
       padding: 0 .5rem;
-      h4{
-        max-height: 64px;
-        overflow: hidden;
-        font-size: 74%;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-      }
-
     }
-
   }
 }
 div.search{

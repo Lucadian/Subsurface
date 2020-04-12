@@ -1,6 +1,6 @@
 <template>
     <div class="selector">
-        <v-select class="d-flex d-md-none" v-if="headbar.valid.title"
+        <v-select class="d-flex d-md-none" v-if="visible.arkTitle"
                   :items="items"
                   prepend-icon="mdi-calendar-month"
                   :label="year"
@@ -27,7 +27,10 @@
             }
         },
         computed:{
-            ...mapState(['headbar']),
+            ...mapState(['visible','headbar']),
+        },
+        created() {
+
         }
     }
 </script>

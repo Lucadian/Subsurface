@@ -1,8 +1,8 @@
 div.list{
   width: 57rem;
-  margin: 1rem auto;
+  margin: 8px auto 80px auto;
   @media (max-width: 600px){
-    margin: 0 auto;
+    margin: 0 auto 80px auto;
     width: 100vw;
   }
 }
@@ -10,7 +10,7 @@ div.list{
 div.aRow{
   padding: 0 10px;
   border-radius: 4px;
-
+  margin-top: -1.5px;
   &:hover{
     background-color: hsl(0,0,97%);
   }
@@ -38,7 +38,7 @@ div.aRow{
         height: 110px;
         @media (max-width: 600px){
           width: 110px;
-          height: 77px;
+          height: 80px;
         }
         display: flex;
         justify-content: center;
@@ -93,12 +93,11 @@ div.aRow{
         }
       }
       div.notes{
-        margin-top: 10px;
+        margin-top: 8px;
         color: #696969;
         font-weight: 100;
         font-size: 13px;
-        height: 14px;
-        line-height: 14px;
+        height: 16px;
         font-style: normal;
         overflow: hidden;
         @media (max-width: 600px){
@@ -107,7 +106,9 @@ div.aRow{
           width: 100%;
           justify-content: space-between;
         }
-        div{
+        div.note{
+          height: 16px;
+          line-height: 16px;
           margin-right: 2rem;
           display: -webkit-box;
           -webkit-box-orient: vertical;
@@ -118,6 +119,7 @@ div.aRow{
           }
         }
       }
+
       div.brief{
         margin-top: 10px;
         color: #535353;

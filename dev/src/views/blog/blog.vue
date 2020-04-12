@@ -25,8 +25,6 @@
     import sidebar  from '@/components/sidebar/sidebar.vue'
     import sideInfo from '@/components/sideInfo/sideInfo.vue'
 
-    import { title } from './title.js'
-
     export default {
         name: "blog",
         data(){
@@ -42,7 +40,9 @@
         },
         created(){
             this.headbar.valid.shrink = false
-            this.headbar.title =  title
+            this.headbar.valid.complex = true
+            this.headbar.title =  '日志'
+            this.headbar.subtitle = '2020年3月~12月'
         }
     }
 </script>

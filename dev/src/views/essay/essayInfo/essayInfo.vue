@@ -2,25 +2,58 @@
     <div class="essayInfo d-flex">
         <div>
             <v-icon x-small class="mr-0" color="#ef5a5a" style="transform: translateY(-1px)">mdi-camera-control</v-icon>
-            最后编辑 2019-11-05
+            最后编辑 {{ info.lastEdited }}
         </div>
         <div class="hidden-sm-and-down">
-            发布于 2019-11-05
+            发布于 {{ info.published }}
         </div>
         <div class="hidden-xs-only">
-            所属分类「 JavaScript,基础 」
+            所属分类「 {{ category }} 」
         </div>
-        <v-spacer></v-spacer>
+        <v-spacer/>
         <div>
-            <v-icon x-small dark class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : 大祖玛
+            <v-icon x-small dark class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : {{ info.source }}
         </div>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
         name: "essayInfo",
-        props:['value']
+        computed:{
+            ...mapState(['headbar']),
+            info(){
+                let obj = {}
+                let arr = this.value.split(/\n/g)
+                    arr.forEach((item,index)=>{
+                        if(!item)
+                            arr.splice(index,1)//删除空项
+                    })
+                arr.forEach((item)=>{
+                    let prop = item.split(':')
+                    obj[prop[0]] = prop[1]
+                })
+                return obj
+            },
+            category(){
+                let ctg = ''
+                if(this.dirname.includes(',')){
+                    let arr = this.dirname.split(',')
+                    ctg = arr[0] + ' , ' + arr[1]
+                }
+                else
+                    ctg = this.dirname
+                return ctg
+            }
+        },
+        props:['value','dirname'],
+        beforeUpdate(){
+            if(!this.headbar.title)
+                this.headbar.title = this.info.title
+
+        },
+
     }
 </script>
 

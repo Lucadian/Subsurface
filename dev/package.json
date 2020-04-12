@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "parc": "vue-cli-service build",
-    "serv": "vue-cli-service serve --open",
-    "album": "node ./src/libs/archive_album.js",
-    "aa": "node ./src/libs/archive_album.js"
+    "parc"   : "vue-cli-service build",
+    "serv"   : "vue-cli-service serve --open",
+    "album"  : "node ./src/libs/archive_album.js",
+    "article": "node ./src/libs/archive_article.js",
+    "aa": "node ./src/libs/archive_article.js"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",

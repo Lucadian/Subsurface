@@ -4,20 +4,26 @@ import VueRouter from 'vue-router'
 // import articleList from '@/views/articleList/articleList'
 // import album from '@/views/album/album'
 // import blog from '@/views/blog/blog'
+import query from '@/views/query/query'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'query',
+    component: query
+  },
+  // {
+  //   path: '/query',
+  //   name: 'query',
+  //   component: () => import('@/views/query/query')
+  // },
+  {
     path: '/album/:gallery',
     name: 'album',
     props:true,
     component: () => import('@/views/album/album')
-  },
-  {
-    path: '/query',
-    name: 'query',
-    component: () => import('@/views/query/query')
   },
   {
     path: '/blog/:year',
