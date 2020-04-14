@@ -24,12 +24,18 @@ export default {
     //
   }),
   computed:{
-    ...mapState(['display','visible'])
+    ...mapState(['display','visible','display']),
+    documentWidth(){
+      return this.$vuetify.breakpoint.smAndDown
+    }
   },
-  methods:{
-
+  watch:{
+    documentWidth(val){
+      this.display.isMobile = val
+    }
   },
   created() {
+
     //这里设置路由 设备检测等
     let ua = navigator.userAgent;
     let ipad = ua.match(/(iPad).*OS\s([\d_]+)/),

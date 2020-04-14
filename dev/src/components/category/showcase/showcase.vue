@@ -2,7 +2,7 @@
     <div class="showcase d-flex justify-space-between align-center">
 
         <!--当前页面二维码-->
-        <v-tooltip right open-delay="300" nudge-top="6" nudge-right="4">
+        <v-tooltip right open-delay="300" nudge-top="6" nudge-right="4" transition="fade-transition">
             <template v-slot:activator="{ on }">
                 <v-btn icon x-large v-on="on" @click="$emit('showQRCode')">
                     <v-icon large color="#424242">mdi-qrcode</v-icon>

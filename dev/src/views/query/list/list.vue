@@ -1,28 +1,40 @@
 <template>
     <div class="list" v-if="rows">
         <div class="aRow" v-for="item in list[page]">
-            <div class="wrapper d-flex justify-space-between">
-                <div class="aside">
-                    <a class="cover" :href="href(item.dir,item.file)" :target="targ">
-                        <img :src=src(item.cover)>
-                    </a>
-                </div>
-                <div class="content">
-                    <div class="title">
-                        <a :href="href(item.dir,item.file)" :target="targ">
-                            <h5 v-text="item.title" />
+                <div class="wrapper d-flex justify-space-between">
+                    <div class="aside">
+                        <a class="cover" :href="href(item.dir,item.file)" :target="targ">
+                            <img :src=src(item.cover)>
                         </a>
                     </div>
-                    <div class="notes d-flex font-weight-light align-center">
-                        <div class="note">
-                            <v-icon small class="mr-1 mb-1">mdi-content-save-edit-outline</v-icon>{{ getDate(item.edited) }}
+                    <div class="content">
+                        <div class="title">
+                            <a :href="href(item.dir,item.file)" :target="targ">
+                                <h5 v-text="item.title" />
+                            </a>
                         </div>
-                        <div class="note">
-                            目录：{{item.dir}}
+                        <div class="notes d-flex font-weight-light align-center">
+                            <div class="note">
+                                <v-icon small class="mr-1 mb-1">mdi-content-save-edit-outline</v-icon>{{ getDate(item.edited) }}
+                            </div>
+                            <div class="note">
+                                目录：{{item.dir}}
+                            </div>
                         </div>
+                        <div class="brief" v-text="item.brief"/>
                     </div>
-                    <div class="brief" v-text="item.brief"/>
                 </div>
+            </div>
+        <div class="noResult" v-if="list.length === 0">
+            <div class="cage d-flex justify-center">
+                <v-icon x-large class="downasaur">mdi-google-downasaur</v-icon>
+                <div class="queryVal d-flex">
+                    <div class="txt" v-text="hash.queryVal"/>
+                    <div class="hlp">?</div>
+                </div>
+            </div>
+            <div class="btn d-flex justify-center">
+                <v-btn rounded depressed dark large color="#999999" @click="resetRows">返回</v-btn>
             </div>
         </div>
     </div>
@@ -42,9 +54,9 @@
             }
         },
         computed:{
-            ...mapState(['display','hash']),
+            ...mapState(['hash']),
             targ(){
-                return this.display.isMobile ? '_self' : '_blank'
+                return this.$vuetify.breakpoint.smAndDown ? '_self' : '_blank'
             },
             page(){
                 return this.hash.page - 1
@@ -113,6 +125,9 @@
                     return arr[0] + arr[1] + arr[2] + arr[3] + '-' + arr[4] + arr[5] + '-' + arr[6] + arr[7]
                 }
             },
+            resetRows(){
+                this.hash.queryKey =''
+            },
             splitQueryVal(dot){ return this.hash.queryVal.toLowerCase().split(dot) },
             getQueryArgs(){
                 let args = []
@@ -127,7 +142,8 @@
             divide(data){
                 let list = []
                 let rows = []
-                let pagi = this.display.isMobile ? 1 : 1
+                // let pagi = this.$vuetify.breakpoint.smAndDown ? 6 : 7
+                let pagi = this.$vuetify.breakpoint.smAndDown ? 1 : 1
                 for(let i=0;i<data.length;i++){
                     rows.push(data[i])
                     if((i + 1) % pagi === 0){

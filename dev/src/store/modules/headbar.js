@@ -3,7 +3,7 @@ export const state = {
     subtitle:'',
     style:'',
     valid:{
+        aug:false,
         shrink:true,
-        complex:false
     }
 }

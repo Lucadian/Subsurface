@@ -3,8 +3,9 @@
         <transition :name="slide">
             <aside v-if="visible.category">
                 <div class="tabs d-flex justify-space-between align-center">
-                        <v-tabs :height="tabHeight" active-class="active" background-color="transparent" slider-size="3" slider-color="black" color="black"
-                                v-model="tab"
+                        <v-tabs mobile-break-point="0"
+                                :height="tabHeight" active-class="active" background-color="transparent" slider-size="3" slider-color="black" color="black"
+                                v-model="index"
                         >
                             <v-tab v-for="item in items" :key="item.tab" v-text="item.tab" />
                         </v-tabs>
@@ -14,9 +15,12 @@
                 </div>
                 <v-divider/>
                 <div class="scrollBox">
-                    <v-tabs-items class="list" v-model="tab">
-                        <v-tab-item v-for="item in items" :key="item.tab">
-                            <div v-for="row in item.category" class="aRow d-flex justify-space-between align-center">
+                    <v-tabs-items class="list" v-model="index">
+                        <v-tab-item v-for="item in items" :key="item.tab" >
+                            <div v-for="row in item.category"
+                                 class="aRow d-flex justify-space-between align-center"
+                                 @click="query(row.title)"
+                            >
                                 <v-icon large class="icon" color="#686868" v-text="row.icon" />
                                 <div class="title">
                                     <div class="aName">{{ row.title }}</div>
@@ -33,7 +37,7 @@
             </aside>
         </transition>
         <transition name="fade">
-            <div class="overlay" v-show="visible.category" @click="hideCategory" @contextmenu.prevent="wasted" />
+            <div class="overlay" v-show="overlayed" @click="hideCategory" @contextmenu.prevent="wasted" />
         </transition>
         <transition name="fade">
             <qrcode v-if="valid.qrcode" :valid="valid"/>
@@ -56,11 +60,11 @@
         data(){
             return {
                 domain,
-                tab: null,
+                index: null,
                 items: [
-                    { tab: '文章', category: article },
-                    { tab: '日志', category: blog },
-                    { tab: '相册', category: album},
+                    { tab:'文章',path:'/',       category: article },
+                    { tab:'日志',path:'/blog/',  category: blog },
+                    { tab:'相册',path:'/album/', category: album},
                 ],
                 valid:{
                     qrcode:false
@@ -68,19 +72,25 @@
             }
         },
         computed:{
-            ...mapState(['display','visible']),
+            ...mapState(['visible','hash']),
+            isMobile(){
+                return this.$vuetify.breakpoint.smAndDown
+            },
             tabHeight(){
-                return this.display.isMobile ? 58 : 80
+                return this.isMobile ? 58 : 80
             },
             slide(){
-                return this.display.isMobile ? 'slideMobile' : 'slidePC'
+                return this.isMobile ? 'slideMobile' : 'slidePC'
+            },
+            overlayed(){
+                return (this.$route.name !== 'query' || this.$vuetify.breakpoint.mdAndDown) && this.visible.category
             }
         },
         components:{
             showcase,qrcode
         },
         methods:{
-            ...mapMutations(['showScrollbar','hideScrollbar']),
+            ...mapMutations(['showScrollbar','hideScrollbar','rewriteHash']),
             hideCategory(){
                 this.visible.category = false
                 this.showScrollbar()
@@ -104,6 +114,29 @@
                 if(this.visible.contacts)
                     this.visible.contacts = false
                 this.valid.qrcode = true
+            },
+            query(val){
+                switch (this.index){
+                    case 0:
+                        if(this.$route.name === 'query'){
+                            this.hash.queryKey = 'category'
+                            this.hash.queryVal = val
+                            this.hash.page = 1
+                            this.rewriteHash()
+                            if(this.isMobile)
+                                this.visible.category = false
+                        }
+                        else{
+
+                        }
+                        break
+                    case 1:
+                        break
+                    case 2:
+                        break
+                }
+                // console.log(this.index)
+                // console.log(category)
             }
 
         },

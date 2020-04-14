@@ -39,17 +39,13 @@
             }
         },
         computed:{
-            ...mapState(['headbar','footbar','visible','display']),
+            ...mapState(['headbar','footbar','visible']),
             minHeight(){
-                return this.display.isMobile ? 160 : 230
+                return this.$vuetify.breakpoint.smAndDown ? 160 : 230
             }
         },
         methods:{
             ...mapMutations(['hideScrollbar']),
-            showCategory(){
-                this.visible.category = true
-                this.hideScrollbar()
-            },
             showViewer(){
                 this.hideScrollbar()
                 this.path.value = event.currentTarget.getAttribute('src')

@@ -40,8 +40,8 @@
                     </v-img>
                     <div class="weixinName">
                         Arcadia_liu
-                        <v-btn icon @click="copy('Arcadia_liu')" class="ml-n1 mb-1">
-                            <v-icon small color="white">mdi-content-copy</v-icon>
+                        <v-btn icon @click="copy('Arcadia_liu')" class="ml-n1 mb-1" color="white">
+                            <v-icon small color="#60d0ff">mdi-content-copy</v-icon>
                         </v-btn>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
             }
         },
         computed:{
-            ...mapState(['display','visible','footbar']),
+            ...mapState(['visible','footbar']),
 
         },
         methods:{
@@ -182,7 +182,7 @@ footer{
     }
     .mask{
         position: fixed;top: 0;
-        color: white;
+        color: #60d0ff;
         background-color: #373D44;
         width: 100vw;
         height: 100vh;
@@ -206,8 +206,8 @@ footer{
                 }
             }
             .weixinName{
-                text-shadow: 0 0 4px black;
-                transform: translateX(12px) translateY(25px);
+                /*text-shadow: 0 0 4px black;*/
+                transform: translateX(12px) translateY(35px);
                 font-size: 20px;
                 text-align: center;
             }

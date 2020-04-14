@@ -3,8 +3,8 @@
         <div id="headbar" class="wrapper scroller d-flex align-center" :style="headbar.style">
             <transition name="headbarSlide">
                 <ark-title v-if="visible.arkTitle" />
-                <div v-if="search" class="search d-flex" :class="{mobile:display.isMobile}">
-                    <div class="prefix d-none d-sm-flex" v-text="prefix"/>
+                <div v-if="search" class="search d-flex" :class="{mobile:$vuetify.breakpoint.smAndDown}">
+                    <div class="prefix d-none d-md-flex" v-text="prefix"/>
                     <input ref="search" type="search" v-model="value"
                            :placeholder="placeholder"
                            @blur="closeSearch"
@@ -13,12 +13,23 @@
                 </div>
             </transition>
             <v-spacer/>
-            <v-btn icon dark @click="resetSearch" @contextmenu.prevent="wasted">
-                <v-icon>{{ visible.arkTitle ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
-            </v-btn>
-            <v-btn icon dark @click="showCategory" @contextmenu.prevent="wasted">
-                <v-icon style="transform: translateY(-1px)">mdi-apps</v-icon>
-            </v-btn>
+            <v-tooltip bottom nudge-bottom="5" transition="fade-transition" open-delay="200">
+                <template v-slot:activator="{ on }">
+                    <v-btn icon dark @click="resetSearch" @contextmenu.prevent="wasted" v-on="on">
+                        <v-icon>{{ visible.arkTitle ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
+                    </v-btn>
+                </template>
+                <span>查找</span>
+            </v-tooltip>
+
+            <v-tooltip bottom nudge-bottom="5" transition="fade-transition" open-delay="200">
+                <template v-slot:activator="{ on }">
+                    <v-btn icon dark @click="showCategory" @contextmenu.prevent="wasted" v-on="on">
+                        <v-icon style="transform: translateY(-1px)">mdi-apps</v-icon>
+                    </v-btn>
+                </template>
+                <span>侧栏</span>
+            </v-tooltip>
         </div>
     </v-app-bar>
 </template>
@@ -36,9 +47,9 @@
             }
         },
         computed:{
-            ...mapState(['headbar','display','visible','hash']),
+            ...mapState(['headbar','visible','hash']),
             placeholder(){
-                return this.display.isMobile ? '文章搜索':''
+                return this.$vuetify.breakpoint.smAndDown ? '文章搜索':''
             },
             prefix(){
                 return '文章搜索'
@@ -48,10 +59,13 @@
             arkTitle
         },
         methods:{
-            ...mapMutations(['hideScrollbar','rewriteHash']),
+            ...mapMutations(['hideScrollbar','showScrollbar','rewriteHash']),
             showCategory(){
-                this.visible.category = true
-                this.hideScrollbar()
+                this.visible.category = !this.visible.category
+                if(this.visible.category)
+                    this.hideScrollbar()
+                else
+                    this.showScrollbar()
             },
             resetSearch(){
                 this.search = false
@@ -76,19 +90,22 @@
                 return false
             },
             query(){ //文章搜索功能
-                if(this.$route.name === 'query'){
-                    this.hash.queryKey = 'search'
-                    this.hash.queryVal = this.value
-                    this.hash.page = 1
-                    this.rewriteHash()
-                    this.search = false
+                if(this.value){
+                    if(this.$route.name === 'query'){
+                        this.hash.queryKey = 'search'
+                        this.hash.queryVal = this.value
+                        this.hash.page = 1
+                        this.rewriteHash()
+                        this.closeSearch()
+                    }
+                    else{
+                        if(this.$vuetify.breakpoint.smAndDown)
+                            window.location = window.location.origin + '/#search=' + this.value
+                        else
+                            window.open(window.location.origin + '/#search=' + this.value)
+                    }
                 }
-                else{
-                    if(this.display.isMobile)
-                        window.location = window.location.origin + '/#search=' + this.value
-                    else
-                        window.open(window.location.origin + '/#search=' + this.value)
-                }
+
             }
         },
         updated() {

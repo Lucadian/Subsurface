@@ -49,8 +49,10 @@
         },
         props:['value','dirname'],
         beforeUpdate(){
-            if(!this.headbar.title)
-                this.headbar.title = this.info.title
+            if(!this.headbar.title){
+                document.getElementById('title').innerHTML = this.headbar.title = this.info.title
+            }
+
 
         },
 

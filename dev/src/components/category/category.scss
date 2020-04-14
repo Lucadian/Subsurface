@@ -5,6 +5,7 @@ aside{
   width: 27rem;
   height: 100vh;
   background-color: #ebebeb;
+  border-left: 1px solid rgba(48,53,58,1);
   @media(max-width: 600px){
     width: 330px;
   }

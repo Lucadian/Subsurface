@@ -36,7 +36,7 @@ export default new Vuex.Store({
       else
         document.getElementById('headbar').classList.remove('scroller')
     },
-    showScrollbar(state){
+    showScrollbar(state,isMobile){
       let root = document.getElementById('html')
       root.classList.add('scroller')
       if (state.display.isMobile)
@@ -45,59 +45,21 @@ export default new Vuex.Store({
         document.getElementById('headbar').classList.add('scroller')
     },
     rewriteHash(state){
-      let query = state.hash.queryKey ? state.hash.queryKey + '=' + state.hash.queryVal + '&' : ''
-      let page  = state.hash.total > 1 ? 'page=' + state.hash.page : ''
+      let query = state.hash.queryKey ? state.hash.queryKey + '=' + state.hash.queryVal : ''
+      let page  = state.hash.total > 1 ? '&page=' + state.hash.page : ''
       window.location.hash = query + page
+    },
+    updateArkTitle(state){
+      state.headbar.title = state.hash.queryKey ? ( state.hash.queryKey === 'category' ? '分类列表' : '查找结果' ) : '次表面网络空间'
+      state.headbar.subtitle = state.hash.queryKey ? state.hash.queryVal : ''
     }
+
   },
   actions: {
 
   },
   getters:{
-    // rows:(state) =>{
-    //   if(state.archive.raw.length){
-    //     //根据哈希中的查询参数，处理文章列表
-    //     let rows = []
-    //     let data = state.archive.raw
-    //
-    //     switch (state.hash.queryKey) {
-    //       case 'category':
-    //         if(state.hash.queryVal !== '全部'){
-    //           data.forEach((item)=>{
-    //             if(item.dir.includes(state.hash.queryVal))
-    //               rows.push(item)
-    //           })
-    //         }
-    //         else
-    //           rows = data
-    //         break
-    //       case 'search':
-    //         let args = this.getQueryArgs()
-    //         let temp = []
-    //         data.forEach((item)=>{
-    //           for(let i=0;i<args.length;i++){
-    //             let arg  = args[i] === 'js' ? 'javascript' : args[i]
-    //             if( item.dir.toLowerCase().includes(arg)
-    //                 || item.title.toLowerCase().includes(arg)
-    //                 || item.brief.toLowerCase().includes(arg)
-    //                 || item.subtitles.join(' ').toLowerCase().includes(arg)
-    //             )
-    //               temp.push(arg)
-    //           }
-    //           if(temp.length === args.length)
-    //             rows.push(item)
-    //           temp = []
-    //         })
-    //         break
-    //       default:
-    //         rows = data
-    //     }
-    //     return rows
-    //   }
-    //   else
-    //     return []
-    //
-    // }
+
   },
   modules: {
     headbar,footbar,archive

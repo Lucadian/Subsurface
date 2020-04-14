@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import { mapState,mapMutations } from 'vuex'
+    import { mapMutations } from 'vuex'
     import pinchZoom from 'vue-pinch-zoom'
     import { Draggable } from 'draggable-vue-directive'
 
@@ -38,9 +38,6 @@
         directives: {
             Draggable,
         },
-        computed:{
-            ...mapState(['display']),
-        },
         methods:{
             ...mapMutations(['showScrollbar']),
             close(){
@@ -50,7 +47,7 @@
         },
         components:{
             pinchZoom
-        }
+        },
     }
 </script>
 

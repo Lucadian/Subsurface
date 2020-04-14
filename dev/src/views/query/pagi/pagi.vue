@@ -1,10 +1,8 @@
 <template>
-    <div id="pagination" v-if="total > 1" class="d-flex justify-center align-center">
+    <div id="pagination" v-if="total > 0" class="d-flex justify-center align-top">
         <a class="home" :class="{invalid:page === 1}" @click="home">首 页</a>
         <a class="prev" :class="{invalid:page === 1}" @click="prev">上一页</a>
-        <div class="page">
-            <a v-for="n in numbers" :class="{current:n === page }" @click="goToPage(n)">{{ n }}</a>
-        </div>
+        <a class="page" v-for="n in numbers" :class="{current:n === page }" @click="goToPage(n)">{{ n }}</a>
         <a class="next" :class="{invalid:page === total}" @click="next">下一页</a>
         <a class="last" :class="{invalid:page === total}" @click="last">尾 页</a>
     </div>
@@ -21,7 +19,10 @@
             }
         },
         computed:{
-            ...mapState(['display','hash']),
+            ...mapState(['hash']),
+            isMobile(){
+                return this.$vuetify.breakpoint.smAndDown
+            },
             total(){
                 return this.hash.total
             },
@@ -31,10 +32,10 @@
             numbers(){
                 let total = this.total,
                     page  = this.page,
-                    max = this.display.isMobile ? 7 : 9,
+                    max = this.isMobile ? 7 : 9,
                     len = total >= max ? max : total,
                     arr = [],
-                    dis = this.display.isMobile ? 3 : 4,
+                    dis = this.isMobile ? 3 : 4,
                     gap = total <= dis*2 || page <= dis ?
                         page - 1 :
                         total - page <= dis ?
