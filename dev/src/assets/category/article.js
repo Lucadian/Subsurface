@@ -34,22 +34,22 @@ let article = [
     },
     {
         title: '工具',
-        subtitle:'软件 配置 技巧',icon: 'mdi-bus',
+        subtitle:'软件 配置 技巧',icon: 'mdi-telegram',
         num:statistics['工具']
     },
-    {
-        title: '规范',
-        subtitle:'理论 解读 分析',icon: 'mdi-pencil-ruler',
-        num:statistics['规范'] ? statistics['规范']:0
-    },
+    // {
+    //     title: '规范',
+    //     subtitle:'理论 解读 分析',icon: 'mdi-pencil-ruler',
+    //     num:statistics['规范'] ? statistics['规范']:0
+    // },
     {
         title: '美工',
-        subtitle:'设计 & 素材',icon: 'mdi-adobe',
+        subtitle:'理论 设计 素材',icon: 'mdi-adobe',
         num:statistics['美术'] ? statistics['美术']:0
     },
     {
         title: '核弹',
-        subtitle:'面经 & 汇总',icon: 'mdi-nuke',
+        subtitle:'原理 & 汇总',icon: 'mdi-nuke',
         num:statistics['核弹'] ? statistics['核弹']:0
     },
     {

@@ -57,7 +57,8 @@
         }
     }
     div.showcase{
-        padding: 0 31px 0 22px;
+        box-sizing: border-box;
+        padding: 0 31px 20px 22px;
         height: 100px;
         div.title{
             border-left: 3px solid #0090ff;

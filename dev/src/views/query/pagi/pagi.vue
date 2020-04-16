@@ -1,5 +1,5 @@
 <template>
-    <div id="pagination" v-if="total > 0" class="d-flex justify-center align-top">
+    <div id="pagination" v-if="total > 0" class="d-flex justify-center align-center">
         <a class="home" :class="{invalid:page === 1}" @click="home">首 页</a>
         <a class="prev" :class="{invalid:page === 1}" @click="prev">上一页</a>
         <a class="page" v-for="n in numbers" :class="{current:n === page }" @click="goToPage(n)">{{ n }}</a>

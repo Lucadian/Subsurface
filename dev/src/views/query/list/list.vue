@@ -1,6 +1,6 @@
 <template>
     <div class="list" v-if="rows">
-        <div class="aRow" v-for="item in list[page]">
+        <div class="aRow" :class="{fadeIn:fadeInQueue[idx]}" v-for="(item,idx) in list">
                 <div class="wrapper d-flex justify-space-between">
                     <div class="aside">
                         <a class="cover" :href="href(item.dir,item.file)" :target="targ">
@@ -24,19 +24,21 @@
                         <div class="brief" v-text="item.brief"/>
                     </div>
                 </div>
-            </div>
-        <div class="noResult" v-if="list.length === 0">
-            <div class="cage d-flex justify-center">
-                <v-icon x-large class="downasaur">mdi-google-downasaur</v-icon>
-                <div class="queryVal d-flex">
-                    <div class="txt" v-text="hash.queryVal"/>
-                    <div class="hlp">?</div>
+        </div>
+        <transition name="fade">
+            <div class="noResult" v-show="!list">
+                <div class="cage d-flex justify-center">
+                    <v-icon x-large class="downasaur">mdi-google-downasaur</v-icon>
+                    <div class="queryVal d-flex">
+                        <div class="txt" v-text="hash.queryVal"/>
+                        <div class="hlp">?</div>
+                    </div>
+                </div>
+                <div class="btn d-flex justify-center">
+                    <v-btn rounded depressed dark large color="#999999" @click="resetRows">返回</v-btn>
                 </div>
             </div>
-            <div class="btn d-flex justify-center">
-                <v-btn rounded depressed dark large color="#999999" @click="resetRows">返回</v-btn>
-            </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -50,7 +52,8 @@
         data(){
             return {
                 domain,
-                raws:[]
+                raws:[],
+                fadeInQueue:[]
             }
         },
         computed:{
@@ -58,17 +61,17 @@
             targ(){
                 return this.$vuetify.breakpoint.smAndDown ? '_self' : '_blank'
             },
-            page(){
-                return this.hash.page - 1
-            },
-            list(){
+            list(){ // 将 rows 切分为多页
                 if(this.rows){
+                    // 将总条数，根据每页行数分页
                     let list = this.divide(this.rows)
+                    // 将得到的总页数存入 vuex
                     this.hash.total = list.length
-                    return list
+                    // 返回当前页列表
+                    return list[this.hash.page - 1]
                 }
             },
-            rows(){
+            rows(){ // raws 处理后的总条数
                 if(this.raws.length){
                     let rows = []
                     switch (this.hash.queryKey) {
@@ -142,8 +145,8 @@
             divide(data){
                 let list = []
                 let rows = []
-                // let pagi = this.$vuetify.breakpoint.smAndDown ? 6 : 7
-                let pagi = this.$vuetify.breakpoint.smAndDown ? 1 : 1
+                let pagi = this.$vuetify.breakpoint.smAndDown ? 6 : 7
+                // let pagi = this.$vuetify.breakpoint.smAndDown ? 1 : 1
                 for(let i=0;i<data.length;i++){
                     rows.push(data[i])
                     if((i + 1) % pagi === 0){
@@ -156,6 +159,23 @@
                 return list
             },
 
+        },
+        watch:{
+            list(val){
+                if(val){
+                    document.documentElement.scrollTop = 0
+                    this.fadeInQueue = []
+                    setTimeout(()=>{
+                        let n = 0
+                        let timer = setInterval(()=>{
+                            this.fadeInQueue.push(true)
+                            n++
+                            if(n === val.length)
+                                clearInterval(timer)
+                        },60)
+                    },110)
+                }
+            }
         },
         created() {
             axios.get('http://'+ window.location.host + '/archive/article/archive.json')

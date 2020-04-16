@@ -24,11 +24,11 @@
 
             <v-tooltip bottom nudge-bottom="5" transition="fade-transition" open-delay="200">
                 <template v-slot:activator="{ on }">
-                    <v-btn icon dark @click="showCategory" @contextmenu.prevent="wasted" v-on="on">
-                        <v-icon style="transform: translateY(-1px)">mdi-apps</v-icon>
+                    <v-btn icon dark @click="visible.category = !visible.category" @contextmenu.prevent="wasted" v-on="on">
+                        <v-icon style="transform: translateY(-1px)">{{ visible.category ? 'mdi-forwardburger' : 'mdi-apps' }}</v-icon>
                     </v-btn>
                 </template>
-                <span>侧栏</span>
+                <span>{{ visible.category ? '关闭侧栏' : '侧栏' }}</span>
             </v-tooltip>
         </div>
     </v-app-bar>
@@ -59,21 +59,14 @@
             arkTitle
         },
         methods:{
-            ...mapMutations(['hideScrollbar','showScrollbar','rewriteHash']),
-            showCategory(){
-                this.visible.category = !this.visible.category
-                if(this.visible.category)
-                    this.hideScrollbar()
-                else
-                    this.showScrollbar()
-            },
+            ...mapMutations(['rewriteHash']),
             resetSearch(){
                 this.search = false
                 this.visible.arkTitle = false
                 this.value = ''
                 setTimeout(() => {
                     this.search = true
-                },50)
+                },5)
             },
             closeSearch(){
                 this.search = false
@@ -83,7 +76,7 @@
                             this.visible.arkTitle = true
 
                         this.timer = null
-                    },300)
+                    },110)
                 }
             },
             wasted(){ //右键取消功能
@@ -119,7 +112,7 @@
 
 <style scoped lang="scss">
     .headbarSlide-enter-active {
-        transition: opacity .3s,transform .3s;
+        transition: opacity .1s,transform .1s;
     }
     .headbarSlide-leave-active {
         display: none;
@@ -127,7 +120,7 @@
     }
     .headbarSlide-enter, .headbarSlide-leave-to {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(6px);
     }
 @import 'headbar.scss';
 </style>

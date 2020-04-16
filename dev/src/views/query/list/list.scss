@@ -1,3 +1,10 @@
+.fadeIn{
+  animation: fadeIn .4s ease forwards;
+}
+@keyframes fadeIn{
+  from{opacity: 0;transform: translateY(16px)}
+  to{opacity: 1;transform: translateY(0)}
+}
 div.list{
   width: 57rem;
   margin: 8px auto 80px auto;
@@ -10,7 +17,8 @@ div.list{
 div.aRow{
   padding: 0 10px;
   border-radius: 4px;
-  margin-top: -1.5px;
+  margin-bottom: -1.5px;
+  opacity: 0;
   &:hover{
     background-color: hsl(0,0,97%);
   }
@@ -19,18 +27,18 @@ div.aRow{
       color: #0a4db0!important;
     }
   }
-  &:last-child{
+  &:first-child{
     div.wrapper{
-      border-bottom: none;
+      border-top: none;
     }
   }
   div.wrapper{
     position: relative;
     padding: 22px 0;
-    border-bottom: 1px dashed #bcbbbb;
+    border-top: 1px dashed #d1d1d1;
     @media (max-width: 600px){
       padding: 50px 0 19px 0;
-      border-bottom: 1px solid #ececec;
+      border-top: 1px solid #ececec;
     }
     div.aside{
       a.cover{

@@ -36,7 +36,7 @@ export default new Vuex.Store({
       else
         document.getElementById('headbar').classList.remove('scroller')
     },
-    showScrollbar(state,isMobile){
+    showScrollbar(state){
       let root = document.getElementById('html')
       root.classList.add('scroller')
       if (state.display.isMobile)
