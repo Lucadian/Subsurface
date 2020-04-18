@@ -24,7 +24,7 @@ export default {
     //
   }),
   computed:{
-    ...mapState(['display','visible','display']),
+    ...mapState(['display']),
     documentWidth(){
       return this.$vuetify.breakpoint.smAndDown
     }
@@ -37,12 +37,12 @@ export default {
   created() {
 
     //这里设置路由 设备检测等
-    let ua = navigator.userAgent;
-    let ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-            isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-            isAndroid = ua.match(/(Android)\s+([\d.]+)/)
-    if(isIphone || isAndroid)
-      this.display.isMobile = true
+    // let ua = navigator.userAgent;
+    // let ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+    //         isIphone =!ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+    //         isAndroid = ua.match(/(Android)\s+([\d.]+)/)
+    // if(isIphone || isAndroid)
+    //   this.display.isMobile = true
   }
 };
 </script>

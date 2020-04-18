@@ -33,16 +33,40 @@
             }
         },
         computed:{
-            ...mapState(['headbar']),
+            ...mapState(['headbar','hash']),
+            isMobile(){
+                return this.$vuetify.breakpoint.smAndDown
+            },
+            subtitle(){
+                return '2020年3月~12月'
+            }
+        },
+        watch:{
+            isMobile(val){
+                if(val){
+                    this.headbar.title = ''
+                    this.hash.queryVal = ''
+                }
+                else{
+                    this.headbar.title =  '日志'
+                    this.hash.queryVal = this.subtitle
+                }
+
+            }
         },
         components:{
             blogInfo,sideInfo,sidebar,blogText,blogTabs,selector
         },
         created(){
-            this.headbar.valid.shrink = false
-            this.headbar.valid.complex = true
-            this.headbar.title =  '日志'
-            this.headbar.subtitle = '2020年3月~12月'
+            this.headbar.valid.aug = true
+            if(this.isMobile){
+                this.headbar.title = ''
+                this.hash.queryVal = ''
+            }
+            else{
+                this.headbar.title =  '日志'
+                this.hash.queryVal = this.subtitle
+            }
         }
     }
 </script>

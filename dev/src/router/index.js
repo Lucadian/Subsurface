@@ -14,11 +14,6 @@ const routes = [
     name: 'query',
     component: query
   },
-  // {
-  //   path: '/query',
-  //   name: 'query',
-  //   component: () => import('@/views/query/query')
-  // },
   {
     path: '/album/:gallery',
     name: 'album',

@@ -138,13 +138,10 @@
 
                 }
             },
-            index(val){
-                console.log(val)
-            }
+
         },
         methods:{
             ...mapMutations(['showScrollbar','hideScrollbar','rewriteHash']),
-
             wasted(){
                 this.visible.category = false
                 return false

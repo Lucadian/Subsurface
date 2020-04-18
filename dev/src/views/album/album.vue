@@ -24,7 +24,6 @@
 
 <script>
     import { mapState,mapMutations } from 'vuex'
-    import { title } from './title.js'
     import viewer from '@/components/viewer/viewer'
     import axios from 'axios'
 
@@ -39,7 +38,7 @@
             }
         },
         computed:{
-            ...mapState(['headbar','footbar','visible']),
+            ...mapState(['headbar','footbar','visible','hash']),
             minHeight(){
                 return this.$vuetify.breakpoint.smAndDown ? 160 : 230
             }
@@ -61,10 +60,11 @@
             viewer
         },
         created(){
-            this.headbar.valid.shrink = false
             this.headbar.style = 'width:1120px'
             this.footbar.style = 'width:1120px'
-            this.headbar.title =  title
+            this.headbar.valid.aug = true
+            this.headbar.title =  '相册'
+            this.hash.queryVal = this.gallery
             axios.get('http://'+ window.location.host + '/archive/album/' + this.gallery + '.json?_=' + Date.now())
                 .then(response => {
                     this.imgs = response.data

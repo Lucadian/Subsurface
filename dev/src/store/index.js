@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import * as headbar from './modules/headbar'
 import * as footbar from './modules/footbar'
-import * as archive from './modules/archive'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -62,6 +61,6 @@ export default new Vuex.Store({
 
   },
   modules: {
-    headbar,footbar,archive
+    headbar,footbar
   }
 })

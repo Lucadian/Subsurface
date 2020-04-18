@@ -7,7 +7,7 @@
     "serv"   : "vue-cli-service serve --open",
     "album"  : "node ./src/libs/archive_album.js",
     "article": "node ./src/libs/archive_article.js",
-    "aa": "node ./src/libs/archive_article.js"
+    "aa": "node ./src/libs/archive_blog.js"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",

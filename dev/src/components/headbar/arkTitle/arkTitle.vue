@@ -26,7 +26,7 @@
                 return this.hash.queryKey ? ( this.hash.queryKey === 'category' ? '分类列表' : '查找结果' ) : this.headbar.title
             },
             subtitle(){
-                return !this.visible.contacts && this.hash.queryKey ? this.hash.queryVal : ''
+                return !this.visible.contacts && this.hash.queryVal ? this.hash.queryVal : ''
             },
             fix(){
                 return this.visible.contacts && this.$vuetify.breakpoint.smAndDown

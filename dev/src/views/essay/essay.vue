@@ -32,6 +32,7 @@
         props:[
             'dirname','filename'
         ],
+
         components:{
             essayInfo,essayText,sideInfo,sidebar
         },

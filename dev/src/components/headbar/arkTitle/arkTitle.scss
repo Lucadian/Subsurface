@@ -46,9 +46,9 @@
       padding: 0 10px;
       letter-spacing: 3px!important;
       position: relative;
-      width: 105px;
+      max-width: 105px;
       @media(max-width: 650px){
-        width: 95px;
+        max-width: 95px;
         padding: 0 5px;
       }
     }

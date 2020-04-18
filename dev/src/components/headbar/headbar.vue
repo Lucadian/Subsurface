@@ -25,7 +25,7 @@
             <v-tooltip bottom nudge-bottom="5" transition="fade-transition" open-delay="200">
                 <template v-slot:activator="{ on }">
                     <v-btn icon dark @click="visible.category = !visible.category" @contextmenu.prevent="wasted" v-on="on">
-                        <v-icon style="transform: translateY(-1px)">{{ visible.category ? 'mdi-forwardburger' : 'mdi-apps' }}</v-icon>
+                        <v-icon class="mdi-flip-h" style="transform: translateY(-1px)">{{ visible.category ? 'mdi-undo-variant' : 'mdi-apps' }}</v-icon>
                     </v-btn>
                 </template>
                 <span>{{ visible.category ? '关闭侧栏' : '侧栏' }}</span>
