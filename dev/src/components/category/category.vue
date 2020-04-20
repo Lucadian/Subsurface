@@ -50,7 +50,6 @@
 </template>
 
 <script>
-    import { domain } from '@/assets/domain'
     import { article } from '@/assets/category/article'
     import { blog } from '@/assets/category/blog'
     import { album } from '@/assets/category/album'
@@ -63,7 +62,6 @@
         name: "category",
         data(){
             return {
-                domain,
                 index: 0,
                 route:{
                     query:0,

@@ -13,6 +13,9 @@ years.forEach((year)=>{
 
    let months = getDirsFrom(path.content + '/blog/' + year)
        months.forEach((month)=>{
+
+           // 确保月份是两位字符串的格式
+           month = parseInt(month) < 10 ? '0' + parseInt(month) : month
            let model_month = {
                //moty is the shortcut for 'month of the year'
                moty:month,
@@ -33,12 +36,13 @@ years.forEach((year)=>{
                        model_day.imgs = imgs
                    model_month.days.push(model_day)
                })
-
+           model_month.days.reverse()
            model_year.push(model_month)
        })
 
     fs.writeFileSync(path.archive + '/blog/' + year + '.json', JSON.stringify(model_year.reverse()))
 })
+
 
 //年度日志的基本数据格式
 // [

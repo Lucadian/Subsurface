@@ -43,15 +43,14 @@
 </template>
 
 <script>
-    import domain from '@/assets/domain'
-    import { mapState } from 'vuex'
+    import { imageHost } from '@/assets/host'
+    import { mapState,mapMutations } from 'vuex'
     import axios from 'axios'
 
     export default {
         name: "list",
         data(){
             return {
-                domain,
                 raws:[],
                 fadeInQueue:[]
             }
@@ -113,6 +112,7 @@
             }
         },
         methods:{
+            ...mapMutations(['rewriteHash']),
             location(dir,file){
                 window.location.href = 'http://' + window.location.host + '/article/' + dir + '/' + file
             },
@@ -120,7 +120,7 @@
                 return 'http://' + window.location.host + '/essay/' + dir + '/' + file
             },
             src(path){
-                return this.domain.image + '/images/' + path
+                return imageHost + '/images/' + path
             },
             getDate(int){
                 if(int){
@@ -130,6 +130,8 @@
             },
             resetRows(){
                 this.hash.queryKey =''
+                this.hash.queryVal =''
+                this.rewriteHash()
             },
             splitQueryVal(dot){ return this.hash.queryVal.toLowerCase().split(dot) },
             getQueryArgs(){

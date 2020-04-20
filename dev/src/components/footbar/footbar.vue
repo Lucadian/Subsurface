@@ -18,7 +18,7 @@
                     Powered by <b>Vuetify</b>
                     <v-icon small style="margin-left: 2px;transform: translateY(-1px)">mdi-vuetify</v-icon>
                 </div>
-                <div class="ICP">鲁ICP备<span>19057389</span>号</div>
+                <div class="ICP">鲁ICP备<span>20012977</span>号</div>
             </div>
         </div>
         <transition name="fade">
@@ -57,14 +57,14 @@
 </template>
 
 <script>
-    import domain from '@/assets/domain.js'
+    import { imageHost } from '@/assets/host'
     import { mapState,mapMutations } from 'vuex'
     export default {
         name: "footBar",
         data(){
             return {
                 isLoaded :false,
-                QRCodeImg:domain.image + '/images/wechat.png',
+                QRCodeImg:imageHost + '/images/wechat.png',
                 copied:false
             }
         },

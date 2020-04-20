@@ -12,11 +12,6 @@
 
     export default {
         name: "articleList",
-        data(){
-            return {
-               
-            }
-        },
         computed:{
             ...mapState(['headbar','footbar','hash']),
         },

@@ -38,10 +38,17 @@
         directives: {
             Draggable,
         },
+        watch:{
+            'path.value':function(val){
+                if(val)
+                    this.hideScrollbar()
+                else
+                    this.showScrollbar()
+            }
+        },
         methods:{
-            ...mapMutations(['showScrollbar']),
+            ...mapMutations(['hideScrollbar','showScrollbar']),
             close(){
-                this.showScrollbar()
                 this.path.value =''
             },
         },

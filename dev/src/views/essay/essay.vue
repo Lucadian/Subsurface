@@ -19,14 +19,13 @@
     import essayInfo from './essayInfo/essayInfo.vue'
     import essayText from './essayText/essayText.vue'
     import axios from 'axios'
-    import domain from '@/assets/domain'
+    import { essayHost } from '@/assets/host'
     export default {
         name: "essay",
         data(){
             return {
                 info:'',
                 text:'',
-                domain
             }
         },
         props:[
@@ -41,7 +40,7 @@
                 .then(response => {
                     let arr = response.data.split('<!--divider-->')
                     this.info = arr[0]
-                    this.text = arr[1].replace(/__imageHost/g,this.domain.image)
+                    this.text = arr[1].replace(/__imageHost/g,essayHost)
                 })
                 .catch(err => {
                     window.location = 'http://'+ window.location.host + '/error?' + err

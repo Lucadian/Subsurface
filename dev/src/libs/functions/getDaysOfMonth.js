@@ -10,7 +10,6 @@ function getDaysOfMonth(moty){
         case 7:
         case 8:
         case 10:
-        case 11:
         case 12:
             return 31
         case 2:
@@ -19,3 +18,5 @@ function getDaysOfMonth(moty){
             return 30
     }
 }
+
+module.exports = getDaysOfMonth

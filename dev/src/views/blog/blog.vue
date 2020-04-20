@@ -5,7 +5,7 @@
                 <selector/>
                 <blog-info/>
                 <blog-tabs/>
-                <blog-text/>
+                <blog-text :year="year"/>
             </v-col>
             <v-col class="aside" cols=12 sm=4>
                 <side-info/>
@@ -16,8 +16,6 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
-
     import blogInfo from './blogInfo/blogInfo'
     import blogTabs from './blogTabs/blogTabs'
     import blogText from './blogText/blogText'
@@ -32,42 +30,10 @@
 
             }
         },
-        computed:{
-            ...mapState(['headbar','hash']),
-            isMobile(){
-                return this.$vuetify.breakpoint.smAndDown
-            },
-            subtitle(){
-                return '2020年3月~12月'
-            }
-        },
-        watch:{
-            isMobile(val){
-                if(val){
-                    this.headbar.title = ''
-                    this.hash.queryVal = ''
-                }
-                else{
-                    this.headbar.title =  '日志'
-                    this.hash.queryVal = this.subtitle
-                }
-
-            }
-        },
         components:{
             blogInfo,sideInfo,sidebar,blogText,blogTabs,selector
         },
-        created(){
-            this.headbar.valid.aug = true
-            if(this.isMobile){
-                this.headbar.title = ''
-                this.hash.queryVal = ''
-            }
-            else{
-                this.headbar.title =  '日志'
-                this.hash.queryVal = this.subtitle
-            }
-        }
+        props:['year'],
     }
 </script>
 

@@ -19,7 +19,7 @@
         <div class="title d-flex flex-column justify-space-between">
             <div class="d-flex justify-space-between align-center">
                 <div class="imageBox">
-                    <img :src="domain.image + '/images/icons/icon_brain_rect.png'">
+                    <img :src="imageHost + '/images/icons/icon_brain_rect.png'">
                 </div>
                 <h5>次表面</h5>
             </div>
@@ -30,12 +30,12 @@
 </template>
 
 <script>
-    import  domain  from '@/assets/domain'
+    import { imageHost } from '@/assets/host'
     export default {
         name: "showcase",
         data(){
             return {
-                domain,
+                imageHost,
             }
         },
     }
