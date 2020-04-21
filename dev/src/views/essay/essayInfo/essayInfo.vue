@@ -68,8 +68,7 @@
         font-weight: 100;
         font-size: 70%;
         background-color: #393f44;
-        letter-spacing: 0.5px;
-        padding: 3px 10px 2px 6px;
+        padding: 3px 10px 3px 6px;
         box-sizing: border-box;
         border-top: 1px solid $info_thread_red!important;
         text-shadow: 0 0 3px black,1px 1px 0 black;
@@ -79,15 +78,19 @@
             padding: 3px 0.6rem;
         }
         div{
+            word-break: break-all;
+            letter-spacing: 0.5px;
             height: 16.8px;
             overflow-y: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
+            /*display: -webkit-box;*/
+            /*-webkit-box-orient: vertical;*/
+            /*-webkit-line-clamp: 1;*/
         }
         div:not(:last-child){
             margin-right: 20px;
-
+        }
+        div.spacer{
+            margin-right: 0;
         }
 
     }

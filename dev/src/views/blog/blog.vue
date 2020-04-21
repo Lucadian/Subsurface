@@ -2,10 +2,10 @@
     <v-content>
         <v-row>
             <v-col class="blogs" cols=12 sm=8>
-                <selector/>
-                <blog-info/>
-                <blog-tabs/>
-                <blog-text :year="year"/>
+                <selector  :year="year" :tabbar="tabbar"/>
+                <blog-info :info="info"/>
+                <blog-tabs :tabbar="tabbar"/>
+                <blog-text :year="year" :tabbar="tabbar" :info="info"/>
             </v-col>
             <v-col class="aside" cols=12 sm=4>
                 <side-info/>
@@ -27,7 +27,16 @@
         name: "blog",
         data(){
             return {
-
+                tabbar:{
+                    tabs:[],
+                    offsets:[],
+                    scrolling:null,
+                    currentIndex:false
+                },
+                info:{
+                    total:false,
+                    mean:false
+                }
             }
         },
         components:{

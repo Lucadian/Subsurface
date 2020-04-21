@@ -9,7 +9,9 @@ let years = getDirsFrom(path.content + '/blog')
 
 years.forEach((year)=>{
 
+   let archive = {}
    let model_year = []
+   let total = 0
 
    let months = getDirsFrom(path.content + '/blog/' + year)
        months.forEach((month)=>{
@@ -35,12 +37,19 @@ years.forEach((year)=>{
                    if( imgs.length )
                        model_day.imgs = imgs
                    model_month.days.push(model_day)
+                   total += 1
                })
            model_month.days.reverse()
            model_year.push(model_month)
        })
 
-    fs.writeFileSync(path.archive + '/blog/' + year + '.json', JSON.stringify(model_year.reverse()))
+    archive.year = model_year.reverse()
+    archive.info = {
+       total,
+       mean:Math.ceil(model_year.length * 30 / total)
+    }
+
+    fs.writeFileSync(path.archive + '/blog/' + year + '.json', JSON.stringify(archive))
 })
 
 

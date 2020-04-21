@@ -2,10 +2,10 @@
     <div class="blogInfo d-flex">
         <div>
             <v-icon x-small class="mr-0" color="#ef5a5a" style="transform: translateY(-1px)">mdi-camera-control</v-icon>
-            合计 66 条
+            合计 {{ info.total }} 条
         </div>
         <div class="">
-            5 天 / 记录
+            {{ info.mean }} 天 / 记录
         </div>
         <v-spacer></v-spacer>
         <div>
@@ -16,7 +16,8 @@
 
 <script>
     export default {
-        name: "blogInfo"
+        name: "blogInfo",
+        props:['info']
     }
 </script>
 
@@ -31,7 +32,7 @@
         font-size: 70%;
         background-color: #393f44;
         letter-spacing: 0.5px;
-        padding: 3px 10px 2px 6px;
+        padding: 3px 10px 3px 6px;
         box-sizing: border-box;
         border-top: 1px solid $info_thread_red!important;
         text-shadow: 0 0 3px black,1px 1px 0 black;

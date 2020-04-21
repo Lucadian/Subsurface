@@ -1,7 +1,14 @@
 <template>
-    <div class="blogTabs d-none d-md-flex justify-end">
+    <div class="blogTabs d-none d-md-flex justify-end" v-if="tabbar.tabs.length">
         <div class="wrapper d-flex justify-end">
-            <div class="tab gap" :class="{active:active === idx}" v-for="(item,idx) in names" v-text="item" />
+            <a class="tab gap"
+               v-for="(item,idx) in tabbar.tabs"
+               :class="{active:activated === idx}"
+               :href="'#month=' + parseInt(item)"
+               :index="idx"
+               @click="changeLabel"
+               v-text="item"
+            />
         </div>
     </div>
 </template>
@@ -11,23 +18,64 @@
         name: "blogTabs",
         data(){
             return {
-                active:0,
-                names:[
-                    'Jan.',
-                    'Feb.',
-                    'Mar.',
-                    'Apr.',
-                    'May.',
-                    'Jun.',
-                    'Jul.',
-                    'Aug.',
-                    'Sep.',
-                    'Oct.',
-                    'Nov.',
-                    'Dec.',
-                ],
-                timer:null
+                timer:null,
+                scrolling:null
             }
+        },
+        computed:{
+            activated(){
+                return this.tabbar.currentIndex ? Number(this.tabbar.currentIndex) : this.tabbar.tabs.length - 1
+            },
+
+        },
+        methods:{
+            changeLabel(){
+                if(!this.scrolling){
+                    this.tabbar.currentIndex = event.currentTarget.getAttribute('index')
+                    let pageYOffset = window.pageYOffset
+
+                    //切换标签时关闭滚动 switchLabel
+                    this.scrolling = setInterval(()=>{
+                        if(window.pageYOffset !== pageYOffset)
+                            pageYOffset = window.pageYOffset
+                        else{
+                            clearInterval(this.scrolling)
+                        }
+                    },400)
+                }
+
+            },
+            switchLabel(){
+
+                if(!this.timer){
+                    let offsets = this.tabbar.offsets
+                    for(let i=0;i<offsets.length;i++){
+                        if(window.pageYOffset > offsets[i]- 260){
+                            this.tabbar.currentIndex = i.toString()
+                            break
+                        }
+                    }
+                }
+
+            },
+            debounce() {
+                if(!this.timer){
+                    this.timer = setTimeout(()=>{
+                        this.timer = null
+                        this.switchLabel()
+                    },200)
+                }
+
+            },
+
+        },
+        props:['tabbar'],
+
+        mounted (){
+            window.addEventListener('scroll',this.debounce,true)
+        },
+        destroyed () {
+            window.removeEventListener('scroll', this.debounce)
         }
     }
 </script>
@@ -48,7 +96,7 @@ div.wrapper{
     background-color: #7c7c7c;
     box-shadow: 0 0 8px #646464;
     border-radius: 4px;
-    div.tab{
+    a.tab{
         position: relative;
         color: rgba(0,0,0,.6);
         font-size: 14px;
@@ -74,7 +122,7 @@ div.wrapper{
         }
 
     }
-    div.tab.active{
+    a.tab.active{
         color: black;
         font-weight: bold;
         background-color: hsl(0,0,95%);

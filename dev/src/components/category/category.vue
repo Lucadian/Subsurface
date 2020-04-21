@@ -127,7 +127,7 @@
                     //处理是否隐藏滚动条
                     if(this.$route.name !== 'query' || this.isMobile)
                         this.hideScrollbar()
-                    //重置 tab 选项卡位置
+                    //重置 文章/日志/相册 选项卡位置
                     this.index = this.route[this.$route.name]
                 }
                 else{

@@ -35,7 +35,7 @@ export default {
     }
   },
   created() {
-
+    this.display.isMobile = this.$vuetify.breakpoint.smAndDown
     //这里设置路由 设备检测等
     // let ua = navigator.userAgent;
     // let ipad = ua.match(/(iPad).*OS\s([\d_]+)/),

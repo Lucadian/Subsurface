@@ -1,9 +1,9 @@
 <template>
     <div class="selector">
-        <v-select class="d-flex d-md-none" v-if="visible.arkTitle"
-                  :items="items"
+        <v-select class="d-flex d-md-none"
+                  :items="tabbar.tabs"
                   prepend-icon="mdi-calendar-month"
-                  :label="year"
+                  :label="year + ' 年'"
                   outlined
                   dense
                   dark
@@ -13,21 +13,23 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
     export default {
         name: "selector",
         data(){
             return {
-                items:[
-                    '1月',
-                    '2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'
-                ],
+                active:false,
+                // items:[
+                //     '1月',
+                //     '2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'
+                // ],
                 current:'1月',
-                year:'2020年'
             }
         },
+        props:['tabbar','year'],
         computed:{
-            ...mapState(['visible','headbar']),
+            activated(){
+                // return this.active ? Number(this.active) : this.tabbar.tabs.length - 1
+            },
         },
         created() {
 

@@ -1,6 +1,7 @@
 <template>
     <div class="blogText">
         <div class="month" v-for="(month,idx) in blogs">
+            <div class="anchor-month" :id="'month=' +  parseInt(month.moty)" />
             <div class="label-month" v-if="idx"
                  v-text="year + ' 年 ' + month.moty + ' 月'"
             />
@@ -14,7 +15,7 @@
                         }"
                 >
                     <div class="contentBox d-flex flex-column">
-                        <div class="day-label" :id="'log_' +  month.moty + day.dotm">
+                        <div class="day-label" :id="'day=' +  month.moty + day.dotm">
                             2020 - {{ month.moty }} - {{ day.dotm }}
                         </div>
                         <div class="log" v-html="day.blog" />
@@ -52,7 +53,7 @@
                 return this.$vuetify.breakpoint.smAndDown
             },
             subtitle(){
-                if(this.blogs.length)
+                if(!this.isMobile && this.blogs.length)
                     return this.year + '.' + this.blogs[this.blogs.length - 1].moty + ' ~ ' + this.blogs[0].moty + ''
                 else
                     return ''
@@ -82,13 +83,20 @@
             },
             resolve(path){
                 return albumHost + '/content/album/日志图片/' + path
+            },
+            setTabbar(){
+                let anchors = document.getElementsByClassName('anchor-month')
+                for(let i=0;i<anchors.length;i++){
+                    this.tabbar.offsets.push(parseInt(anchors[i].offsetTop))
+                }
+                this.tabbar.offsets.reverse()
             }
 
         },
         components:{
             viewer
         },
-        props:['year'],
+        props:['year','tabbar','info'],
         created() {
             this.headbar.valid.aug = true
             if(this.isMobile)
@@ -98,12 +106,35 @@
 
             axios.get('http://'+ window.location.host + '/archive/blog/' + this.year + '.json' )
                 .then( response => {
-                    this.blogs = response.data
+                    this.blogs = response.data.year
+
+                    this.info.total = response.data.info.total
+                    this.info.mean  = response.data.info.mean
+
                     this.hash.queryVal = this.subtitle
+                    this.blogs.forEach((month)=>{
+                        this.tabbar.tabs.unshift(parseInt(month.moty) + ' 月')
+                    })
+                    if(window.location.hash){
+                        // let arr = window.location.hash.substr(1).split('&')
+                        // let obj = {}
+                        // arr.forEach((item)=>{
+                        //     item = item.split('=')
+                        //     obj[item[0]] = decodeURI(item[1])
+                        // })
+                        // if(obj.date){
+                        //     this.tabbar.position = obj.date
+                        // }
+                    }
+
+                    this.$nextTick(this.setTabbar)
+
                 })
                 .catch(err => {
-                    window.location = 'http://'+ window.location.host + '/error?' + err
+                    console.log(err)
+                    // window.location = 'http://'+ window.location.host + '/error?' + err
                 })
+
         }
     }
 </script>

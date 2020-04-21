@@ -90,7 +90,7 @@ div.v-tooltip__content{
   color:black;
   background-color: #EBEBEB;
   padding: 4px 12px;
-  border: 1px solid #c4c4c4!important;
+  border: 2px solid #c4c4c4!important;
   &::before{
     position: absolute;top: -8px;left: calc((100% - 10px)/2);
     display:inline-block;content: '';
