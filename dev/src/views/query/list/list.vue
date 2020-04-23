@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="btn d-flex justify-center">
-                    <v-btn rounded depressed dark large color="#999999" @click="resetRows">返回</v-btn>
+                    <v-btn  text outlined large color="#999999" @click="resetRows">返回</v-btn>
                 </div>
             </div>
         </transition>

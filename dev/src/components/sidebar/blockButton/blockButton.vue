@@ -1,12 +1,20 @@
 <template>
-    <a class="button" href="">
+    <a class="button" :href="href" :target="targ">
         查看全部<v-icon dark small color="#dbdbdb" style="transform: translateX(2px) translateY(-2px)">mdi-arrow-up-bold-hexagon-outline</v-icon>
     </a>
 </template>
 
 <script>
     export default {
-        name: "blockButton"
+        name: "blockButton",
+        computed:{
+            targ(){
+                return this.$vuetify.breakpoint.smAndDown ? '_self' : '_blank'
+            },
+            href(){
+                return 'http://'+ window.location.host
+            }
+        }
     }
 </script>
 

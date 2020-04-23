@@ -2,14 +2,14 @@
     <div class="selector">
         <v-select class="d-flex d-md-none"
                   :items="tabbar.tabs"
-                  prepend-icon="mdi-calendar-month"
                   :label="year + ' 年'"
-                  outlined
-                  dense
-                  dark
-        ></v-select>
+                  :value="current"
+                  prepend-icon="mdi-calendar-month"
+                  outlined dense dark
+                  v-model="current"
+        />
     </div>
-
+<!--    @change="changeLabel"-->
 </template>
 
 <script>
@@ -18,22 +18,38 @@
         data(){
             return {
                 active:false,
-                // items:[
-                //     '1月',
-                //     '2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'
-                // ],
-                current:'1月',
+                current:'',
+                scrolling:null,
             }
         },
         props:['tabbar','year'],
         computed:{
-            activated(){
-                // return this.active ? Number(this.active) : this.tabbar.tabs.length - 1
+            currentIndex(){
+                return this.tabbar.currentIndex ? Number(this.tabbar.currentIndex) : this.tabbar.tabs.length - 1
             },
-        },
-        created() {
 
-        }
+        },
+        watch:{
+            current(val){
+                if(!this.tabbar.scrolling && val){
+                    this.current = ''
+                    document.getElementById('month=' + parseInt(val)).scrollIntoView()
+                }
+            },
+            currentIndex(val){
+                this.current = this.tabbar.tabs[val]
+                this.tabbar.scrolling = setInterval(()=>{
+                    if(window.pageYOffset !== pageYOffset)
+                        pageYOffset = window.pageYOffset
+                    else{
+                        clearInterval(this.tabbar.scrolling)
+                        this.tabbar.scrolling= null
+                    }
+                },200)
+            }
+        },
+
+
     }
 </script>
 

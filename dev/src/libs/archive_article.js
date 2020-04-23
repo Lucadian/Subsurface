@@ -28,7 +28,7 @@ dirs.forEach((dirname)=>{
 
             let info = {}
             let tmps = fs.readFileSync(path.content + '/article/' + dirname + '/' + filename, 'utf-8').split('<!--divider-->')
-            tmps[0].split(/\n/g).forEach((item) => {
+            tmps[0].split(/\r\n/g).forEach((item) => {
                 let tmp = item.split(':')
                 info[tmp[0]] = tmp[1]
             })
@@ -54,6 +54,12 @@ dirs.forEach((dirname)=>{
 archive = archive.sort((a, b) => b.edited - a.edited)
 // 将前 6 篇文章做侧栏文章列表
 updates = archive.slice(0,6)
+updates.forEach((article)=>{
+    delete article.brief
+    delete article.subtitles
+    let arr = article.edited.toString().split('')
+    article.edited = arr[0] + arr[1] + arr[2] + arr[3] + '-' + arr[4] + arr[5] + '-' + arr[6] + arr[7]
+})
 
 fs.writeFileSync(path.archive + '/article/archive.json', JSON.stringify(archive))
 fs.writeFileSync(path.archive + '/article/updates.json', JSON.stringify(updates))

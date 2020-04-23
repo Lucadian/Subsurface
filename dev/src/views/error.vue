@@ -3,7 +3,7 @@
         <div class="wrapper">
             <div class="d-flex justify-center"><v-icon x-large>mdi-google-downasaur</v-icon></div>
             <div class="title">页面被恐龙吃掉了...</div>
-            <a :href="home">前往首页</a>
+            <a :href="home">返回</a>
         </div>
     </v-content>
 </template>
@@ -19,7 +19,10 @@
             }
         },
         created(){
-            this.headbar.title = 'Subsurface.cn'
+            this.headbar.title = '页面被恐龙吃掉了...'
+            this.$nextTick(function(){
+                    document.getElementById('title').innerHTML = '页面被恐龙吃掉了...'
+                })
         }
     }
 </script>

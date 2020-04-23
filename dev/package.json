@@ -8,7 +8,7 @@
     "album"  : "node ./src/libs/archive_album.js",
     "article": "node ./src/libs/archive_article.js",
     "blog"   : "node ./src/libs/archive_blog.js",
-    "aa": "node ./src/libs/archive_chart.js"
+    "chart"  : "node ./src/libs/archive_chart.js"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",

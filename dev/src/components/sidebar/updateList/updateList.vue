@@ -1,6 +1,6 @@
 <template>
     <div class="updateList">
-        <div class="item d-flex" v-for="n in 6">
+        <div class="item d-flex" v-for="item in items">
             <a class="cover" href="">
                 <img src="" alt="">
             </a>
@@ -18,8 +18,31 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
-        name: "updateList"
+        name: "updateList",
+        data(){
+            return {
+                items:[]
+            }
+        },
+        computed:{
+            path(){
+                return 'http://' + window.location.host + '/essay/'
+            }
+        },
+        methods:{
+
+        },
+        created() {
+            axios.get('http://'+ window.location.host + '/archive/article/updates.json')
+                .then(response =>{
+                    this.items = response.data
+                })
+                .catch(err =>{
+
+                })
+        }
     }
 </script>
 

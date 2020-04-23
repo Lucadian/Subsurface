@@ -25,6 +25,11 @@ export default new Vuex.Store({
       queryKey:'',
       queryVal:'',
     },
+    blog:{
+      blogText:{
+        date:''
+      }
+    }
   },
   mutations: {
     hideScrollbar(state){

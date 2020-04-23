@@ -144,7 +144,8 @@ div.imgs{
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    //cursor: pointer;
+    cursor: zoom-in;
     border-radius: 3px;
     @media(max-width: 600px){
       height: 90px;

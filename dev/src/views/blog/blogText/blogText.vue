@@ -15,7 +15,7 @@
                         }"
                 >
                     <div class="contentBox d-flex flex-column">
-                        <div class="day-label" :id="'day=' +  month.moty + day.dotm">
+                        <div class="day-label">
                             2020 - {{ month.moty }} - {{ day.dotm }}
                         </div>
                         <div class="log" v-html="day.blog" />
@@ -28,6 +28,7 @@
                 </v-lazy>
             </div>
         </div>
+        <poster :post="post"/>
         <viewer :path="path" />
     </div>
 </template>
@@ -35,6 +36,7 @@
 <script>
     import { albumHost } from '@/assets/host'
     import viewer from '@/components/viewer/viewer'
+    import poster from './poster/poster'
     import axios from 'axios'
     import { mapState } from 'vuex'
     export default {
@@ -44,17 +46,23 @@
                 blogs:[],
                 path:{
                     value:''
+                },
+                post:{
+                    value:''
                 }
             }
         },
         computed:{
-            ...mapState(['headbar','hash']),
+            ...mapState(['headbar','hash','blog']),
             isMobile(){
                 return this.$vuetify.breakpoint.smAndDown
             },
+            subtext(){
+                return this.year + '.' + this.blogs[this.blogs.length - 1].moty + ' ~ ' + this.blogs[0].moty + ''
+            },
             subtitle(){
                 if(!this.isMobile && this.blogs.length)
-                    return this.year + '.' + this.blogs[this.blogs.length - 1].moty + ' ~ ' + this.blogs[0].moty + ''
+                    return this.subtext
                 else
                     return ''
             }
@@ -69,7 +77,24 @@
                     this.headbar.title =  '日志'
                     this.hash.queryVal = this.subtitle
                 }
-
+            },
+            'blog.blogText.date':function(date){ //date格式 '2020-02-20'
+                let arr = date.split('-')
+                if( arr[0] !== this.year )
+                    window.location = 'http://'+ window.location.host + '/archive/blog/' + arr[0] + '#month=' + arr[1] + '&day=' + arr[2]
+                else
+                    for(let i=0;i<this.blogs.length;i++){
+                        if(this.blogs[i].moty === arr[1]){
+                            for(let d=0;d<this.blogs[i].days.length;d++){
+                                if(this.blogs[i].days[d].dotm === arr[2]){
+                                    this.post.value = this.blogs[i].days[d].blog
+                                    this.post.date = date
+                                    break
+                                }
+                            }
+                            break
+                        }
+                    }
             }
         },
         methods:{
@@ -90,11 +115,12 @@
                     this.tabbar.offsets.push(parseInt(anchors[i].offsetTop))
                 }
                 this.tabbar.offsets.reverse()
+
             }
 
         },
         components:{
-            viewer
+            viewer,poster
         },
         props:['year','tabbar','info'],
         created() {
@@ -112,27 +138,28 @@
                     this.info.mean  = response.data.info.mean
 
                     this.hash.queryVal = this.subtitle
+                    document.getElementById('title').innerText = '日志 | ' + this.subtext
+
                     this.blogs.forEach((month)=>{
                         this.tabbar.tabs.unshift(parseInt(month.moty) + ' 月')
                     })
-                    if(window.location.hash){
-                        // let arr = window.location.hash.substr(1).split('&')
-                        // let obj = {}
-                        // arr.forEach((item)=>{
-                        //     item = item.split('=')
-                        //     obj[item[0]] = decodeURI(item[1])
-                        // })
-                        // if(obj.date){
-                        //     this.tabbar.position = obj.date
-                        // }
-                    }
 
+                    if(window.location.hash){
+                        let arr = window.location.hash.substr(1).split('&')
+                        let obj = {}
+                        arr.forEach((item)=>{
+                            item = item.split('=')
+                            obj[item[0]] = decodeURI(item[1])
+                        })
+                        if(obj.month && obj.day){
+                            this.blog.blogText.date  = this.year + '-' + obj.month + '-' + obj.day
+                        }
+                    }
                     this.$nextTick(this.setTabbar)
 
                 })
                 .catch(err => {
-                    console.log(err)
-                    // window.location = 'http://'+ window.location.host + '/error?' + err
+                    window.location = 'http://'+ window.location.host + '/axiosError?' + err
                 })
 
         }

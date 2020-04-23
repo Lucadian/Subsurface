@@ -3,9 +3,8 @@
         <div class="wrapper d-flex justify-end">
             <a class="tab gap"
                v-for="(item,idx) in tabbar.tabs"
-               :class="{active:activated === idx}"
+               :class="{active:currentIndex === idx}"
                :href="'#month=' + parseInt(item)"
-               :index="idx"
                @click="changeLabel"
                v-text="item"
             />
@@ -23,30 +22,29 @@
             }
         },
         computed:{
-            activated(){
+            currentIndex (){
                 return this.tabbar.currentIndex ? Number(this.tabbar.currentIndex) : this.tabbar.tabs.length - 1
             },
 
         },
         methods:{
             changeLabel(){
-                if(!this.scrolling){
-                    this.tabbar.currentIndex = event.currentTarget.getAttribute('index')
+                if(!this.tabbar.scrolling){
                     let pageYOffset = window.pageYOffset
 
                     //切换标签时关闭滚动 switchLabel
-                    this.scrolling = setInterval(()=>{
+                    this.tabbar.scrolling = setInterval(()=>{
                         if(window.pageYOffset !== pageYOffset)
                             pageYOffset = window.pageYOffset
                         else{
-                            clearInterval(this.scrolling)
+                            clearInterval(this.tabbar.scrolling)
+                            this.tabbar.scrolling= null
                         }
                     },400)
                 }
 
             },
             switchLabel(){
-
                 if(!this.timer){
                     let offsets = this.tabbar.offsets
                     for(let i=0;i<offsets.length;i++){
