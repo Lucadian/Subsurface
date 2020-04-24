@@ -180,12 +180,12 @@
             }
         },
         created() {
-            axios.get('http://'+ window.location.host + '/archive/article/archive.json')
+            axios.get('http://'+ window.location.host + '/archive/article/archive.json?_=' + Date.now())
                 .then(response => {
                     this.raws = response.data
                 })
                 .catch(err => {
-                    window.location = 'http://'+ window.location.host + '/error?' + err
+                    window.location = 'http://'+ window.location.host + '/queryList_err?' + err
                 })
         }
 

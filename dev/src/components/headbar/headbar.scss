@@ -87,16 +87,15 @@ button.v-btn{
 
 div.v-tooltip__content{
   opacity: 1!important;
-  color:black;
-  background-color: #EBEBEB;
-  padding: 4px 12px;
-  border: 2px solid #c4c4c4!important;
+  color:white;
+  background-color: #5c6166;
+  padding: 4px 11px 5px 11px;
   &::before{
-    position: absolute;top: -8px;left: calc((100% - 10px)/2);
+    position: absolute;top: -6px;left: calc((100% - 10px)/2);
     display:inline-block;content: '';
     width:0;height:0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 8px solid #c4c4c4;
+    border-bottom: 8px solid #5c6166;
   }
 }

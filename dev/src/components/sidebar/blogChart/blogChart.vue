@@ -83,7 +83,7 @@
             }
         },
         created(){
-            axios.get('http://'+ window.location.host + '/archive/blog/chart.json')
+            axios.get('http://'+ window.location.host + '/archive/blog/chart.json?_=' + Date.now())
                 .then(response =>{
                     this.items = response.data
                 })

@@ -54,7 +54,7 @@ let article = [
     },
     {
         title: '其他',
-        subtitle:'执念 & 生活',icon: 'mdi-sony-playstation',
+        subtitle:'认知 & 执念',icon: 'mdi-sony-playstation',
         num:statistics['其他'] ? statistics['其他']:0
     },
 ]

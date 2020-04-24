@@ -61,7 +61,7 @@
         padding: 0 31px 20px 22px;
         height: 100px;
         div.title{
-            border-left: 3px solid #0090ff;
+            border-left: 3px solid #0685e7;
             padding-left: 7px;
             height: 38px;
 

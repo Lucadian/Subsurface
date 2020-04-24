@@ -4,7 +4,7 @@
             <aside v-if="activated">
                 <div class="tabs d-flex justify-space-between align-center">
                         <v-tabs mobile-break-point="0"
-                                :height="tabHeight" active-class="active" background-color="transparent" slider-size="3" slider-color="black" color="black"
+                                :height="tabHeight" active-class="active" background-color="transparent" slider-size="3" slider-color="rgb(55,61,68)" color="black"
                                 v-model="index"
                         >
                             <v-tab v-for="item in items" :key="item.tab" v-text="item.tab" />
@@ -22,7 +22,7 @@
                                      class="aRow d-flex justify-space-between align-center"
                                      @click="query(row.title)"
                                 >
-                                    <v-icon large class="icon" color="#686868" v-text="row.icon" />
+                                    <v-icon large class="icon" color="#848484" :class="{'mdi-flip-h':row.flipH}" v-text="row.icon" />
                                     <div class="title">
                                         <div class="aName">{{ row.title }}</div>
                                         <div class="aInfo">{{ row.subtitle }}</div>
@@ -151,7 +151,6 @@
                 this.valid.qrcode = true
             },
             query(val){
-                console.log(val)
                 let href
                 switch (this.index){
                     case 0:

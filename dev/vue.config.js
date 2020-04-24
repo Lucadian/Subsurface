@@ -15,7 +15,7 @@ module.exports = {
       template: './public/index.html',
 
       // 在 dist/index.html 的输出
-      filename: './index.html',
+      filename: process.env.NODE_ENV === 'production' ? '../index.html' : './index.html',
 
       // 当使用 title 选项时，
       // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>

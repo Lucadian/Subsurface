@@ -1,16 +1,16 @@
 <template>
     <div class="updateList">
         <div class="item d-flex" v-for="item in items">
-            <a class="cover" href="">
-                <img src="" alt="">
+            <a class="cover" :href="articlePath + item.dir + '/' + item.file" :target="targ">
+                <img :src="imagePath + item.cover" alt="">
             </a>
             <div class="preview">
-                <a class="title" href="">
-                    <h4>DOM 狂悖无道的尺寸(一) Scroll/Client/Offset</h4>
+                <a class="title" :href="articlePath + item.dir + '/' + item.file" :target="targ">
+                    <h4 v-text="item.title"/>
                 </a>
                 <div class="date">
                     <v-icon x-small dark class="mr-1" color="#b30000" style="transform: translateY(-1px)">mdi-text-box-outline</v-icon>
-                    2019-11-05
+                    {{ item.edited }}
                 </div>
             </div>
         </div>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+    import { imageHost } from '@/assets/host'
+    import { mapState } from 'vuex'
     import axios from 'axios'
     export default {
         name: "updateList",
@@ -27,20 +29,27 @@
             }
         },
         computed:{
-            path(){
+            ...mapState(['display']),
+            targ(){
+                return this.display.isMobile ? '_self' : '_blank'
+            },
+            articlePath(){
                 return 'http://' + window.location.host + '/essay/'
+            },
+            imagePath(){
+                return imageHost + '/images/'
             }
         },
         methods:{
 
         },
         created() {
-            axios.get('http://'+ window.location.host + '/archive/article/updates.json')
+            axios.get('http://'+ window.location.host + '/archive/article/updates.json?_=' + Date.now())
                 .then(response =>{
                     this.items = response.data
                 })
                 .catch(err =>{
-
+                    window.location = 'http://'+ window.location.host + '/updateList_err?' + err
                 })
         }
     }

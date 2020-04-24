@@ -1,6 +1,6 @@
 const fs   = require('fs')
-
-function getFilesFrom(path,suffix){
+//只能获取有扩展名的文件
+function getFilesFrom(path,suffix=''){
     let files = []
     let arr  = fs.readdirSync(path)
     for(let i=0;i<arr.length;i++){

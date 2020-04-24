@@ -13,7 +13,7 @@
                 </div>
             </transition>
             <v-spacer/>
-            <v-tooltip bottom nudge-bottom="5" transition="fade-transition" open-delay="300">
+            <v-tooltip bottom nudge-bottom="5" transition="fade" open-delay="300">
                 <template v-slot:activator="{ on }">
                     <v-btn icon dark @click="resetSearch" @contextmenu.prevent="wasted" v-on="on">
                         <v-icon>{{ visible.arkTitle ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
@@ -22,7 +22,7 @@
                 <span>查找</span>
             </v-tooltip>
 
-            <v-tooltip bottom nudge-bottom="5" transition="fade-transition" open-delay="300">
+            <v-tooltip bottom nudge-bottom="5" transition="fade" open-delay="300">
                 <template v-slot:activator="{ on }">
                     <v-btn icon dark @click="visible.category = !visible.category" @contextmenu.prevent="wasted" v-on="on">
                         <v-icon class="mdi-flip-h" style="transform: translateY(-1px)">{{ visible.category ? 'mdi-undo-variant' : 'mdi-apps' }}</v-icon>

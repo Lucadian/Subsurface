@@ -18,7 +18,16 @@ const routes = [
     path: '/album/:gallery',
     name: 'album',
     props:true,
-    component: () => import('@/views/album/album')
+    component: () => import('@/views/album/album'),
+    // children:[
+    //   {
+    //     // 当 /album/:gallery/:subclass 匹配成功，
+    //     // UserProfile 会被渲染在 User 的 <router-view> 中
+    //     path: ':subclass',
+    //     props:true,
+    //     component: () => import('@/views/album/album'),
+    //   },
+    // ]
   },
   {
     path: '/blog/:year',

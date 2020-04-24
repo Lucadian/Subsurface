@@ -1,0 +1,3 @@
+年份.json 是全年的日志数据
+
+chart.json 是侧栏 blogChart 组件的数据

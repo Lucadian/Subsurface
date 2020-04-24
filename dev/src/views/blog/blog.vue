@@ -62,7 +62,7 @@
         }
         div.row{
             margin: 0;
-            box-shadow: 0 1px 10px #646464;
+            box-shadow: 0 1px 10px rgba(100,100,100,.5);
             box-sizing: border-box;
             border-radius: 0 0 3px 3px;
             background-color: hsl(0,0%,95%);

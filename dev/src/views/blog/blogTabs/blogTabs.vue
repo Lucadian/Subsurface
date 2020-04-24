@@ -112,7 +112,7 @@ div.wrapper{
             display: block;content: '';
             position: absolute;top: 0;left: 0;
             width: 100%;height: 100%;
-            background: linear-gradient(0deg,rgba(0,0,0,.7) 8%,rgba(0,0,0,.20) 24%,rgba(0,0,0,0) 45%);
+            background: linear-gradient(0deg,rgba(0,0,0,.6) 8%,rgba(0,0,0,.15) 24%,rgba(0,0,0,0) 45%);
         }
         &:hover{
             color: black;

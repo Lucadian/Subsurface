@@ -8,7 +8,10 @@
     "album"  : "node ./src/libs/archive_album.js",
     "article": "node ./src/libs/archive_article.js",
     "blog"   : "node ./src/libs/archive_blog.js",
-    "chart"  : "node ./src/libs/archive_chart.js"
+    "chart"  : "node ./src/libs/archive_chart.js",
+    "category": "node ./src/libs/archive_category.js",
+    "update" : "yarn album && yarn article && yarn blog && yarn chart && yarn category",
+    "aa" : "node ./src/libs/archive_category.js"
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",

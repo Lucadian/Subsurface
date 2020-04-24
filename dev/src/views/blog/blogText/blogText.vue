@@ -107,7 +107,7 @@
                 this.path.value = event.currentTarget.children[0].src
             },
             resolve(path){
-                return albumHost + '/content/album/日志图片/' + path
+                return albumHost + '/content/album/' + path
             },
             setTabbar(){
                 let anchors = document.getElementsByClassName('anchor-month')
@@ -130,7 +130,7 @@
             else
                 this.headbar.title =  '日志'
 
-            axios.get('http://'+ window.location.host + '/archive/blog/' + this.year + '.json' )
+            axios.get('http://'+ window.location.host + '/archive/blog/' + this.year + '.json?_=' + Date.now())
                 .then( response => {
                     this.blogs = response.data.year
 

@@ -24,6 +24,7 @@
 
 <script>
     import { mapState,mapMutations } from 'vuex'
+    import { album } from '@/assets/category/album'
     import viewer from '@/components/viewer/viewer'
     import axios from 'axios'
 
@@ -41,6 +42,13 @@
             ...mapState(['headbar','footbar','visible','hash']),
             minHeight(){
                 return this.$vuetify.breakpoint.smAndDown ? 160 : 230
+            },
+            dirname(){
+                let name = this.gallery
+                for(let i=0;i<album.length;i++){
+                    if(album[i].title === name)
+                        return album[i].dirname
+                }
             }
         },
         methods:{
@@ -50,7 +58,7 @@
                 this.path.value = event.currentTarget.getAttribute('src')
             },
             getRelativePath(src){
-                return '/content/album/'+ this.gallery + '/' + src
+                return '/content/album/'+ this.dirname + '/' + src
             }
         },
         props:[
@@ -65,12 +73,12 @@
             this.headbar.valid.aug = true
             this.headbar.title =  '相册'
             this.hash.queryVal = this.gallery
-            axios.get('http://'+ window.location.host + '/archive/album/' + this.gallery + '.json?_=' + Date.now())
+            axios.get('http://'+ window.location.host + '/archive/album/' + this.dirname + '.json?_=' + Date.now())
                 .then(response => {
                     this.imgs = response.data
                 })
                 .catch(err => {
-                    window.location = 'http://'+ window.location.host + '/error?' + err
+                    // window.location = 'http://'+ window.location.host + '/error?' + err
                 })
         }
     }

@@ -52,6 +52,9 @@ dirs.forEach((dirname)=>{
 
 // 将文章列表按“最后编辑时间”降序排列
 archive = archive.sort((a, b) => b.edited - a.edited)
+
+fs.writeFileSync(path.archive + '/article/archive.json', JSON.stringify(archive))
+
 // 将前 6 篇文章做侧栏文章列表
 updates = archive.slice(0,6)
 updates.forEach((article)=>{
@@ -60,6 +63,4 @@ updates.forEach((article)=>{
     let arr = article.edited.toString().split('')
     article.edited = arr[0] + arr[1] + arr[2] + arr[3] + '-' + arr[4] + arr[5] + '-' + arr[6] + arr[7]
 })
-
-fs.writeFileSync(path.archive + '/article/archive.json', JSON.stringify(archive))
 fs.writeFileSync(path.archive + '/article/updates.json', JSON.stringify(updates))

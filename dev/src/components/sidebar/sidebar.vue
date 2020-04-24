@@ -2,7 +2,7 @@
     <div class="sidebar">
         <update-list/>
         <divider/>
-        <recommends/>
+        <recommendation/>
         <block-button/>
         <blog-chart/>
     </div>
@@ -11,13 +11,13 @@
 <script>
     import updateList from './updateList/updateList'
     import divider from './divider/divider'
-    import recommends from './recommends/recommends'
+    import recommendation from './recommendation/recommendation'
     import blockButton from './blockButton/blockButton'
     import blogChart  from './blogChart/blogChart'
     export default {
         name: "sidebar",
         components:{
-            updateList,divider,recommends,blockButton,blogChart
+            updateList,divider,recommendation,blockButton,blogChart
         }
     }
 </script>

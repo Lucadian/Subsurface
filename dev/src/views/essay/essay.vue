@@ -43,7 +43,7 @@
                     this.text = arr[1].replace(/__imageHost/g,essayHost)
                 })
                 .catch(err => {
-                    window.location = 'http://'+ window.location.host + '/error?' + err
+                    window.location = 'http://'+ window.location.host + '/essay_err?' + err
                 })
         }
     }
