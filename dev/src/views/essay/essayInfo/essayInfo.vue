@@ -67,12 +67,14 @@
         font-style: normal;
         font-weight: 100;
         font-size: 70%;
-        background-color: #393f44;
+        background-color: #38383b;
+        /*background-color: #393f44;*/
         padding: 3px 10px 3px 6px;
         box-sizing: border-box;
         border-top: 1px solid $info_thread_red!important;
         text-shadow: 0 0 3px black,1px 1px 0 black;
         border-right: .5px solid black;
+
         @media (max-width: 600px){
             border-right:0;
             padding: 3px 0.6rem;

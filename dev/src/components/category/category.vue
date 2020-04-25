@@ -18,17 +18,17 @@
                     <div class="scrollBox" ref="scrollBox" :style="scrollBoxHeight" @scroll="debounce">
                         <v-tabs-items class="list" v-model="index">
                             <v-tab-item v-for="item in items" :key="item.tab" >
-                                <div v-for="row in item.category"
+                                <div v-for="row in item.list"
                                      class="aRow d-flex justify-space-between align-center"
                                      @click="query(row.title)"
                                 >
                                     <v-icon large class="icon" color="#848484" :class="{'mdi-flip-h':row.flipH}" v-text="row.icon" />
                                     <div class="title">
                                         <div class="aName">{{ row.title }}</div>
-                                        <div class="aInfo">{{ row.subtitle }}</div>
+                                        <div class="aInfo">{{ row.brief }}</div>
                                     </div>
                                     <v-spacer></v-spacer>
-                                    <div class="aNum" v-text="row.num" />
+                                    <div class="aNum" v-text="row.total" />
                                 </div>
                             </v-tab-item>
                         </v-tabs-items>
@@ -56,7 +56,7 @@
     import { mapState,mapMutations } from 'vuex'
     import showcase from './showcase/showcase'
     import qrcode from './qrcode/qrcode'
-
+    import axios from 'axios'
 
     export default {
         name: "category",
@@ -70,9 +70,9 @@
                     album:2
                 },
                 items: [
-                    { tab:'文章',path:'/',       category: article },
-                    { tab:'日志',path:'/blog/',  category: blog },
-                    { tab:'相册',path:'/album/', category: album},
+                    { tab:'文章',path:'/',       list: article },
+                    { tab:'日志',path:'/blog/',  list: blog },
+                    { tab:'相册',path:'/album/', list: album},
                 ],
                 scrolledTop:0,
                 scrolledBtm:0,
@@ -199,7 +199,17 @@
             }
 
         },
-
+        created() {
+            axios.get('http://'+ window.location.host + '/archive/category/category.json?_=' + Date.now())
+                .then(response =>{
+                    this.items[0].list = response.data.article
+                    this.items[1].list = response.data.blog
+                    this.items[2].list = response.data.album
+                })
+                .catch(err =>{
+                    window.location = 'http://'+ window.location.host + '/category_err?' + err
+                })
+        }
     }
 </script>
 

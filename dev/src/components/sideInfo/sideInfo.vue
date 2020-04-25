@@ -23,7 +23,8 @@
         font-style: normal;
         font-weight: 100;
         font-size: 70%;
-        background-color: #393f44;
+        background-color: #38383b;
+        /*background-color: #393f44;*/
         letter-spacing: 0.5px;
         padding: 3px 15px 3px 10px;
         box-sizing: border-box;

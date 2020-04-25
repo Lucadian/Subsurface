@@ -24,10 +24,10 @@
 
 <script>
     import { mapState,mapMutations } from 'vuex'
-    import { album } from '@/assets/category/album'
     import viewer from '@/components/viewer/viewer'
     import axios from 'axios'
 
+    const album = require('@/assets/category/album')
     export default {
         name: "album",
         data(){
@@ -47,7 +47,7 @@
                 let name = this.gallery
                 for(let i=0;i<album.length;i++){
                     if(album[i].title === name)
-                        return album[i].dirname
+                        return album[i].dir
                 }
             }
         },

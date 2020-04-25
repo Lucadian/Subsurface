@@ -107,7 +107,7 @@
                 this.path.value = event.currentTarget.children[0].src
             },
             resolve(path){
-                return '/content/album/album_' + path
+                return '/content/album/' + path
             },
             setTabbar(){
                 let anchors = document.getElementsByClassName('anchor-month')
