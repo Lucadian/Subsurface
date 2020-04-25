@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import { albumHost } from '@/assets/host'
+    // import { albumHost } from '@/assets/host'
     import viewer from '@/components/viewer/viewer'
     import poster from './poster/poster'
     import axios from 'axios'
@@ -107,7 +107,7 @@
                 this.path.value = event.currentTarget.children[0].src
             },
             resolve(path){
-                return albumHost + '/content/album/' + path
+                return '/content/album/album_' + path
             },
             setTabbar(){
                 let anchors = document.getElementsByClassName('anchor-month')

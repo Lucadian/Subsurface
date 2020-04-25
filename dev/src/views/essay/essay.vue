@@ -29,21 +29,29 @@
             }
         },
         props:[
-            'dirname','filename'
+            'dirname','subdirname','filename'
         ],
-
+        computed:{
+            category(){
+                return decodeURI(this.dirname)
+            },
+            subclass(){
+                return this.subdirname ? '/' + decodeURI(this.subdirname) : ''
+            }
+        },
         components:{
             essayInfo,essayText,sideInfo,sidebar
         },
         created(){
-            axios.get('http://'+ window.location.host + '/content/article/' + decodeURI(this.dirname) + '/' + decodeURI(this.filename) + '.html?_=' + Date.now())
+            axios.get('http://'+ window.location.host + '/content/article/' + this.category + this.subclass + '/' + decodeURI(this.filename) + '.html?_=' + Date.now())
                 .then(response => {
                     let arr = response.data.split('<!--divider-->')
                     this.info = arr[0]
                     this.text = arr[1].replace(/__imageHost/g,essayHost)
                 })
                 .catch(err => {
-                    window.location = 'http://'+ window.location.host + '/essay_err?' + err
+                    // window.location = 'http://'+ window.location.host + '/essay_err?' + err
+                    console.log(err)
                 })
         }
     }

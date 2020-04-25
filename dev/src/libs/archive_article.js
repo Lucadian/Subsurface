@@ -1,6 +1,8 @@
 const fs   = require('fs')
 const path = require('./path')
 
+const getDirsFrom = require('./functions/getDirsFrom')
+const getFilesFrom = require('./functions/getFilesFrom')
 String.prototype.getInnerTextOf = require('./functions/getInnerTextOf.js')
 String.prototype.getPlainText   = require('./functions/getPlainText.js')
 String.prototype.isHTML         = require('./functions/isHTML.js')
@@ -9,17 +11,12 @@ String.prototype.isHTML         = require('./functions/isHTML.js')
 let archive = []
 let updates = []
 
-let dirs    = fs.readdirSync(path.content + '/article')
-//删除非目录文件
-for(let i=0;i<dirs.length;i++){
-    if(dirs[i].includes('.'))
-        dirs.splice(i, 1)
-}
+let dirs    = getDirsFrom(path.content + '/article')
 
 // 读取每个文章目录
 dirs.forEach((dirname)=>{
-    // 获取所有文件名
-    let files = fs.readdirSync(path.content + '/article/' + dirname)
+    // 获取所有文件名 ，cloak 文件夹不会被读取
+    let files = getFilesFrom(path.content + '/article/' + dirname)
     // 读取每个文件内容
     files.forEach((filename)=>{
         //如果文件是一个 HTML 文件

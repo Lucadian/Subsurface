@@ -1,6 +1,5 @@
-
-
 let fs = require('fs')
+
 const getDirsFrom = require('./functions/getDirsFrom')
 const getFilesFrom = require('./functions/getFilesFrom')
 const delFilesFrom = require('./functions/delFilesFrom')
