@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app flat :shrink-on-scroll="headbar.valid.shrink" >
+    <v-app-bar app flat :shrink-on-scroll="headbar.valid.shrink">
         <div id="headbar" class="wrapper scroller d-flex align-center" :style="headbar.style">
             <transition name="headbarSlide">
                 <ark-title v-if="visible.arkTitle" />
@@ -15,7 +15,7 @@
             <v-spacer/>
             <v-tooltip bottom nudge-bottom="5" transition="fade" open-delay="300">
                 <template v-slot:activator="{ on }">
-                    <v-btn icon dark @click="resetSearch" @contextmenu.prevent="wasted" v-on="on">
+                    <v-btn icon :dark="!isMobile" @click="resetSearch" @contextmenu.prevent="wasted" v-on="on">
                         <v-icon>{{ visible.arkTitle ? 'mdi-magnify':'mdi-magnify-close' }}</v-icon>
                     </v-btn>
                 </template>
@@ -24,7 +24,7 @@
 
             <v-tooltip bottom nudge-bottom="5" transition="fade" open-delay="300">
                 <template v-slot:activator="{ on }">
-                    <v-btn icon dark @click="visible.category = !visible.category" @contextmenu.prevent="wasted" v-on="on">
+                    <v-btn icon :dark="!isMobile" @click="visible.category = !visible.category" @contextmenu.prevent="wasted" v-on="on">
                         <v-icon class="mdi-flip-h" style="transform: translateY(-1px)">{{ visible.category ? 'mdi-undo-variant' : 'mdi-apps' }}</v-icon>
                     </v-btn>
                 </template>
@@ -48,8 +48,11 @@
         },
         computed:{
             ...mapState(['headbar','visible','hash']),
+            isMobile(){
+                return this.$vuetify.breakpoint.xs
+            },
             placeholder(){
-                return this.$vuetify.breakpoint.smAndDown ? '文章搜索':''
+                return this.isMobile ? '文章搜索':''
             },
             prefix(){
                 return '文章搜索'

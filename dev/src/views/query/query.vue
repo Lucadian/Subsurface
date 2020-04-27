@@ -24,7 +24,16 @@
             this.headbar.valid.aug = true
             this.headbar.style = 'width: 57rem'
             this.footbar.style = 'width: 57rem'
-            this.headbar.title = '文章列表'
+            this.headbar.title = `
+<style>
+    .special{
+    font-family: ;
+    background-color: white;color: rgba(55,61,68,1);
+
+    }
+</style>
+<div class="special">次表面</div>
+`
 
             if(window.location.hash){
                 // console.log(this.$vuetify.breakpoint)
@@ -61,7 +70,7 @@
             position: fixed;top: 0;left: 0;
             width: 100vw;height: 100vh;
             background-color: hsl(0,0%,94%);
-            @media(max-width: 600px){
+            @media(max-width: 950px){
                 background-color: white;
             }
         }

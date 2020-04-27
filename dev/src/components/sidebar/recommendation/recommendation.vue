@@ -48,6 +48,9 @@
         padding: 0 .5rem;
         height: 2.8rem;
         overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
         word-break: break-all;
         border-bottom: 1px dotted hsl(0,0,88%);
         &:last-child{

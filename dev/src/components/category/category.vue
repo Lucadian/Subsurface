@@ -35,8 +35,12 @@
                         <v-divider/>
                         <showcase @showQRCode="showQRCode" />
                     </div>
-                    <div class="hinterTop" v-if="hinterTop">︿</div>
-                    <div class="hinterBtm" v-if="hinterBtm">﹀</div>
+                    <transition name="fade">
+                        <div class="hinterTop" v-if="hinterTop">︿</div>
+                    </transition>
+                    <transition name="fade">
+                        <div class="hinterBtm" v-if="hinterBtm">﹀</div>
+                    </transition>
                 </div>
             </aside>
         </transition>
