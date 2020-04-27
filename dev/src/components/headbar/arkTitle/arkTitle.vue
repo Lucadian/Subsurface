@@ -1,6 +1,6 @@
 <template>
-    <caption class="ark-title">
-        <h4 :class="{title:headbar.valid.aug,fix:fix,border:subtitle,extend:!subtitle}"
+    <caption class="ark-title d-flex align-center">
+        <h4 :class="{title:headbar.valid.aug,fix:fix,border:subtitle}"
              v-html="visible.contacts ? '微信二维码' : title"
         />
         <div class="subtitle" v-if="subtitle">

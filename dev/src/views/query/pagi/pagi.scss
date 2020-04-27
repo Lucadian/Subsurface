@@ -1,5 +1,8 @@
 $mw:9vw;
 $lineHeight:calc(9vw - 4px);
+
+$darkblue:#296ab9;
+
 div#pagination{
   position: absolute;bottom: 0;
   font-size: 14px;
@@ -8,9 +11,9 @@ div#pagination{
   user-select: none;
   line-height: 32px;
   text-align: center;
-  //@media(max-width: 600px){
-  //  align-items: center;
-  //}
+  @media(max-width: 950px){
+    height: 100px;
+  }
   a{
     display: inline-block;
   }
@@ -31,8 +34,8 @@ div#pagination{
     &:hover:not(.invalid){
       position: relative;z-index: 1;
       border-radius: 2px;
-      border: 1px solid  #007aff;
-      color:  #005ec4;
+      border: 1px solid  $darkblue;
+      color:  $darkblue;
     }
     &.invalid{
       color:#c1c1c1;
@@ -65,12 +68,12 @@ div#pagination{
   &:hover:not(.current){
     position: relative;z-index: 1;
     border-radius: 2px;
-    border: 1px solid  #007aff;
-    color:  #005ec4;
+    border: 1px solid  $darkblue;
+    color:  $darkblue;
   }
   &.current{
-    border: 1px solid #007aff;
-    background-color:#007aff;
+    border: 1px solid $darkblue;
+    background-color:$darkblue;
     color:white;
     cursor: default;
   }

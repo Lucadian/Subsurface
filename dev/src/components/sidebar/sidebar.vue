@@ -1,8 +1,8 @@
 <template>
     <div class="sidebar">
         <update-list/>
-        <divider/>
-        <recommendation/>
+        <divider class="hidden-sm-and-down"/>
+        <recommendation class="hidden-xs-only"/>
         <block-button/>
         <blog-chart/>
     </div>

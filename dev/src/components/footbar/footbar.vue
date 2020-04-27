@@ -124,7 +124,9 @@ footer{
             width: 100vw!important;
         }
         @media(max-width: 600px) {
-            padding: 0 0.6rem;
+            height: 90px;
+            line-height: 70px;
+            padding: 0 10px;
             border-top: 1px solid rgba(0,0,0,.1);
             background-color: white;
         }
