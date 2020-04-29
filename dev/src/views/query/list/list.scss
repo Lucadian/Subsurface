@@ -1,3 +1,5 @@
+$title_darkblue:#0a4b9b;
+$title_darkgrey:#1a1a1a;
 .fadeIn{
   animation: fadeIn .4s ease forwards;
 }
@@ -26,7 +28,7 @@ div.aRow{
   &:hover div.title{
     h5{
       //color: #0a4db0!important;
-      color:#0a4b9b!important;
+      color:$title_darkblue!important;
     }
   }
   &:first-child{
@@ -95,7 +97,7 @@ div.aRow{
             font-size: 21px;
             font-weight: bold;
             //color: #007aff;
-            color: #1a1a1a;
+            color: $title_darkgrey;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;

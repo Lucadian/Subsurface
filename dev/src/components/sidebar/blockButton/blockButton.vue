@@ -1,6 +1,6 @@
 <template>
-    <a class="button" :href="href" :target="targ">
-        查看全部<v-icon dark small color="#dbdbdb" style="transform: translateX(2px) translateY(-2px)">mdi-arrow-up-bold-hexagon-outline</v-icon>
+    <a class="button subtitle-2 font-weight-light" :href="href" :target="targ">
+        Subsurface.cn<v-icon dark x-small color="rgba(0,0,0,.45)" style="transform: translateX(4px) translateY(-1px)">mdi-open-in-new</v-icon>
     </a>
 </template>
 
@@ -8,6 +8,9 @@
     export default {
         name: "blockButton",
         computed:{
+            tinc(){
+
+            },
             targ(){
                 return this.$vuetify.breakpoint.smAndDown ? '_self' : '_blank'
             },
@@ -21,19 +24,20 @@
 <style scoped lang="scss">
     a.button{
         display: block;
-        margin: 1.06rem 0;
-        font-size: 14px;
-        color:hsl(0,0,95%);
+        margin: 1rem 0;
+        color: #1a1a1a;
         border-radius: 3px;
-        background-color: rgba(0,0,0,.35);
-        height: 30px;
-        line-height: 30px;
+        box-sizing: border-box;
+        border: .5px solid #d1d1d1;
+        height: 32px;
+        line-height: 31px;
         text-align: center;
         cursor: pointer;
-        letter-spacing: 2px;
+        transition: background-color .2s;
         &:hover{
-         color: white;
-         background-image: radial-gradient(closest-side at 50% 50%, rgba(0,0,0,.60), rgba(0,0,0,.5));
+            background-color: rgba(0,0,0,.03);
+         /*color: white;*/
+         /*background-image: radial-gradient(closest-side at 50% 50%, rgba(0,0,0,.50), rgba(0,0,0,.45));*/
         }
     }
 </style>

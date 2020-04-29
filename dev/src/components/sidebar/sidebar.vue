@@ -1,8 +1,8 @@
 <template>
     <div class="sidebar">
         <update-list/>
-        <divider class="hidden-sm-and-down"/>
-        <recommendation class="hidden-xs-only"/>
+        <divider/>
+        <recommendation/>
         <block-button/>
         <blog-chart/>
     </div>
@@ -26,7 +26,7 @@
 div.sidebar{
     position: sticky;
     top: 1.2rem;
-    padding: 1.7rem;
+    padding: 1.7rem 1.7rem 2.6rem 1.7rem;
     @media(max-width: 600px){
         padding: 12px 10px 40px 10px;
     }

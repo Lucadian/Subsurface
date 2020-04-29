@@ -6,19 +6,34 @@ div.blogText{
   border-radius: 0 0 0 3px;
   box-sizing: border-box;
   border-right: .5px solid black;
-  padding: 1rem 1rem 3rem 1rem;
+  padding: 1rem;
   min-height: 1200px;
   @media(max-width: 600px){
     border-right: 0;
     border-radius: 0;
-    padding: 0.6rem 0 2rem 0; /*移动端内容区宽度*/
+    padding: 0; /*移动端内容区宽度*/
     background-color: white;
+  }
+  div.Fin{
+    letter-spacing: 2px;
+    user-select: none;
+    color: rgba(84,89,93,.9);
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: .9rem .9rem 2.8rem .9rem;
+    @media(max-width: 950px){
+      padding: 1.6rem 10px .5rem 10px;
+      transform: translateY(-30px);
+    }
   }
 }
 div.month{
   div.anchor-month{
     height: 0;
     transform: translateY(-65px);
+    @media(max-width: 600px){
+      transform: translateY(-57px);
+    }
   }
   div.label-month{
     text-align: center;
@@ -32,7 +47,10 @@ div.month{
     border-radius:  0 0 2px 2px;
     position: relative;
     @media(max-width: 600px){
-      margin: 2rem 9px 0 9px;
+      margin: 30px 0 0 0;
+      color: black;
+      text-shadow: none;
+      background-color: rgba(0,0,0,.05);
     }
     &::before{
       display: inline-block;content: '';
@@ -41,6 +59,9 @@ div.month{
       //background-color: #60d0ff;
       //background-color: #9a2602;
       position: absolute;top: -2px;left: 0;
+      @media(max-width: 600px) {
+        background-color: #acacac;
+      }
     }
   }
 }
@@ -76,7 +97,7 @@ div.day:not(:first-child){
       display: block;content: '';
       position: absolute;top: -30px;
       width: 100%;
-      border-top: 2px dashed rgba(0,0,0,.1);
+      border-top: 2px dashed rgba(0,0,0,.08);
     }
   }
 }

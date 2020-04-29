@@ -4,7 +4,7 @@
             次表面网络空间
         </div>
         <div>
-            <v-icon x-small :dark="!$vuetify.breakpoint.smAndDown" class="mr-1 pb-0">mdi-chevron-down</v-icon>最近更新
+            <v-icon x-small dark class="mr-1 pb-0">mdi-chevron-down</v-icon>最近更新
         </div>
     </div>
 </template>
@@ -29,17 +29,5 @@
         box-sizing: border-box;
         border-top: 1px solid $info_thread_red;
         text-shadow: 0 0 3px black,1px 1px 0 black;
-        @media(max-width: 950px){
-            border-top: 0;
-            color: black;
-            font-weight: normal;
-            text-shadow: none;
-            border-top: 0;
-            background-color: white;
-        }
-        @media (max-width: 600px){
-            /*padding: 3px 0.6rem;*/
-        }
-
     }
 </style>

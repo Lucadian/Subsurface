@@ -12,7 +12,7 @@
         </div>
         <v-spacer class="hidden-xs-only"/>
         <div>
-            <v-icon x-small :dark="!$vuetify.breakpoint.smAndDown" class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : {{ info.source }}
+            <v-icon x-small :dark="!$vuetify.breakpoint.xs" class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : {{ info.source }}
         </div>
     </div>
 </template>
@@ -54,32 +54,22 @@
         },
         props:['value','dirname'],
         methods:{
-            checkScroll(){
-                console.log(1)
-            },
-            throttle(fn, delay) {
-                let prev = Date.now()
-                return function() {
-                    let now = Date.now()
-                    if (now - prev > delay) {
-                        fn()
-                        prev = Date.now()
-                    }
-                }
-            }
+            // throttle(fn, delay) {
+            //     let prev = Date.now()
+            //     return function() {
+            //         let now = Date.now()
+            //         if (now - prev > delay) {
+            //             fn()
+            //             prev = Date.now()
+            //         }
+            //     }
+            // }
         },
         beforeUpdate(){
             if(!this.headbar.title){
                 document.getElementById('title').innerHTML = this.headbar.title = this.info.title
             }
         },
-        mounted (){
-            window.addEventListener('scroll',this.throttle(this.checkScroll,500),true)
-        },
-        destroyed () {
-            window.removeEventListener('scroll', this.throttle)
-        }
-
     }
 </script>
 

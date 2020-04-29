@@ -20,7 +20,7 @@
                             <v-tab-item v-for="item in items" :key="item.tab" >
                                 <div v-for="row in item.list"
                                      class="aRow d-flex justify-space-between align-center"
-                                     @click="query(row.title)"
+                                     @click="query(row)"
                                 >
                                     <v-icon large class="icon" color="#848484" :class="{'mdi-flip-h':row.flipH}" v-text="row.icon" />
                                     <div class="title">
@@ -35,12 +35,12 @@
                         <v-divider/>
                         <showcase @showQRCode="showQRCode" />
                     </div>
-                    <transition name="fade">
-                        <div class="hinterTop" v-if="hinterTop">︿</div>
-                    </transition>
-                    <transition name="fade">
-                        <div class="hinterBtm" v-if="hinterBtm">﹀</div>
-                    </transition>
+<!--                    <transition name="fade">-->
+<!--                        <div class="hinterTop" v-if="hinterTop">︿</div>-->
+<!--                    </transition>-->
+<!--                    <transition name="fade">-->
+<!--                        <div class="hinterBtm" v-if="hinterBtm">﹀</div>-->
+<!--                    </transition>-->
                 </div>
             </aside>
         </transition>
@@ -78,8 +78,8 @@
                     { tab:'日志',path:'/blog/',  list: blog },
                     { tab:'相册',path:'/album/', list: album},
                 ],
-                scrolledTop:0,
-                scrolledBtm:0,
+                // scrolledTop:0,
+                // scrolledBtm:0,
                 valid:{
                     qrcode:false
                 },
@@ -109,12 +109,12 @@
             overlayed(){
                 return (this.$route.name !== 'query' || this.isMobile) && this.visible.category
             },
-            hinterTop(){
-                return this.scrolledTop > 50
-            },
-            hinterBtm(){
-                return this.scrolledBtm > 50
-            },
+            // hinterTop(){
+            //     return this.scrolledTop > 50
+            // },
+            // hinterBtm(){
+            //     return this.scrolledBtm > 50
+            // },
         },
         components:{
             showcase,qrcode
@@ -122,12 +122,12 @@
         watch:{
             activated(val){
                 if(val){
-                    //处理分类列表的滚动提示箭头
-                    setTimeout(()=>{
-                        let box = this.$refs.scrollBox
-                        this.scrolledTop = box.scrollTop
-                        this.scrolledBtm = box.scrollHeight - box.clientHeight - box.scrollTop
-                    },400)
+                    // //处理分类列表的滚动提示箭头
+                    // setTimeout(()=>{
+                    //     let box = this.$refs.scrollBox
+                    //     this.scrolledTop = box.scrollTop
+                    //     this.scrolledBtm = box.scrollHeight - box.clientHeight - box.scrollTop
+                    // },400)
                     //处理是否隐藏滚动条
                     if(this.$route.name !== 'query' || this.isMobile)
                         this.hideScrollbar()
@@ -139,7 +139,7 @@
                         this.showScrollbar()
 
                 }
-            },
+            }
 
         },
         methods:{
@@ -154,29 +154,29 @@
                     this.visible.contacts = false
                 this.valid.qrcode = true
             },
-            query(val){
+            query(row){
                 let href
                 switch (this.index){
                     case 0:
                         if(this.isHomepage){
                             this.hash.queryKey = 'category'
-                            this.hash.queryVal = val
+                            this.hash.queryVal = row.title
                             this.hash.page = 1
                             this.rewriteHash()
                             if(this.isMobile)
                                 this.visible.category = false
                         }
                         else{
-                            href = 'http://' + window.location.host + '/#category=' + val
+                            href = 'http://' + window.location.host + '/#category=' + row.title
                             this.goToPage(href)
                         }
                         break
                     case 1:
-                        href = 'http://' + window.location.host + '/blog/' + parseInt(val)
+                        href = 'http://' + window.location.host + '/blog/' + parseInt(row.title)
                         this.goToPage(href)
                         break
                     case 2:
-                        href = 'http://' + window.location.host + '/album/' + val
+                        href = 'http://' + window.location.host + '/album/' + row.title
                         this.goToPage(href)
                         break
                 }

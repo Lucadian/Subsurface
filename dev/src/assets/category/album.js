@@ -18,6 +18,7 @@ let album = [
         brief:'演示 & 意向',icon: 'mdi-dog-side',
 
         dir:'全页动效',
+        warning:'你要打开的「全页动效」包含大量动图，可能导致浏览器崩溃，是否打开？',
         total:0
     },
     {

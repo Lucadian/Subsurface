@@ -20,7 +20,7 @@ const DB_PASSWORD = 'root';   //数据库密码
 const DB_CHARSET  = 'utf8';   //连接时使用的字符集（PDO需要，否则会有bug）
 //以上内容最终应在配置文件中设置
 
-//用法：DBOperator.submit("sql语句") 返回结果为 json 或受影响条数（整型）
+//用法：DBOperator:submit("sql语句") 返回结果为 json 或受影响条数（整型）
 
 class DBOperator{
     static private $pdo;//要删除连接，只需Datamate::$pdo = null 即可

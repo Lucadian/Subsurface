@@ -28,6 +28,9 @@
                 </v-lazy>
             </div>
         </div>
+        <div class="Fin">
+            Fin
+        </div>
         <poster :post="post"/>
         <viewer :path="path" />
     </div>

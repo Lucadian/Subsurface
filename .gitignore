@@ -2,6 +2,7 @@
 content
 node_modules
 dist
+index.html
 
 # Log files
 npm-debug.log*

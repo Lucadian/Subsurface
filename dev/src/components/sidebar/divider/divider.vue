@@ -1,5 +1,5 @@
 <template>
-    <div class="divider" />
+    <div class="divider hidden-xs-only" />
 </template>
 
 <script>

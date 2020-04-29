@@ -1,18 +1,20 @@
 <template>
     <div class="selector">
         <v-select class="d-flex d-md-none"
+                  v-if="visible.arkTitle"
                   :items="tabbar.tabs"
                   :label="year + ' 年'"
                   :value="current"
+                  :dark="!$vuetify.breakpoint.xs"
                   prepend-icon="mdi-calendar-month"
-                  outlined dense dark
+                  outlined dense
                   v-model="current"
         />
     </div>
-<!--    @change="changeLabel"-->
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     export default {
         name: "selector",
         data(){
@@ -24,6 +26,10 @@
         },
         props:['tabbar','year'],
         computed:{
+            ...mapState(['visible']),
+            isMobile(){
+                return this.$vuetify.breakpoint.xs
+            },
             currentIndex(){
                 return this.tabbar.currentIndex ? Number(this.tabbar.currentIndex) : this.tabbar.tabs.length - 1
             },

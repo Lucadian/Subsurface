@@ -1,7 +1,7 @@
 <template>
     <div class="blogInfo d-flex">
         <div>
-            <v-icon x-small class="mr-0" color="#ef5a5a" style="transform: translateY(-1px)">mdi-camera-control</v-icon>
+            <v-icon x-small class="mr-0 hidden-xs-only" color="#ef5a5a" style="transform: translateY(-1px)">mdi-camera-control</v-icon>
             合计 {{ info.total }} 条
         </div>
         <div class="">
@@ -9,7 +9,7 @@
         </div>
         <v-spacer></v-spacer>
         <div>
-            <v-icon x-small dark class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : 大祖玛
+            <v-icon x-small :dark="!$vuetify.breakpoint.xs" class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : 大祖玛
         </div>
     </div>
 </template>
@@ -38,8 +38,13 @@
         text-shadow: 0 0 3px black,1px 1px 0 black;
         border-right: .5px solid black;
         @media (max-width: 600px){
+            font-weight: normal;
+            border-top: 1px solid #acacac!important;
             border-right:0;
             padding: 3px 0.6rem;
+            background-color: rgba(0,0,0,.05);
+            color: black;
+            text-shadow: none;
         }
         div{
             height: 16.8px;

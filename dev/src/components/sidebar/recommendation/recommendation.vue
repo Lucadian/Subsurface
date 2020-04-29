@@ -1,5 +1,5 @@
 <template>
-    <div class="recommends">
+    <div class="recommends hidden-xs-only">
         <h4 class="item" v-for="item in items">
             <a :href="path + item.dir + '/' + item.file" :target="targ" v-text="item.title" />
         </h4>

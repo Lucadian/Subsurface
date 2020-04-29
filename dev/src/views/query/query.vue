@@ -25,16 +25,22 @@
             this.headbar.style = 'width: 57rem'
             this.footbar.style = 'width: 57rem'
             this.headbar.title = `
-<style>
-    .special{
-    font-family: ;
-    background-color: white;color: rgba(55,61,68,1);
-
-    }
-</style>
-<div class="special">次表面</div>
-`
-
+            <style>
+                div.logo{
+                    height: 34px;
+                    width: 107.5px;
+                    background-image: url("http://www.subsurface.cn.obs.cn-east-3.myhuaweicloud.com/images/icons/logo.png");
+                    background-size: cover;
+                    background-repeat:no-repeat;
+                }
+                @media screen and (max-width: 600px){
+                    div.logo{
+                        background-image: url("http://www.subsurface.cn.obs.cn-east-3.myhuaweicloud.com/images/icons/logo_dark.png");
+                    }
+                }
+            </style>
+            <div class="logo" />
+            `
             if(window.location.hash){
                 // console.log(this.$vuetify.breakpoint)
                 let arr = window.location.hash.substr(1).split('&')
