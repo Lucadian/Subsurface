@@ -46,7 +46,7 @@ for(let i=0;i<years.length;i++){
                         rank = 5
                     }
                 }
-                    blog = blog.substr(0,24)
+                    blog = blog.substr(0,40)
                 chart[key] = {
                     blog,
                     rank

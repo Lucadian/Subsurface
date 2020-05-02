@@ -96,9 +96,6 @@
                 document.body.removeChild(input)
                 this.copied = true
             },
-            aaa(){
-                console.log(123)
-            }
 
         },
 

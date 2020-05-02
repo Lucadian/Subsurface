@@ -15,7 +15,7 @@
                 </div>
                 <v-divider/>
                 <div class="wrapper">
-                    <div class="scrollBox" ref="scrollBox" :style="scrollBoxHeight" @scroll="debounce">
+                    <div class="scrollBox" ref="scrollBox" :style="scrollBoxHeight">
                         <v-tabs-items class="list" v-model="index">
                             <v-tab-item v-for="item in items" :key="item.tab" >
                                 <div v-for="row in item.list"
@@ -35,12 +35,6 @@
                         <v-divider/>
                         <showcase @showQRCode="showQRCode" />
                     </div>
-<!--                    <transition name="fade">-->
-<!--                        <div class="hinterTop" v-if="hinterTop">︿</div>-->
-<!--                    </transition>-->
-<!--                    <transition name="fade">-->
-<!--                        <div class="hinterBtm" v-if="hinterBtm">﹀</div>-->
-<!--                    </transition>-->
                 </div>
             </aside>
         </transition>
@@ -78,12 +72,9 @@
                     { tab:'日志',path:'/blog/',  list: blog },
                     { tab:'相册',path:'/album/', list: album},
                 ],
-                // scrolledTop:0,
-                // scrolledBtm:0,
                 valid:{
                     qrcode:false
                 },
-                timer:null,
             }
         },
         computed:{
@@ -109,12 +100,6 @@
             overlayed(){
                 return (this.$route.name !== 'query' || this.isMobile) && this.visible.category
             },
-            // hinterTop(){
-            //     return this.scrolledTop > 50
-            // },
-            // hinterBtm(){
-            //     return this.scrolledBtm > 50
-            // },
         },
         components:{
             showcase,qrcode
@@ -122,12 +107,6 @@
         watch:{
             activated(val){
                 if(val){
-                    // //处理分类列表的滚动提示箭头
-                    // setTimeout(()=>{
-                    //     let box = this.$refs.scrollBox
-                    //     this.scrolledTop = box.scrollTop
-                    //     this.scrolledBtm = box.scrollHeight - box.clientHeight - box.scrollTop
-                    // },400)
                     //处理是否隐藏滚动条
                     if(this.$route.name !== 'query' || this.isMobile)
                         this.hideScrollbar()
@@ -187,20 +166,6 @@
                 else
                     window.open(href)
             },
-            hints(){
-                let box = this.$refs.scrollBox
-                this.scrolledTop = box.scrollTop
-                this.scrolledBtm = box.scrollHeight - box.clientHeight - box.scrollTop
-            },
-            debounce() {
-                if(!this.timer){
-                    this.timer = setTimeout(()=>{
-                        this.timer = null
-                        this.hints()
-                    },200)
-                }
-
-            }
 
         },
         created() {

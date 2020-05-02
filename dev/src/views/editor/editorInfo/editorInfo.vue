@@ -2,17 +2,17 @@
     <div class="essayInfo d-flex">
         <div>
             <v-icon x-small class="mr-0 hidden-xs-only" color="#ef5a5a" style="transform: translateY(-1px)">mdi-camera-control</v-icon>
-            最后编辑 {{ value.lastEdited }}
+            最后编辑 {{ info.lastEdited }}
         </div>
         <div class="hidden-sm-and-down">
-            发布于 {{ value.published }}
+            发布于 {{ info.published }}
         </div>
         <div class="hidden-xs-only">
-            所属分类「 {{ category }} 」
+            所属分类「 编辑阶段待定 」
         </div>
         <v-spacer class="hidden-xs-only"/>
         <div>
-            <v-icon x-small :dark="!$vuetify.breakpoint.xs" class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : {{ value.source }}
+            <v-icon x-small :dark="!$vuetify.breakpoint.xs" class="mr-1 pb-0">mdi-link-variant</v-icon>来源 : {{ info.source }}
         </div>
     </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
     import { mapState } from 'vuex'
     export default {
-        name: "essayInfo",
+        name: "editorInfo",
         data(){
             return {
                 timer:null
@@ -28,9 +28,9 @@
         },
         computed:{
             ...mapState(['headbar']),
-            value(){
+            info(){
                 let obj = {}
-                let arr = this.info.str.split(/\n/g)
+                let arr = this.value.split(/\n/g)
                     arr.forEach((item,index)=>{
                         if(!item)
                             arr.splice(index,1)//删除空项
@@ -41,23 +41,13 @@
                 })
                 return obj
             },
-            category(){
-                let ctg = ''
-                if(this.dirname.includes(',')){
-                    let arr = this.dirname.split(',')
-                    ctg = arr[0] + ' , ' + arr[1]
-                }
-                else
-                    ctg = this.dirname
-                return ctg
-            }
         },
-        props:['info','dirname'],
-        beforeUpdate(){
+        props:['value'],
+        created() {
             if(!this.headbar.title){
-                document.getElementById('title').innerHTML = this.headbar.title = this.value.title
+                document.getElementById('title').innerHTML = this.headbar.title = this.info.title
             }
-        },
+        }
     }
 </script>
 

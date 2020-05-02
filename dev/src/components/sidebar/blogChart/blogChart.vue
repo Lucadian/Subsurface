@@ -10,7 +10,7 @@
             </v-btn>
         </div>
         <div class="preview d-flex justify-space-between">
-            <div v-text="brief" />
+            <div v-html="brief" />
             <a :href="href" v-if="brief !== '无记录'" :target="targ" @click="showPoster">
                 <i>查</i><i style="transform: translateY(-1px)">看</i>
             </a>

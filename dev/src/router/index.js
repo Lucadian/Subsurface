@@ -42,6 +42,11 @@ const routes = [
     ]
   },
   {
+    path: '/editor',
+    name: 'editor',
+    component: () => import('@/views/editor/editor')
+  },
+  {
     path: '/*',
     name: 'error',
     component: () => import('@/views/error')

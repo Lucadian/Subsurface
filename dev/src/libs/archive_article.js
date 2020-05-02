@@ -30,17 +30,14 @@ dirs.forEach((dirname)=>{
                 info[tmp[0]] = tmp[1]
             })
 
-            // 如果不是一个隐形文件，则将其内容存入文章列表
-            if(!info.cloak){
-                article.file  = filename.slice(0,filename.lastIndexOf('.'))
-                article.dir   = dirname
-                article.title = info.title
-                article.cover = info.cover
-                article.brief = tmps[1].getPlainText().slice(0,110)
-                article.subtitles = tmps[1].getInnerTextOf('h2')
-                article.edited    = Number(info.lastEdited.replace(/-/g,''))
-                archive.push(article)
-            }
+            article.file  = filename.slice(0,filename.lastIndexOf('.'))
+            article.dir   = dirname
+            article.title = info.title
+            article.cover = info.cover
+            article.brief = tmps[1].getPlainText().slice(0,110)
+            article.subtitles = tmps[1].getInnerTextOf('h2')
+            article.edited    = Number(info.lastEdited.replace(/-/g,''))
+            archive.push(article)
 
         }
     })

@@ -4,13 +4,14 @@
              class="overlay d-flex justify-center align-center"
         >
             <div class="mobileBugFixer" @click="close" />
-            <pinch-zoom class="wrapper" v-draggable
+            <pinch-zoom class="wrapper"
+                        v-draggable
                         overflow="visible"
                         disableZoomControl="disable"
                         backgroundColor="transparent"
             >
                 <div>
-                    <img :src="path.value">
+                    <img :src="path.value" @dragstart.stop.prevent="wasted">
                     <v-btn icon tile dark @click="close">
                         <v-icon x-large >mdi-close</v-icon>
                     </v-btn>
@@ -51,6 +52,10 @@
             close(){
                 this.path.value =''
             },
+            wasted(){
+                //解决火狐拖拽打开新标签BUG
+                return false
+            }
         },
         components:{
             pinchZoom

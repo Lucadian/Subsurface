@@ -48,7 +48,7 @@
                 if(!this.timer){
                     let offsets = this.tabbar.offsets
                     for(let i=0;i<offsets.length;i++){
-                        if(window.pageYOffset > offsets[i]- 260){
+                        if(window.pageYOffset > offsets[i]- 100){
                             this.tabbar.currentIndex = i.toString()
                             break
                         }

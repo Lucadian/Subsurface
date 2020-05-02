@@ -12,23 +12,39 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    import { essayHost } from '@/assets/host'
+
     export default {
         name: "essayText",
-        computed:{
-            html(){
-                let html = this.value
-                if( html.includes('prettyprint') ){
+        data(){
+            return {
+                html:''
+            }
+        },
+        watch:{
+            html(val){
+                if( val.includes('class="prettyprint"') ){
                     const s = document.createElement('script')
                           s.type   = 'text/javascript'
                           s.onload = 'PR.prettyPrint()'
                           s.src    = '/dist/run_prettify.js'
-                    document.body.appendChild(s)
+                          document.body.appendChild(s)
                 }
-
-                return html
             }
         },
-        props:['value'],
+        props:['info','url'],
+        created(){
+            axios.get(this.url)
+                .then(response => {
+                    let arr = response.data.split('<!--divider-->')
+                    this.info.str = arr[0]
+                    this.html = arr[1].replace(/__imageHost/g,essayHost)
+                })
+                .catch(err => {
+                    window.location = 'http://'+ window.location.host + '/essay_err?' + err
+                })
+        }
     }
 </script>
 
