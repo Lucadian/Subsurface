@@ -1,12 +1,11 @@
 <template>
     <div class="selector">
         <v-select class="d-flex d-md-none"
-                  v-if="visible.arkTitle"
+                  v-if="visible.arkTitle && !visible.contacts"
                   :items="tabbar.tabs"
                   :label="year + ' 年'"
                   :value="current"
                   :dark="!$vuetify.breakpoint.xs"
-                  prepend-icon="mdi-calendar-month"
                   outlined dense
                   v-model="current"
         />

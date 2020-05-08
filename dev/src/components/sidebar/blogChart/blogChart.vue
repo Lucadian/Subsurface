@@ -70,8 +70,8 @@
             goToBlog(){
                 let year = this.date.split('-')[0]
                 let href = 'http://'+ window.location.host + '/blog/' + year
-                if(this.$route.name === 'blog' || this.isMobile)
-                    document.body.scrollIntoView()
+                if(this.isMobile)
+                    window.location = href
                 else
                     window.open(href)
             },

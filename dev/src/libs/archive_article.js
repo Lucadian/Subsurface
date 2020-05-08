@@ -7,6 +7,9 @@ String.prototype.getInnerTextOf = require('./functions/getInnerTextOf.js')
 String.prototype.getPlainText   = require('./functions/getPlainText.js')
 String.prototype.isHTML         = require('./functions/isHTML.js')
 
+//这是一个按字节数截取字符串的工具
+String.prototype.rebyte         = require('./functions/rebyteStr')
+
 // 文章列表
 let archive = []
 let updates = []
@@ -34,7 +37,11 @@ dirs.forEach((dirname)=>{
             article.dir   = dirname
             article.title = info.title
             article.cover = info.cover
-            article.brief = tmps[1].getPlainText().slice(0,110)
+            article.brief = tmps[1].getPlainText().rebyte(120)
+            // article.brief = lodash.truncate(tmps[1].getPlainText(), {
+            //         'length': 110,
+            //         'separator': /pP +/
+            //     })
             article.subtitles = tmps[1].getInnerTextOf('h2')
             article.edited    = Number(info.lastEdited.replace(/-/g,''))
             archive.push(article)

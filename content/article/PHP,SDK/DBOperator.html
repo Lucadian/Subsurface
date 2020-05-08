@@ -1,15 +1,11 @@
 title:PDO 的封装：DBOperator
 published:2018-12-01
 lastEdited:2019-11-05
-source:次表面
+source:大祖玛
 cover:covers/cover_sdk.png
 <!--divider-->
 <section class="prologue">
-    <p>当年用 PDO 封装的 MySQL 增删改查工具，用着很方便，还能防 sql 注入。<strong>代码中有很多稚嫩之处，却不忍修改，都是岁月的痕迹，留着这些稚嫩的痕迹更好</strong>。</p>
-    <p>起初只是用来练习的，后来发现还挺好用，就放到这里保存起来。</p>
-</section>
-<section>
-    <h2>PDO 的 MySQL 封装： DBOperator</h2>
+    <p>一个很旧但好用的 MySQL 工具，虽然一坨但逻辑清晰，应付增删改查足以。</p>
 <pre class="prettyprint" contenteditable="true">
 const DB_TYPE = "mysql";      //数据库类型
 const DB_HOST = 'localhost';  //域名
@@ -31,12 +27,12 @@ class DBOperator{
     static public  $json     = "";
     static public  $result   = 0;
 
-    //如果要使用$pdo->quote方法防sql注入，可以先用该静态方法建立连接，获取到$pdo
+    //如果要使用$pdo->quote方法防sql注入，就需要先用该静态方法建立连接，获取到$pdo
     static function connect($cfg=""){
         return self::$pdo = new PDO($cfg['dsn'],$cfg['username'],$cfg['password'],array(PDO::ATTR_PERSISTENT=>true));
     }
 
-    //提交sql语句，查询语句默认返回json，其他语句返回受影响条数，该方法不防sql注入
+    //提交sql语句，查询语句默认返回json，其他语句返回受影响条数
     static function submit($sql="",$format="json",$cfg=""){
 
         //检查$sql语句是否为空

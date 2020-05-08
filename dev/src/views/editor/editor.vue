@@ -37,6 +37,9 @@
             let arr = content.split('<!--divider-->')
             this.info = arr[0]
             this.text = arr[1].replace(/__imageHost/g,'./')
+        },
+        mounted(){
+            console.log(this)
         }
     }
 </script>

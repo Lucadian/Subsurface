@@ -193,8 +193,11 @@ pre.prettyprint{ //演示代码
     //color:#003fc9;
     font-weight: bold;
   }
-  span.str,span.com{
+  span.str,span.com,span.atv{
     color: #005a78;
+  }
+  span.tag{
+    font-weight: bold;
   }
   em{
     font-style:normal;

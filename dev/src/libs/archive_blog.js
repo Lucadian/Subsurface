@@ -31,7 +31,7 @@ years.forEach((year)=>{
                    let model_day = {
                        //dotm is the shortcut for 'day of the month'
                        dotm:day.split('.')[0].substr(-2),
-                       blog:data.getInnerTextOf('log')[0].replace(/\ +/g,"").replace(/[\r\n]/g, ""),//字符串，日志的 html，去掉了空格和换行符
+                       blog:data.getInnerTextOf('log')[0].replace(/\s+/g," ").replace(/[\r\n]/g,""),//字符串，日志的 html，去掉了空格和换行符
                    }
                    let imgs = data.getInnerTextOf('name') //数组，当前日志的图片路径，格式为 年/文件名，比如 ['2026/打脸.png','2026/呵呵.jpg']
                    if( imgs.length )

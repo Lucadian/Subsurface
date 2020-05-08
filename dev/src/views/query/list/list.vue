@@ -18,7 +18,7 @@
                                 <v-icon small class="mr-1 mb-1">mdi-content-save-edit-outline</v-icon>{{ getDate(item.edited) }}
                             </div>
                             <div class="note">
-                                目录：{{item.dir}}
+                                {{ isMobile ? item.dir : '目录：' + item.dir}}
                             </div>
                         </div>
                         <div class="brief" v-text="item.brief"/>
@@ -57,8 +57,11 @@
         },
         computed:{
             ...mapState(['hash']),
+            isMobile(){
+                return this.$vuetify.breakpoint.smAndDown
+            },
             targ(){
-                return this.$vuetify.breakpoint.smAndDown ? '_self' : '_blank'
+                return this.isMobile ? '_self' : '_blank'
             },
             list(){ // 将 rows 切分为多页
                 if(this.rows){
@@ -147,8 +150,8 @@
             divide(data){
                 let list = []
                 let rows = []
-                let pagi = this.$vuetify.breakpoint.smAndDown ? 6 : 7
-                // let pagi = this.$vuetify.breakpoint.smAndDown ? 1 : 1
+                let pagi = this.isMobile ? 6 : 7
+                // let pagi = this.isMobile ? 1 : 1
                 for(let i=0;i<data.length;i++){
                     rows.push(data[i])
                     if((i + 1) % pagi === 0){
@@ -174,7 +177,7 @@
                             n++
                             if(n === val.length)
                                 clearInterval(timer)
-                        },60)
+                        },40)
                     },110)
                 }
             }
