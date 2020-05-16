@@ -1,7 +1,7 @@
 <template>
     <div class="recommends hidden-xs-only">
         <h4 class="item" v-for="item in items">
-            <a :href="path + item.dir + '/' + item.file" :target="targ" v-text="item.title" />
+            <a :href="item.href" :target="targ" v-text="item.file" />
         </h4>
     </div>
 </template>
