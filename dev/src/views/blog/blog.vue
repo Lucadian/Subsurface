@@ -47,7 +47,7 @@
 </script>
 
 <style scoped lang="scss">
-    main.v-content{
+    main.v-main{
         &::before{
             display: block;content: '';
             position: fixed;top: 0;left: 0;

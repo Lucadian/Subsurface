@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "parc"   : "vue-cli-service build",
-    "serv"   : "vue-cli-service serve --open",
+    "dev"   : "vue-cli-service serve --open",
     "album"  : "node ./src/libs/archive_album.js",
     "article": "node ./src/libs/archive_article.js",
     "blog"   : "node ./src/libs/archive_blog.js",
@@ -34,7 +34,8 @@
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.3.0"
+    "vuetify-loader": "^1.3.0",
+    "vue-pinch-zoom": "^1.0.1"
   },
   "browserslist": [
     "> 1%",

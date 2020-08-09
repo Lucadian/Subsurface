@@ -14,6 +14,13 @@ let album = [
         total:0
     },
     {
+        title: 'sample',
+        brief:'样图',icon: 'mdi-dog-side',
+        
+        dir:'sample',
+        total:0
+    },
+    {
         title: '动效图片',
         brief:'演示 & 意向',icon: 'mdi-dog-side',
 
