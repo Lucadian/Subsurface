@@ -1,0 +1,52 @@
+title:实例的方法/事件 Vue.prototype.$emit
+published:2020-05-05
+lastEdited:2020-05-05
+source:大祖玛
+cover:covers/cover_vue.png
+<!--divider-->
+<section class="prologue">
+    <p>
+        Vue 组件内使用 this.$emit('事件名')，就会<a href="https://cn.vuejs.org/v2/api/#vm-emit" target="_blank">“触发当前实例上的事件”</a>，这句话外表朴素，实则水深，
+        什么位置才算“当前实例”？实例上的哪些属性才称得上“实例上的”？
+    </p>
+    <img src="__imageHost/images/articles/JavaScript,API/$emit_1.png"
+         class="fullWidth" style="margin: 1.2rem auto 0.6rem auto">
+
+    <pre class="prettyprint">
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;a @log="console.log('a')"/&gt;
+        &lt;b @log="console.log('b')"/&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+</pre>
+    <p>
+        "当前实例" — 任何组件都是 Vue.Component 的实例，组件内部 this 所指对象即当前实例（组件自身）。
+    </p>
+    <p>
+        "实例上的" — 其实指的是 this 上的 $refs、$store、_events 等直接属性，与组件内部元素或方法无关（虽然他们也是实例上的属性）。
+    </p>
+    <p>由上图可知，只要是在 b 组件内，在任何位置 this.$emit('log')，<b>也只能从绿色区域内找对应的 @log 事件，与内部元素、外部组件都没关系</b>。因为 $emit 方法调用的是“当前实例上的” _events，
+        而 <b>_events 只包含从组件外部绑定的事件</b>。</p>
+</section>
+<section>
+    <h2>Vue.prototype.$emit 的源码</h2>
+    <pre class="prettyprint">
+Vue.prototype.$emit = function (event) {
+    var vm = this
+    var cbs = vm._events[event] //this._events 只包含组件外部绑定的事件
+    if (cbs) {
+        cbs = cbs.length > 1 ? toArray(cbs) : cbs
+        var args = toArray(arguments, 1)
+        var info = "event handler for \\"" + event + "\\""
+        for (var i = 0, l = cbs.length; i < l; i++) {
+            invokeWithErrorHandling(cbs[i], vm, args, vm, info)
+        }
+    }
+    return vm
+}
+</pre>
+    <p>
+        由源码可知，当组件内部调用 this.$emit('事件名') 时，经过的流程是：<b>this → Vue.prototype.$emit → this._events</b>。this._events 内的事件，决定了 $emit 的作用范围。
+    </p>
+</section>

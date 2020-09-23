@@ -1,0 +1,39 @@
+title:这是给人看的，原型链图解 Prototype Chain Graph
+published:2019-07-31
+lastEdited:2020-05-01
+source:大祖玛
+cover:articles/JavaScript%2C%E5%9F%BA%E7%A1%80/%E7%9C%8B%E4%B8%8D%E6%87%82.jpg
+<!--divider-->
+<section class="prologue">
+    <p>网传的各种原型链图解，一眼望去浑身瘫软，两眼望去子孙难产、、、用 JS 本就该是件很快乐的事情，不该如此硬核。</p>
+    <img class="fullWidth" style="margin: 2rem auto 0.2rem auto"
+         src="__imageHost/images/articles/JavaScript,基础/prototype_6.png">
+    <small class="imgDescription">
+        网传的各种原型链图解，都是被作图者“复杂化”了
+    </small>
+    <p>大祖玛视民如伤，<strong>做了一份原型链的最简图解（下图），包含原型链的全部内容，只要念出代码，就能找到对应的链</strong>。</p>
+    <img class="mediumWidth" style="margin: 2rem auto 0.8rem auto"
+         src="__imageHost/images/articles/JavaScript,基础/prototype_1.png">
+    <small class="imgDescription">
+        Instance.__proto__ → Constructor.prototype<br>
+        Constructor.prototype.__proto__ → Object.prototype<br>
+        ... <br>
+        其他链按图依此类推即可（<a href="__imageHost/images/articles/JavaScript,基础/prototype_1.png" target="_blank">点击查看原图</a>）
+    </small>
+    <p>
+        Instance 表示实例/对象；Constructor 表示构造函数；Function 的 __proto__ 和 prototype 是同一个对象。
+    </p>
+    <p>
+        下图是每一条链的动态演示，试试<strong>跟着下方动图，念出红色的代码</strong>：
+    </p>
+    <img class="mediumWidth" style="margin: 1.5rem auto 20px auto"
+         src="__imageHost/images/articles/JavaScript,基础/prototype_2.gif">
+</section>
+<section>
+    <p>
+        补充-为什么要搞清楚原型链：<a href="./原型链的基本概念" target="_blank">知道这三个概念就够了</a>
+    </p>
+    <p>
+        补充-鸡生蛋还是蛋生鸡？<a href="./运算的结果，仅是运算逻辑的体现" target="_blank">原型链：运算的结果，仅是运算逻辑的体现</a>
+    </p>
+</section>

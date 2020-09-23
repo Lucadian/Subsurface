@@ -1,0 +1,33 @@
+title:核弹基础：CSS
+published:2020-05-14
+lastEdited:2020-05-14
+source:大祖玛
+cover:covers/cover_js_1.jpg
+<!--divider-->
+<section>
+    <h2>如何居中一个浮动元素</h2>
+    <p>
+        先清浮动，给父元素使用 .clearfix ，再使用弹性布局
+    </p>
+    <pre class="prettyprint">
+div.box{
+  border:1px solid black;
+  display: flex;
+  justify-content: center;
+  &.clearfix::after{
+    display: block;
+    content: '';
+    clear: both;
+  }
+  div.floater{
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    line-height:100px;
+    text-align:center;
+    float: left;
+  }
+}
+    </pre>
+</section>

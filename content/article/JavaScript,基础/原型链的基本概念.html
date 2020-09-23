@@ -1,0 +1,63 @@
+title:原型链：知道这三个概念就够了
+published:2019-07-31
+lastEdited:2020-05-01
+source:大祖玛
+cover:covers/cover_概念.png
+<!--divider-->
+<section class="prologue">
+    <p>
+        ES 的 class 包括构造函数(constructor)和静态方法(static 前缀)，二者 this 指向不一样，<strong>若不捋清原型链，贸然使用 class ，就是打王八拳 —— 瞎比划。</strong>
+    </p>
+    <pre class="prettyprint">
+ class Unit {
+     //这是构造函数
+     constructor(type){
+         this.type = type
+         this.race = this.race
+     }
+     //这是静态方法
+     static setRace(name){
+         this.race = name
+     }
+ }
+ Object.prototype.damage = 1
+ Unit.prototype.race = '人族'
+ Unit.setRace('神族')
+
+ let 枪兵 = new Unit('枪兵')
+ console.log(枪兵.race) //人族
+ console.log(Unit.race) //神族
+ console.log(枪兵.damage) //1
+</pre>
+    <p>
+        熟练使用原型链，只需知道三个概念：<strong>默认继承、图解 和 [[Prototype]] 属性</strong>。
+    </p>
+</section>
+<section>
+    <h2>默认继承</h2>
+    <p>默认继承的概念有两条：</p>
+    <p>1.实例的 __proto__ 默认指向构造函数的 prototype</p>
+    <p>2.所有引用类向上追溯，终点都是 Object.prototype，如果继续追溯，就是 null 了</p>
+</section>
+<section>
+    <h2>图解：原型问题直接看图</h2>
+    <p>原型遇到问题，直接看图找链：<a href="./这是给人看的，原型链图解">给人看的原型链图解</a></p>
+    <p>
+        上面代码直接反应在图解上，见下图：
+    </p>
+    <img class="largeWidth" style="margin: 2rem auto 0.8rem auto"
+         src="__imageHost/images/articles/JavaScript,基础/原型链200501.png">
+</section>
+<section>
+    <h2>[[Prototype]] 属性</h2>
+    <p>
+        在原型链的实现上，虽然各平台都提供了 __proto__ 属性，但其本质是一个访问器属性，<strong>每次使用
+        __proto__ ，都会调用其 getter 或 setter，实际访问的是对象内部的 [[Prototype]]，因此使用 __proto__
+        会影响性能</strong>。
+    </p>
+    <p>
+        从性能上考虑，
+        应使用 Object.create() 方法创建原型对象，
+        使用 Object.getPrototypeOf() 来获取原型对象。
+    </p>
+</section>

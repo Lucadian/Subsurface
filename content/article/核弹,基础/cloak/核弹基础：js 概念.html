@@ -1,0 +1,172 @@
+title:简单面试题
+published:2020-05-14
+lastEdited:2020-05-14
+source:大祖玛
+cover:covers/cover_js_1.jpg
+<!--divider-->
+<!--<section class="prologue">-->
+
+<!--</section>-->
+<section>
+    <h2>数组去重</h2>
+    <p>
+        方法一：用计数逻辑去重：创建一个空数组，将原数组元素加入新数组，加入时检查是否存在。
+        坑：<strong>数组遍历，避开 for ... in，尽量使用 for 或者 forEach</strong>
+    </p>
+    <pre class="prettyprint">
+Array.prototype.unique=function(){
+    let tmp=[]
+    this.forEach((item)=>{
+        if(!tmp.join(',').includes(item))
+            tmp.push(item)
+    })
+    return tmp
+}
+let arr=['a','b','a','c','c',1,1]
+console.log(arr.unique());
+    </pre>
+    <p>
+        方法二：使用官方 API 去重，即 Set 方法
+    </p>
+    <pre class="prettyprint">
+Array.from(new Set([...]))
+    </pre>
+    <p>方法三：使用 Weakmap 去重，自行了解吧</p>
+</section>
+<section>
+    <h2>死记硬背 字符串和数组的 slice 用法</h2>
+    <p>
+        str.slice(beginIndex[, endIndex])<br>
+        num.slice(beginIndex[, endIndex])<br>
+        无论数组还是字符串，都包含 beginIndex 的那个元素，不包含结束的那个元素
+    </p>
+</section>
+<section>
+    <h2>解释一下闭包</h2>
+    <p>
+        闭包是想办法利用函数作用域，闭包将一直存在，直到闭包函数结束或者页面关闭
+    </p>
+</section>
+<section>
+    <h2>基本的前端优化</h2>
+    <p>
+        尽量减少请求数量；一些文件设置 expires 头（减少 DNS 查询）；CSS 样式放在页面的上；将脚本移动到底部；
+    </p>
+</section>
+<section>
+    <h2>如何深拷贝一个对象</h2>
+    <p>将对象转为字符串，再将字符串转为对象，缺点是该方式拷贝函数、undefined、正则、Date等时会报错</p>
+    <pre class="prettyprint">
+        let obj = { ... }
+        let cpy = JSON.parse(JSON.stringify(obj))
+    </pre>
+    <p>
+        递归拷贝：
+    </p>
+</section>
+<section>
+    <h2>说一下类</h2>
+    <p>
+        详见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes">mdn class</a>
+    </p>
+</section>
+<section>
+    <h2>JS 如何实现继承，以及 super() 是什么</h2>
+    <p>通过原型链的写法</p>
+    <p>class 写法</p>
+</section>
+<section>
+    <h2>说一下 DOM 的事件模型</h2>
+    <p>
+        1. DOM 事件分为捕获和冒泡两个阶段。
+    </p>
+    <p>
+        2. 捕获/冒泡的先后顺序是由事件的监听顺序决定的。即 addEventLisioner
+    </p>
+</section>
+<section>
+    <h2>刁难题：如何实现 a == 1 && a == 2 && a == 3 为 true</h2>
+    <p>考点：使用 普通等号会调用对象的 toString 方法</p>
+    <pre class="prettyprint">
+let a = {
+    value:0,
+    toString(){
+        this.value += 1
+        return this.value
+    }
+}
+console.log(a == 1 && a == 2 && a == 3) //true
+
+    </pre>
+</section>
+<section>
+    <h2>六种普通排序算法</h2>
+    <p>
+        冒泡、选择、计数、快排、插入排序、归并排序
+    </p>
+    <p>
+        进阶 二分查找法 ，资深 翻转二叉树
+    </p>
+</section>
+<section>
+    <h2>XSS 攻击及预防</h2>
+    <p>
+        给 HTML 文件内天加 \< script\> 标签，标签内输入的恶意代码，可以被浏览器执行。
+    </p>
+    <p>
+        解决办法一：尽量使用 innerText 代替 innerHTML
+    </p>
+    <p>
+        解决方法二：遇到使用 innerHTML 时，将其中的 \< \> \& \" \' 号转为 HTML 实体（即 &nbsp;这种东东）
+    </p>
+    <p>
+        解决方法三：使用 CSP 自行谷歌
+    </p>
+</section>
+<section>
+    <h2>CSRF 攻击及防御</h2>
+    <p>
+        避免办法：1.后端检查 referer 2.或者使用 csrf_token
+    </p>
+</section>
+<section>
+    <h2>Webpack 减少编译体积的写法</h2>
+    <p>
+        在需要调用时才引入，使用如下写法（而不是脚本开始时就直接 import）
+        import('xxxx').then( (xxxx)=>{ ... } )
+    </p>
+</section>
+<section>
+    <h2>Webpack 编译速度慢怎么办？</h2>
+    <p>
+        不知道，Webpack 一直都很慢，从来都很慢。再说了，webpack 比起其他语言的编译，已经很快了！
+    </p>
+</section>
+<section>
+    <h2>如何实现 webpack 的插件和 loader ?</h2>
+    <p>
+        不会，看过教程，但是没练过。
+    </p>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

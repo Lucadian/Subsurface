@@ -1,0 +1,57 @@
+export default
+`
+title:Vuetify 图标库的本地安装
+published:2020-05-06
+lastEdited:2020-05-06
+source:大祖玛
+cover:covers/cover_vuetify.png
+<!--divider-->
+<section class="prologue">
+    <p>
+    Vuetify 支持 Material Design 和 Font Awesome 的图标库，默认使用的是 Material Design Icons（即 mdi 开头的图标）。
+    这两个库都被维护得非常好，图标风格一致，大小统一，使用时几乎不需要调整，满足日常开发需求。
+    </p>
+    <p>
+    缺点是<strong>随着库的更新，打包出来的项目会出现图标丢失的情况，因此最好将图标库安装到项目本地</strong>，更新与否由我们自己决定。
+    </p>
+    <img src="__imageHost/images/articles/JavaScript,SDK/vuetify_mdi.png"
+             class="fullWidth" style="margin: 1.2rem auto 0.6rem auto">
+     <small class="imgDescription">（部分截图）数量充足，大小统一，风格一致</small>   
+     <p>
+</p>
+</section>
+<section>
+<h2>第一步 安装开发依赖</h2>
+<pre class="prettyprint">
+$ yarn add @mdi/font -D
+// OR
+$ npm install @mdi/font -D
+</pre>
+</section>
+<section>
+<h2>第二步 修改配置文件</h2>
+<p>
+修改项目 src/plugins 目录下的 vuetify.js 文件，其实只要在第一行引入 CSS 就行了：
+</p>
+<pre class="prettyprint">
+// 只需要引入这个 CSS 文件就行了 
+import '@mdi/font/css/materialdesignicons.css'
+
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+
+Vue.use(Vuetify)
+
+export default new Vuetify({
+    
+  //这是个默认设置，不写不影响使用
+  icons: {
+    iconfont: 'mdi'
+  },
+})
+</pre>
+<p>
+打包大小：经简单测试，打包时 vuetify 会自动使用 .min.css 文件，且 webpack 对 CSS 也有 tree-shaking。
+</p>
+</section>
+`

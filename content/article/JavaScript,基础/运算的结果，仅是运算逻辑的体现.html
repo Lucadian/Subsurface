@@ -1,0 +1,93 @@
+title:运算结果，仅是运算逻辑的体现
+published:2019-07-31
+lastEdited:2020-05-02
+source:大祖玛
+cover:articles/JavaScript,基础/大象.jpg
+<!--divider-->
+<section class="prologue">
+    <p>
+        <strong>JavaScript 中 Function 和 Object 的先后顺序问题</strong>，鄙人无案可查，ES文档只描述语言的定义和功能，其他资料全都在讲“子类”“继承” ...
+        其逻辑类看上去就是个莫比斯环，如此境况（显然这是一个无用的问题），<strong>不值得较真</strong>，普通人当“学究”绝不是好事！
+    </p>
+    <img src="__imageHost/images/articles/JavaScript,基础/大象.jpg"
+         class="mediumWidth" style="margin: 2rem auto 0.6rem auto">
+    <small class="imgDescription">
+        技术上有些奇怪的地方，用做“新怪谈”挺好，避免“学究”
+    </small>
+    <p>
+        此问之下，<a href="https://www.zhihu.com/people/he-shi-jun/activities" target="_blank">贺师俊</a>的回答：
+        <strong>运算的结果，仅是运算逻辑的体现，</strong>应该是最好的答案了。Function 和 Object 的先后顺序，是由 JavaScript 的实现者设定的，不由我们猜定。
+    </p>
+    <p>
+        以下三种观点，都是网友推论，无事实依据，非“学究”不要浪费时间看了。
+    </p>
+</section>
+
+<section>
+    <h2>Object.prototype</h2>
+    <p>持 Object.prototype 观点者认为：<strong>Object.prototype 处于原型链的顶端（向上是
+        null），无 constructor 属性</strong>，所以 Object.prototype 是凭空出现的。根据先有原型，后有实例的规律，
+        持此观点者认为的出现顺序是：
+    </p>
+    <p style="text-indent:0;text-align: center">
+        Object.prototype → Function.prototype → Function → Object
+    </p>
+    <img src="__imageHost/images/articles/JavaScript,基础/prototype_4.png"
+         class="largeWidth" style="margin: 2rem auto 0.6rem auto">
+    <small class="imgDescription" style="font-weight: bold;color: red">
+        （上图）Object.prototype.__proto__ === null
+    </small>
+    <pre class="prettyprint">
+    Object.prototype.__proto__ === null //true
+    Object.prototype.constructor        //undefined
+    //Object.prototype 向上查找是 null，也无 constructor 属性
+</pre>
+</section>
+
+<section>
+    <h2>Object</h2>
+    <p>
+        持 Object 观点认为：Object 是 Function.prototype 的构造者，而 Function 是所有对象的构造器。 持此观点者认为的出现顺序是：
+    </p>
+    <p style="text-indent:0;text-align: center">
+        Object → Function.prototype → Function → Object.prototype
+    </p>
+    <img src="__imageHost/images/articles/JavaScript,基础/prototype_3.png"
+         class="largeWidth" style="margin: 1.2rem auto 0.6rem auto">
+    <small class="imgDescription" style="font-weight: bold;color: red">
+        （上图）Function.prototype.__proto__ === Object.prototype
+    </small>
+    <pre class="prettyprint">
+    Object.getPrototypeOf(Function.prototype) === Object.prototype
+    //true
+    Function.prototype.__proto__ === Object.prototype
+    //true
+    //结果是 true，就可凭此认定 Object 是 Function.prototype 的构造者吗？
+</pre>
+</section>
+
+<section>
+    <h2>Function</h2>
+    <p>
+        持 Function 观点认为：JS 设计之初，函数就是 First Class，Function 自己构造了自己，因为
+        Function.__proto__ === Function.prototype，然后 Function 构造了 Object，因为 Object.__proto__ === Function.prototype。
+        持此观点者认为的出现顺序是：
+    </p>
+    <p style="text-indent:0;text-align: center">
+        Function → Function.prototype → Object
+    </p>
+    <img src="__imageHost/images/articles/JavaScript,基础/prototype_5.png"
+         class="largeWidth" style="margin: 1.2rem auto 0.6rem auto">
+    <small class="imgDescription" style="font-weight: bold;color: red">
+        （上图）Function.__proto__ === Function.prototype
+    </small>
+    <pre class="prettyprint">
+    Function.__proto__ === Function.prototype //true
+    Object.__proto__ === Function.prototype   //true
+    //我认为这个观点，看上去最能自洽
+</pre>
+</section>
+<section>
+    <br>
+    补充-原型链图解：<a href="./这是给人看的，原型链图解" target="_blank">给人看的图</a>
+</section>

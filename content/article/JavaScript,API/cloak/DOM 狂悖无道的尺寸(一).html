@@ -1,0 +1,86 @@
+title:DOM 狂悖无道的尺寸(一) Scroll/Client/Offset
+published:2019-10-14
+lastEdited:2019-10-18
+source:次表面
+cover:covers/cover_dom.png
+<!--divider-->
+<section class="prologue">
+    <p>DOM 中要获取元素的宽高和位置，使用 client... offset... 和 scroll... 这“三系”属性。它们的<strong>值都是 number 类型，且只有整数值</strong>。
+        注：DOM 中的根元素（documentElement），因其滚动条始终紧贴浏览器窗口，其 client 尺寸只受浏览器窗口影响，故不在本篇描述范围内。
+    </p>
+    <p>
+        DOM 的元素宽高和位置属性有：
+    </p>
+    <ol>
+        <li><b class="fixedWidth _12rem">外部宽高 offsetWidth / offsetHeight</b></li>
+        <li><b class="fixedWidth _12rem">内部宽高 clientWidth / clientHeight</b></li>
+        <li><b class="fixedWidth _12rem">内容宽高 scrollWidth / scrollHeight</b></li>
+        <li><b class="fixedWidth _11rem">内部滚动 scrollLeft / scrollTop</b></li>
+        <li><b class="fixedWidth _11rem">位置尺寸 offsetLeft / offsetTop</b></li>
+    </ol>
+</section>
+<section>
+    <h2>外部宽高 offsetWidth/offsetHeight</h2>
+    <img class="halfWidth" style="margin: 1.6rem auto 1rem auto;transform: translateX(1.8rem)"
+         src="__imageHost/images/articles/JavaScript,API/offsetWidth%20offsetHeight.png">
+    <p>
+        有资料说，offsetWidth / offsetHeight 最早由微软提出，该属性也被称为元素的物理/图形尺寸，或是一个元素的边框尺寸。<strong>若元素无 CSS 宽高，其 offset
+        尺寸随内容的改变而变化（即 content-box + padding + border）</strong>。
+    </p>
+</section>
+<section>
+    <h2>内部宽高 clientWidth/clientHeight</h2>
+    <img class="halfWidth" style="margin: 1.6rem auto 1rem auto;transform: translateX(1.8rem)"
+         src="__imageHost/images/articles/JavaScript,API/clientWidth%20clientHeight.png">
+    <p>
+        clientWidth / clientHeight 也是由微软最早提出的，<strong>该属性用以表示，在标准盒模型外，有别于 padding-box 的一块“客户端窗口”区。
+        若元素无 CSS 宽高，其 client 尺寸随内容的改变而变化（即 content-box + padding）</strong>。
+        由图可知：
+    </p>
+    <p>
+        clientHeight = CSS height(content-box) + 上下内边距 - scrollbar
+    </p>
+</section>
+<section>
+    <h2>内容宽高 srollWidth/scrollHeight</h2>
+    <img class="halfWidth" style="margin: 1.6rem auto 1rem auto;transform: translateX(1.8rem)"
+         src="__imageHost/images/articles/JavaScript,API/scrollHeight.png">
+    <p>
+        除根元素外的其他元素，当无滚动条时，其 scroll 尺寸始终等于自身的 client 尺寸。由图知，scroll 尺寸包括 ::before 和 ::after 这样的伪元素尺寸。
+    </p>
+</section>
+<section>
+    <h2>内部滚动 srollTop/scrollLeft</h2>
+    <img class="halfWidth" style="margin: 1.6rem auto 1rem auto;transform: translateX(1.8rem)"
+         src="__imageHost/images/articles/JavaScript,API/scrollTop.png">
+    <p>
+        由图知，当 scrollHeight - scrollTop === clientHeight 时，元素内容就已经滚动到底部了。
+        <strong>该属性可写，可用来设置内容的滚动位置</strong>。
+    </p>
+</section>
+<section>
+    <h2>位置尺寸 offsetTop/offsetLeft</h2>
+    <img class="halfWidth" style="margin: 1.6rem auto 1rem auto;transform: translateX(0.3rem)"
+         src="__imageHost/images/articles/JavaScript,API/offsetLeft%20offsetTop.png">
+    <p>
+        用以获取，<strong>相对于 最近的定位父元素 的偏移量</strong>。定位父元素：具有 relative 的父元素，或者根元素。
+    </p>
+    <p>
+        因为 offsetParent 也是 DOM 属性，若要取元素相对于页面起始坐标的位置，可将其 offsetLeft 与 offsetParent
+        的相同属性叠加，如此循环直至根元素，即可得到一个“基本准确”的值。例如：
+    </p>
+    <pre class="prettyprint">
+    function getTheLeft(el){
+        let theLeft = el.offsetLeft
+        let current = el.offsetParent
+
+        while(parent !== null){  //通过 offsetParent 判断是否为根元素
+            theLeft += parent.offsetLeft
+            current = parent.offsetParent
+        }
+
+        return theLeft
+    }
+</pre>
+<!--    <div class="theEnd">- THE END -</div>-->
+</section>
