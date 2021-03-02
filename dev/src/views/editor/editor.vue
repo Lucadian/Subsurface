@@ -39,7 +39,6 @@
             this.text = arr[1].replace(/__imageHost/g,'./')
         },
         mounted(){
-            console.log(this)
         }
     }
 </script>

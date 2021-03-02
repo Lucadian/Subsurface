@@ -14,21 +14,6 @@ let album = [
         total:0
     },
     {
-        title: 'sample',
-        brief:'样图',icon: 'mdi-dog-side',
-        
-        dir:'sample',
-        total:0
-    },
-    {
-        title: '动效图片',
-        brief:'演示 & 意向',icon: 'mdi-dog-side',
-
-        dir:'全页动效',
-        warning:'你要打开的「全页动效」包含大量动图，可能导致浏览器崩溃，是否打开？',
-        total:0
-    },
-    {
         title: '大祖玛',
         brief:'美工 & 留念',icon: 'mdi-pig-variant',
 

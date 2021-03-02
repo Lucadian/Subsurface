@@ -104,8 +104,8 @@ div.day:not(:first-child){
 //日期标签
 div.day{
   .day-label{
-    opacity: 0;
-    transition: opacity .4s .4s;
+    opacity: .8;
+    //transition: opacity .4s;
     position: absolute;
     top: -17px;
     left: 0;
